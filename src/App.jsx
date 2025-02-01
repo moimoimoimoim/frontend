@@ -1,5 +1,6 @@
 // import { useState } from "react";
 import "./App.css";
+import "./styles/reset.css";
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import Layout from "./components/Layout";
 import LoginPage from "./pages/LoginPage";

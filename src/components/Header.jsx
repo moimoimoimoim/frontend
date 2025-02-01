@@ -1,4 +1,6 @@
 import "./Header.css";
+import { useState } from "react";
+import Sidebar from "../pages/MainPage/Sidebar";
 
 import menu from "../assets/menu.png";
 import logoSimple from "../assets/logo-simple.png";
@@ -6,7 +8,12 @@ import logo from "../assets/logo.png";
 import logout from "../assets/logout.png";
 import calendarAdd from "../assets/Calendar-add.png";
 
-const Header = ({ userName }) => {
+const Header = ({ userName, showMenu }) => {
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  const toggleSidebar = () => {
+    setIsSidebarOpen(!isSidebarOpen);
+  };
+
   const user = {
     isLogin: true,
   };
@@ -14,9 +21,11 @@ const Header = ({ userName }) => {
     <>
       <header className="header-component">
         <div className="header-component__left">
-          <div>
-            {<img src={menu} className="menu-icon" alt="메뉴 아이콘"></img>}
-          </div>
+          {showMenu && ( //MainPage에서만 Menu-icon 보이도록록
+            <div onClick={toggleSidebar} className="menu-container">
+              {<img src={menu} className="menu-icon" alt="메뉴 아이콘"></img>}
+            </div>
+          )}
           <div>
             {
               <img
@@ -47,6 +56,7 @@ const Header = ({ userName }) => {
           </div>
         </div>
       </header>
+      <Sidebar isOpen={isSidebarOpen} toggleSidebar={toggleSidebar}></Sidebar>
     </>
   );
 };

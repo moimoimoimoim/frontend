@@ -1,0 +1,26 @@
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 270px;
+  height: 100%;
+  background: #fcfcfc;
+  color: #000000;
+  transform: translateX(-100%); /* 기본적으로 숨김 */
+  transition: transform 0.3s ease-in-out; /* 부드러운 애니메이션 */
+  padding: 1rem 2rem;
+  display: flex;
+}
+
+.sidebar.open {
+  transform: translateX(0); /* 열릴 때 */
+}
+
+.menu-container {
+  cursor: pointer;
+  z-index: 1000; /* 사이드바 위에 유지 */
+}
+
+.sidebar__content {
+  margin-top: 6rem;
+}

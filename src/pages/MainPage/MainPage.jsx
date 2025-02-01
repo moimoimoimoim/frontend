@@ -1,3 +1,4 @@
+import Header from "../../components/Header";
 import "./MainPage.css";
 
 const MainPage = () => {
