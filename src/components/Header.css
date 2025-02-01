@@ -7,8 +7,19 @@ header {
   align-items: center;
 }
 
+.header-component__left {
+  display: flex;
+  gap: 1.8rem;
+  align-items: center;
+}
+
+/* menu */
+.menu-icon {
+  width: 1.5rem;
+}
+
 /* 로고 */
-img {
+.logoSimple-icon {
   width: 2.5rem;
   height: 2.5rem;
 }
@@ -31,11 +42,24 @@ img {
   background-color: white;
 
   padding: 0.3rem 0;
-  width: 4rem;
+  width: 6rem;
+  height: 2.3rem;
 
   border-radius: 20px;
   border: 1px solid rgba(0, 0, 0, 0.1);
   cursor: pointer;
+}
+
+.logout {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 0.3rem;
+}
+.logout-icon {
+  width: 1rem;
+  height: auto;
 }
 
 button:hover {

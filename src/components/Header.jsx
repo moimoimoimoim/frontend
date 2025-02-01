@@ -6,29 +6,49 @@ import logo from "../assets/logo.png";
 import logout from "../assets/logout.png";
 import calendarAdd from "../assets/Calendar-add.png";
 
-const MainHeader = ({ userName }) => {
+const Header = ({ userName }) => {
   const user = {
     isLogin: true,
   };
   return (
     <>
       <header className="header-component">
-        <div>{<img src={menu}></img>}</div>
-        <div>{<img src={logoSimple}></img>}</div>
-        <div className="user">
-          <div className="user-name center">{userName}</div>
-          {user.isLogin ? (
-            <button className="center">
-              로그아웃
-              {<img src={logout}></img>}
-            </button>
-          ) : (
-            <button className="center">로그인</button>
-          )}
+        <div className="header-component__left">
+          <div>
+            {<img src={menu} className="menu-icon" alt="메뉴 아이콘"></img>}
+          </div>
+          <div>
+            {
+              <img
+                src={logoSimple}
+                className="logoSimple-icon"
+                alt="로고"
+              ></img>
+            }
+          </div>
+        </div>
+        <div className="header-component__right">
+          <div className="user">
+            <div className="user-name logout">{userName}</div>
+            {user.isLogin ? (
+              <button className="logout">
+                로그아웃
+                {
+                  <img
+                    src={logout}
+                    className="logout-icon"
+                    alt="로그아웃"
+                  ></img>
+                }
+              </button>
+            ) : (
+              <button className="logout">로그인</button>
+            )}
+          </div>
         </div>
       </header>
     </>
   );
 };
 
-export default MainHeader;
+export default Header;
