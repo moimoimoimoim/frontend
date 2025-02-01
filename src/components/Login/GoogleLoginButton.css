@@ -1,0 +1,31 @@
+.google-login-btn {
+  all: unset;
+
+  width: 260px;
+  height: 32px;
+  border-radius: 10px;
+  background-color: white;
+  border: 1px solid var(--black05);
+
+  /* background-repeat: no-repeat; */
+
+  font-size: 1rem;
+
+  padding: 0.5rem 1.5rem;
+  margin-top: 1rem;
+
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  gap: 16px;
+}
+.google-icon {
+  width: 18px;
+  height: 18px;
+}
+.google-login-span {
+  display: flex;
+  font-size: 16px;
+}

@@ -1,0 +1,50 @@
+/* 그룹, 모임 이름, 참여 코드 필드 */
+.step1-form-fields {
+  gap: 2rem;
+  display: flex;
+  align-items: center; /* ✅ 모든 요소를 가운데 정렬 */
+}
+
+.step1-form-fields input,
+select {
+  all: unset;
+  width: 180px;
+  margin-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  font-size: 14px;
+}
+
+/* input (모임명, 참여코드) */
+
+.step1-form-fields input::placeholder {
+  color: var(--black30);
+}
+
+.step1-form-fields input:focus::placeholder {
+  color: rgb(248, 248, 248);
+  transition: color 0.1s ease;
+}
+
+.input-fields {
+  border-bottom: 1px solid var(--black05);
+}
+
+.input-fields span {
+  font-size: 14px;
+  margin-right: 1rem;
+  font-weight: 600;
+}
+.step1-form-fields > select {
+  background-image: url(/public/폴더.png), url(/public/셀렉트박스.png);
+  background-repeat: no-repeat, no-repeat;
+
+  /* ✅ 왼쪽 폴더 아이콘 조정 (더 위로 올리기) */
+  background-position: left -0.5px, right -0.001px;
+
+  background-size: 14px, 14px;
+
+  padding-left: 1.5rem; /* 왼쪽 아이콘과 텍스트 간격 */
+  padding-right: 1.5rem; /* 오른쪽 아이콘과 텍스트 간격 */
+
+  border-bottom: 1px solid var(--black05);
+}
