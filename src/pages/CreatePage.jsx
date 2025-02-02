@@ -19,7 +19,11 @@ const CreatePage = () => {
 
   return (
     <div>
-      <StepIndicator steps={[1, 2, 3]} currentStep={currentStep} />
+      <StepIndicator
+        title="모임 생성하기"
+        steps={[1, 2, 3]}
+        currentStep={currentStep}
+      />
 
       {/* ✅ Step1_MoimInfo에 props로 상태 전달 */}
       {/* 단계 변경 버튼 예시 추후에 바꿀 것*/}
