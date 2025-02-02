@@ -14,7 +14,6 @@ import NotFound from "./pages/NotFound";
 
 //메인페이지 Sidebar route
 // import Sidebar from "./components/MainPage/Sidebar";
-import AllMeetings from "./components/MainPage/AllMeetings";
 import OngoingMeetings from "./components/MainPage/OngoingMeetings";
 import ClosedMeetings from "./components/MainPage/ClosedMeetings";
 import Group from "./components/MainPage/Group"; // 동적 그룹 페이지
@@ -40,7 +39,7 @@ function App() {
           <Route path="/mypage" element={<MyPage />} />
 
           {/* 메인페이지에서 사이드바를 통한 라우트 */}
-          <Route path="/main/all-meetings" element={<AllMeetings />} />
+          {/* <Route path="/main/all-meetings" element={<MainPage />} /> */}
           <Route path="/main/ongoing-meetings" element={<OngoingMeetings />} />
           <Route path="/main/closed-meetings" element={<ClosedMeetings />} />
           <Route path="/main/group/:groupId" element={<Group />} />

@@ -48,7 +48,7 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
         <ul>
           <h3 className="category-title">모임 관리</h3>
           <li>
-            <Link to="/main/all-meetings" onClick={toggleSidebar}>
+            <Link to="/main" onClick={toggleSidebar}>
               모든 모임
             </Link>
           </li>
