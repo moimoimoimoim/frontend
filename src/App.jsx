@@ -23,13 +23,13 @@ function App() {
   return (
     <>
       {/* 네비게이션 추가 */}
-      <nav>
+      {/* <nav>
         <Link to="/">로그인</Link>
         <Link to="/signup">회원가입</Link>
         <Link to="/main">메인</Link>
         <Link to="/create">생성</Link>
         <Link to="/mypage">마이페이지</Link>
-      </nav>
+      </nav> */}
 
       <Routes>
         <Route element={<Layout />}>

@@ -1,0 +1,20 @@
+.sidebar-no {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 160px;
+  height: 100%;
+  background-color: #ffffff;
+  z-index: 1;
+}
+
+.sidebar-line {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 160px;
+  height: 76px;
+  /* background-color: red; */
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  z-index: 1;
+}
