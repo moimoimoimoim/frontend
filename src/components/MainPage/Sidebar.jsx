@@ -7,14 +7,14 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
   const outside = useRef(null); //사이드바 요소 참조
 
   const [groups, setGroups] = useState([{ id: 1, name: "기본 그룹" }]); // 기본 그룹 리스트
-  const [groupName, setGroupName] = useState(""); // ✅ 사용자 입력을 저장할 state
+  const [groupName, setGroupName] = useState(""); // 사용자 입력을 저장할 state
 
-  // ✅ 새 그룹 추가 함수
+  // 새 그룹 추가 함수
   const addNewGroup = () => {
     if (!groupName.trim()) return; // 빈 입력 방지
     const newGroupId = groups.length + 1;
     const newGroup = { id: newGroupId, name: groupName };
-    setGroups([...groups, newGroup]); // ✅ 그룹 리스트에 추가
+    setGroups([...groups, newGroup]); // 그룹 리스트에 추가
     setGroupName(""); // 입력창 초기화
   };
 
@@ -65,7 +65,7 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
         </ul>
         <ul>
           <h3 className="category-title">그룹 관리</h3>
-          {/* ✅ 사용자 입력 필드 추가 */}
+          {/* 사용자 입력 필드 추가 */}
           <li className="addGroup-container">
             <form
               className="addGroup-form"

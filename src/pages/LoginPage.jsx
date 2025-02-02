@@ -1,18 +1,20 @@
 import { useNavigate } from "react-router-dom";
+import GoogleLoginButton from "../components/Login/GoogleLoginButton";
 
 const LoginPage = () => {
   const navigate = useNavigate();
 
   const handleGoToMyPage = () => {
-    navigate("/mainpage"); // 마이페이지로 이동
+    navigate("/mainPage"); // 마이페이지로 이동
   };
 
   return (
-    <div>
-      <h1>로그인 화면</h1>
-      <button onClick={handleGoToMyPage}>
-        로그인하기(누르면메인페이지이동)
-      </button>
+    <div className="center">
+      {/* 아이디 */}
+      {/* 비번 */}
+      {/* 로그인 버튼 */}
+      {/* 간편 로그인 하시겠습니까? */}
+      <GoogleLoginButton />
     </div>
   );
 };

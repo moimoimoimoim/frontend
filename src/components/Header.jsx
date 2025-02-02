@@ -1,6 +1,6 @@
 import "./Header.css";
 import { useState } from "react";
-import Sidebar from "../pages/MainPage/Sidebar";
+import Sidebar from "./MainPage/Sidebar";
 import { useLocation } from "react-router-dom";
 
 import menu from "../assets/menu.png";
@@ -25,6 +25,7 @@ const Header = ({ userName, showMenu }) => {
   const user = {
     isLogin: true,
   };
+
   return (
     <>
       <header className="header-component">

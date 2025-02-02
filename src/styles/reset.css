@@ -127,3 +127,50 @@ table {
   border-collapse: collapse;
   border-spacing: 0;
 }
+
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap");
+
+/* 기본 CSS 초기화 */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  font-family: "Pretendard", sans-serif;
+  height: 100vh;
+  /* width: 100vw; */
+  margin: 0;
+}
+
+.center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+:root {
+  --black05: rgba(0, 0, 0, 0.05);
+  --black10: rgba(0, 0, 0, 0.1);
+  --black15: rgba(0, 0, 0, 0.15);
+  --black20: rgba(0, 0, 0, 0.2);
+  --black30: rgba(0, 0, 0, 0.3);
+  --orange: #ff6a20;
+  --yellow: #ffaa17;
+}
+
+/* 반응형 레이아웃 (추가) */
+@media (max-width: 1200px) {
+  .container {
+    width: 90%;
+  }
+}
+
+@media (max-width: 768px) {
+  nav {
+    flex-direction: column;
+    align-items: center;
+  }
+}

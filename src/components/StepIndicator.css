@@ -1,0 +1,30 @@
+.step-container {
+  display: flex;
+  flex-direction: column;
+  padding-left: 1rem;
+}
+/* 점 3개 들어가는 칸 */
+
+.step-indicator {
+  margin-top: 4rem;
+  display: flex;
+  gap: 6px;
+}
+
+.step {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background-color: var(--black10); /* 기본 색상 (비활성) */
+}
+
+.step.active {
+  background: linear-gradient(var(--orange), 50%, var(--yellow));
+}
+
+/* 과정 설명/ */
+.step-title {
+  font-size: 24px;
+  font-weight: bold;
+  margin: 1rem 0;
+}

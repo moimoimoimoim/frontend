@@ -1,0 +1,241 @@
+/* 정보 입력받는 거 싹 다 묶는 거/ */
+.step3-form-fields {
+  display: flex;
+  gap: 1.5rem;
+}
+
+/* 셀렉트박스 스타일 */
+.day-selector-style {
+  all: unset;
+  margin-top: 1rem;
+
+  width: 130px; /* ✅ 글자 크기만큼 너비 조절 */
+  display: inline-block; /* ✅ span 크기에 맞게 조정 */
+
+  font-size: 14px; /* ✅ 글자 크기 설정 */
+
+  padding: 0.8rem 1rem; /* ✅ 안쪽 여백 조정 */
+  border: 1px solid var(--black10); /* ✅ 테두리 추가 */
+  border-radius: 15px; /* ✅ 둥근 모서리 */
+
+  background-image: url(/public/셀렉트박스.png);
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+
+  background-size: 14px, 14px;
+  padding-right: 3rem; /* 오른쪽 아이콘과 텍스트 간격 */
+}
+
+/* 선택 모달창(?) */
+.day-selector {
+  position: relative;
+  display: inline-block;
+
+  cursor: pointer;
+}
+
+/* 날짜 선택하는 드롭다운 박스/ */
+.day-dropdown {
+  position: absolute;
+
+  top: 110%;
+  left: 0;
+
+  width: 340px;
+
+  background: white;
+  border: 1px solid var(--black05);
+  border-radius: 15px;
+  box-shadow: 0 2px 10px var(--black05);
+  z-index: 100;
+  padding: 1.2rem 1rem;
+
+  font-size: 14px;
+}
+/* 전체선택 버튼 */
+.all-select {
+  margin-left: 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 0.1rem;
+}
+
+/* 전체 선택 및 완료 버튼 */
+.day-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.5rem;
+}
+
+/* 그 안에 있는 월~금 */
+.day-options {
+  display: flex;
+  flex-wrap: wrap; /* ✅ 한 줄에 다 안 들어가면 자동 줄바꿈 */
+  gap: 10px; /* ✅ 요일 간격 조정 */
+  justify-content: center; /* ✅ 가운데 정렬 */
+}
+
+.day-option {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px; /* ✅ 정사각형 크기 설정 */
+  height: 32px;
+  padding: 5px;
+  border-radius: 50%; /* ✅ 동그랗게 */
+  /* background-color: var(--black05); */
+  cursor: pointer;
+  transition: background-color 0.2s, color 0.2s;
+}
+
+/* ✅ 토요일 기본 파란색 */
+.day-option.saturday {
+  color: #3183ff;
+}
+
+/* ✅ 일요일 기본 빨간색 */
+.day-option.sunday {
+  color: #ff2929;
+}
+
+/* ✅ 선택된 요일 스타일 */
+.day-option.selected {
+  background: black;
+  color: white;
+  /* font-weight: bold; */
+}
+
+.done-btn {
+  padding: 6px 10px;
+  background-color: white;
+  border: none;
+  border-radius: 30px;
+  color: black;
+
+  cursor: pointer;
+}
+
+.done-btn:hover {
+  background-color: var(--black05);
+  transition: 0.2s;
+}
+
+.all-select_btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  /* all: unset; */
+
+  border: 1px solid var(--black20);
+  border-radius: 3px;
+  width: 12px;
+  height: 12px;
+  margin-right: 8px;
+}
+
+/* @@@@ 시간 선택 창 @@@@ */
+.time-selector {
+  display: flex;
+}
+
+.time-picker {
+  display: flex;
+  gap: 1rem;
+  position: relative;
+}
+
+/* 셀렉트박스 스타일 */
+.time-selector-style {
+  margin: auto;
+  all: unset;
+  margin-top: 1rem;
+  display: inline-block; /* ✅ span 크기에 맞게 조정 */
+  width: 70px;
+
+  font-size: 14px; /* ✅ 글자 크기 설정 */
+
+  padding: 0.8rem 1rem; /* ✅ 안쪽 여백 조정 */
+  border: 1px solid var(--black10); /* ✅ 테두리 추가 */
+  border-radius: 15px; /* ✅ 둥근 모서리 */
+
+  background-image: url(/public/셀렉트박스.png);
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+
+  background-size: 14px, 14px;
+  padding-right: 3rem; /* 오른쪽 아이콘과 텍스트 간격 */
+  cursor: pointer;
+}
+
+/* 시간 모달창 */
+
+.dropdown-list {
+  position: absolute;
+  text-align: center;
+  cursor: pointer;
+
+  top: 110%;
+  left: 0;
+
+  max-height: 202px; /* ✅ 최대 5줄까지만 보이게 설정 */
+
+  overflow-y: auto; /* ✅ 스크롤 가능하도록 설정 */
+  width: 100%;
+  background: white;
+  border: 1px solid var(--black05);
+  border-radius: 10px;
+  box-shadow: 0 2px 10px var(--black05);
+  z-index: 100;
+  padding: 5px;
+
+  font-size: 14px;
+  letter-spacing: 0.05rem;
+
+  box-shadow: inset 0px 0px 20px white;
+  /* background: linear-gradient(rgba(255, 255, 255, 1), 90%, rgba(0, 0, 0, 0.05)); */
+}
+
+.dropdown-item {
+  padding: 12px;
+  text-align: center;
+  cursor: pointer;
+  transition: background 0.2s ease-in-out;
+  border-radius: 10px;
+}
+
+.dropdown-item:hover {
+  border-radius: 10px;
+  background: var(--black05);
+}
+/* ✅ 스크롤바 전체 스타일 */
+.dropdown-list::-webkit-scrollbar {
+  width: 0px;
+}
+
+.add-button {
+  margin: auto;
+  all: unset;
+  margin-top: 1rem;
+  display: inline-block; /* ✅ span 크기에 맞게 조정 */
+
+  font-size: 14px; /* ✅ 글자 크기 설정 */
+  font-weight: bold;
+  color: white;
+
+  padding: 0.8rem 1rem; /* ✅ 안쪽 여백 조정 */
+  border: 1px solid var(--black10); /* ✅ 테두리 추가 */
+  border-radius: 15px; /* ✅ 둥근 모서리 */
+
+  background: linear-gradient(#4f4f4f, #3a3a3a);
+
+  cursor: pointer;
+}
+
+.add-button:hover {
+  background: linear-gradient(#2c2c2c, #292929);
+  box-shadow: 0 0 10px var(--black05);
+  filter: brightness(1.2); /* ✅ 밝기 효과 추가 */
+}

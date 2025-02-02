@@ -34,7 +34,6 @@
   font-weight: bold;
   font-size: 16px;
   padding: 10px 0;
-  color: #ddd;
 }
 
 .menu-list {
@@ -45,4 +44,5 @@
 
 .menu-list li {
   padding: 10px 0;
+  color: rgba(0, 0, 0, 50%);
 }

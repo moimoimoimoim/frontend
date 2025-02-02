@@ -7,29 +7,29 @@ import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import Layout from "./components/Layout";
 import LoginPage from "./pages/LoginPage";
 import SignUpPage from "./pages/SignUpPage";
-import MainPage from "./pages/MainPage/MainPage";
+import MainPage from "./pages/MainPage";
 import CreatePage from "./pages/CreatePage";
 import MyPage from "./pages/MyPage";
 import NotFound from "./pages/NotFound";
 
 //메인페이지 Sidebar route
-import Sidebar from "./pages/MainPage/Sidebar";
-import AllMeetings from "./pages/MainPage/AllMeetings";
-import OngoingMeetings from "./pages/MainPage/OngoingMeetings";
-import ClosedMeetings from "./pages/MainPage/ClosedMeetings";
-import Group from "./pages/MainPage/Group"; // 동적 그룹 페이지
+// import Sidebar from "./components/MainPage/Sidebar";
+import AllMeetings from "./components/MainPage/AllMeetings";
+import OngoingMeetings from "./components/MainPage/OngoingMeetings";
+import ClosedMeetings from "./components/MainPage/ClosedMeetings";
+import Group from "./components/MainPage/Group"; // 동적 그룹 페이지
 
 function App() {
   return (
     <>
       {/* 네비게이션 추가 */}
-      {/* <nav>
+      <nav>
         <Link to="/">로그인</Link>
         <Link to="/signup">회원가입</Link>
         <Link to="/main">메인</Link>
         <Link to="/create">생성</Link>
         <Link to="/mypage">마이페이지</Link>
-      </nav> */}
+      </nav>
 
       <Routes>
         <Route element={<Layout />}>
