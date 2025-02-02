@@ -9,6 +9,7 @@ import LoginPage from "./pages/LoginPage";
 import SignUpPage from "./pages/SignUpPage";
 import MainPage from "./pages/MainPage";
 import CreatePage from "./pages/CreatePage";
+import SchedulePage from "./pages/SchedulePage";
 import MyPage from "./pages/MyPage";
 import NotFound from "./pages/NotFound";
 
@@ -28,6 +29,7 @@ function App() {
         <Link to="/signup">회원가입</Link>
         <Link to="/main">메인</Link>
         <Link to="/create">생성</Link>
+        <Link to="/schedule">스케줄</Link>
         <Link to="/mypage">마이페이지</Link>
       </nav>
 
@@ -37,6 +39,7 @@ function App() {
           <Route path="/signup" element={<SignUpPage />} />
           <Route path="/main" element={<MainPage />} />
           <Route path="/create" element={<CreatePage />} />
+          <Route path="/schedule" element={<SchedulePage />} />
           <Route path="/mypage" element={<MyPage />} />
 
           {/* 메인페이지에서 사이드바를 통한 라우트 */}
