@@ -21,7 +21,7 @@ const Header = ({ userName, showMenu }) => {
     <>
       <header className="header-component">
         <div className="header-component__left">
-          {showMenu && ( //MainPage에서만 Menu-icon 보이도록록
+          {showMenu && ( //MainPage에서만 Menu-icon 보이도록
             <div onClick={toggleSidebar} className="menu-container">
               {<img src={menu} className="menu-icon" alt="메뉴 아이콘"></img>}
             </div>
