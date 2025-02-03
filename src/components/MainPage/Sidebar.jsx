@@ -45,8 +45,8 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
     //사이드바 컨테이너 -> isOpen 상태에 따라 open 클래스 추가
     <aside ref={outside} className={`sidebar ${isOpen ? "open" : ""}`}>
       <div className="sidebar__content">
-        <ul>
-          <h3 className="category-title">모임 관리</h3>
+        <h3 className="category-title">모임 관리</h3>
+        <ul className="menu-list">
           <li>
             <Link to="/main" onClick={toggleSidebar}>
               모든 모임
@@ -63,8 +63,16 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
             </Link>
           </li>
         </ul>
-        <ul>
-          <h3 className="category-title">그룹 관리</h3>
+        <hr /> {/* 구분선 */}
+        <h3 className="category-title">그룹 관리</h3>
+        <ul className="group-list">
+          {groups.map((group) => (
+            <li key={group.id}>
+              <Link to={`/main/group/${group.id}`} onClick={toggleSidebar}>
+                {group.name}
+              </Link>
+            </li>
+          ))}
           {/* 사용자 입력 필드 추가 */}
           <li className="addGroup-container">
             <form
@@ -90,14 +98,6 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
               </div>
             </form>
           </li>
-
-          {groups.map((group) => (
-            <li key={group.id}>
-              <Link to={`/main/group/${group.id}`} onClick={toggleSidebar}>
-                {group.name}
-              </Link>
-            </li>
-          ))}
         </ul>
       </div>
     </aside>
