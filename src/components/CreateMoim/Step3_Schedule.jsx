@@ -18,7 +18,11 @@ const Step3_Schedule = ({
   const [isOpenEnd, setIsOpenEnd] = useState(false);
 
   // ✅ 1~12시까지만 선택할 수 있도록 설정
-  const timeOptions = Array.from({ length: 24 }, (_, i) => `${i - 1 + 1}:00`);
+  const timeOptions = Array.from({ length: 48 }, (_, i) => {
+    const hours = Math.floor(i / 2); // 시간 계산 (0~23)
+    const minutes = i % 2 === 0 ? "00" : "30"; // 30분 단위
+    return `${hours}:${minutes}`;
+  }).filter((time) => parseInt(time.split(":")[0]) < 24); // 24:00 이상 제거
 
   // 요일 선택 핸들러
   const toggleDay = (day) => {
@@ -29,9 +33,28 @@ const Step3_Schedule = ({
     }
   };
 
+  const convertToSlot = (day, time) => {
+    if (!time) return null;
+    const [hours, minutes] = time.split(":").map(Number);
+    return (day - 1) * 48 + hours * 2 + minutes / 30;
+  };
+
   // 일정 추가 핸들러
   const addSchedule = () => {
     if (selectedDays.length > 0 && startTime && endTime) {
+      const scheduleData = selectedDays.map((day) => {
+        const dayNumber = days.indexOf(day) + 1; // "월" → 1, "화" → 2 ...
+        return {
+          days: day, // 기존 요일
+          startTime,
+          endTime,
+          startSlot: convertToSlot(dayNumber, startTime),
+          endSlot: convertToSlot(dayNumber, endTime) - 1,
+        };
+      });
+      // ✅ 콘솔에서 변환된 슬롯 값 확인하기!
+      console.log("📤 변환된 일정 데이터:", scheduleData, days);
+
       setSchedules([
         ...schedules,
         { days: selectedDays.join(", "), startTime, endTime },
@@ -43,7 +66,6 @@ const Step3_Schedule = ({
       console.error("🚨 일정 추가 실패! 요일, 시작시간, 종료시간이 필요함.");
     }
   };
-
   return (
     <div className="form-section">
       <span className="create-container__title">
