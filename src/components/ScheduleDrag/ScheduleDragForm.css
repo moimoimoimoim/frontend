@@ -6,7 +6,7 @@
 
 .fixed-table {
   margin: 4rem 0;
-  border: 1px solid var(--black10);
+  border: 1px solid var(--black05);
   width: 60%;
   border-radius: 20px;
   table-layout: fixed;
@@ -84,4 +84,11 @@ th:hover {
 
 table {
   border-radius: 30px;
+}
+* {
+  user-select: none;
+}
+.td-style {
+  text-align: right;
+  border-bottom: 1px solid var(--black05);
 }

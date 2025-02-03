@@ -1,7 +1,8 @@
 import React, { useState, useRef } from "react";
 import "./ScheduleDragForm.css";
 
-const DragTable = () => {
+const DragTable = ({ onSubmit }) => {
+  // ✅ props로 onSubmit 받기
   const timeBlocks = Array.from({ length: 48 }, (_, i) =>
     Array(7).fill(
       `${String(Math.floor(i / 2)).padStart(2, "0")}:${
@@ -10,6 +11,8 @@ const DragTable = () => {
     )
   );
 
+  // rowIndex와 colIndex를 기반으로 slot을 계산하는 함수
+  const convertToSlot = (colIndex, rowIndex) => colIndex * 48 + rowIndex;
   const [selectedCells, setSelectedCells] = useState(new Set());
   const isDragging = useRef(false);
   const [startDrag, setStartDrag] = useState({ row: null, col: null });
@@ -74,6 +77,36 @@ const DragTable = () => {
   const handleMouseUp = () => {
     isDragging.current = false;
     setStartDrag({ row: null, col: null });
+
+    const selectedSlots = {};
+    selectedCells.forEach((cell) => {
+      const [rowIndex, colIndex] = cell.split("-").map(Number);
+      const slot = convertToSlot(colIndex, rowIndex);
+
+      if (!selectedSlots[slot]) {
+        selectedSlots[slot] = new Set();
+      }
+      selectedSlots[slot].add("user1");
+    });
+
+    const formattedData = {
+      timeslots: Object.entries(selectedSlots).map(([slot, members]) => ({
+        slot: Number(slot),
+        members: Array.from(members),
+      })),
+    };
+
+    console.log(
+      "📤 DragTable에서 부모로 보낼 데이터:",
+      JSON.stringify(formattedData, null, 2)
+    );
+
+    // ✅ 부모 컴포넌트로 데이터 전달
+    if (onSubmit) {
+      onSubmit(formattedData);
+    } else {
+      console.error("⚠️ DragTable: onSubmit이 정의되지 않음!");
+    }
   };
 
   // 요일 클릭 시 해당 열 전체 선택/해제
@@ -131,7 +164,26 @@ const DragTable = () => {
         }
       }
     }
+    // 선택된 셀을 JSON 데이터로 변환
+    const getSelectedSlots = () => {
+      const selectedSlots = {};
+      selectedCells.forEach((cell) => {
+        const [rowIndex, colIndex] = cell.split("-").map(Number);
+        const slot = convertToSlot(colIndex, rowIndex);
 
+        if (!selectedSlots[slot]) {
+          selectedSlots[slot] = new Set();
+        }
+        selectedSlots[slot].add("user1"); // 현재는 user1만 추가 (다중 유저 확장 가능)
+      });
+
+      return {
+        timeslots: Object.entries(selectedSlots).map(([slot, members]) => ({
+          slot: Number(slot),
+          members: Array.from(members),
+        })),
+      };
+    };
     setSelectedCells(newSelectedCells);
   };
 
@@ -162,6 +214,7 @@ const DragTable = () => {
             <tr key={rowIndex}>
               {/* 첫 번째 열(시간) - 클릭하면 해당 행 전체 선택 */}
               <td
+                className="td-style"
                 onClick={() => handleTimeClick(rowIndex)}
                 style={{
                   cursor: "pointer",
@@ -170,7 +223,7 @@ const DragTable = () => {
                 {rowIndex % 2 === 0 ? (
                   <span className="time-section">
                     <span className="time-section">
-                      {String(Math.floor(rowIndex / 2)).padStart(2, "0")}
+                      {String(Math.floor(rowIndex / 2)).padStart(2, "0")}시
                     </span>
                   </span>
                 ) : (
@@ -193,7 +246,7 @@ const DragTable = () => {
                   onMouseMove={(e) =>
                     colIndex >= 0 && colIndex <= 6 && handleMouseMove(e)
                   }
-                  onMouseUp={handleMouseUp}
+                  onMouseUp={handleMouseUp} // ✅ 데이터 전송을 위해 추가
                   style={{
                     backgroundColor: selectedCells.has(
                       `${rowIndex}-${colIndex}`
