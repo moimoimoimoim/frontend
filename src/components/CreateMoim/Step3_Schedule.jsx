@@ -64,7 +64,6 @@ const Step3_Schedule = ({
 
     return updatedTimeslots;
   };
-
   const addSchedule = () => {
     if (selectedDays.length > 0 && startTime && endTime) {
       const scheduleData = selectedDays.map((day) => {
@@ -85,18 +84,22 @@ const Step3_Schedule = ({
         { days: selectedDays.join(", "), startTime, endTime },
       ]);
 
+      // 기존 timeslots 업데이트 함수
       setTimeslots((prevTimeslots) => {
         const newTimeslots = updateTimeslots(scheduleData, prevTimeslots);
         console.log("📤 업데이트된 timeslots:", newTimeslots);
         return newTimeslots;
       });
 
+      // 중복 제거된 timeBlocks 저장하기
       setTimeBlocks((prevTimeBlocks) => {
         const newTimeBlocks = updateTimeslots(scheduleData, prevTimeBlocks).map(
-          (slot) => ({ timeBlocks: slot })
+          (slot) => slot // 또는 추가적인 매핑
         );
-        console.log("📤 업데이트된 timeBlocks:", newTimeBlocks);
-        return newTimeBlocks;
+        // 중복 제거하기
+        const uniqueTimeBlocks = [...new Set(newTimeBlocks)];
+        console.log("📤 중복 제거된 timeBlocks:", uniqueTimeBlocks);
+        return uniqueTimeBlocks;
       });
     }
   };
