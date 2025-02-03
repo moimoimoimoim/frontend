@@ -1,5 +1,6 @@
 import "./CreateMoimForm.css";
 import "./Step3_Schedule.css";
+import { convertToSlot } from "../../utils/convertTimeslot.jsx";
 import { useState } from "react";
 
 const Step3_Schedule = ({
@@ -16,6 +17,7 @@ const Step3_Schedule = ({
   const [isOpen, setIsOpen] = useState(false); // ✅ isOpen 추가
   const [isOpenStart, setIsOpenStart] = useState(false);
   const [isOpenEnd, setIsOpenEnd] = useState(false);
+  const [timeslots, setTimeslots] = useState([]);
 
   // ✅ 1~12시까지만 선택할 수 있도록 설정
   const timeOptions = Array.from({ length: 48 }, (_, i) => {
@@ -33,39 +35,56 @@ const Step3_Schedule = ({
     }
   };
 
-  const convertToSlot = (day, time) => {
-    if (!time) return null;
-    const [hours, minutes] = time.split(":").map(Number);
-    return (day - 1) * 48 + hours * 2 + minutes / 30;
+  // 일정 추가 핸들러
+  // ✅ 기존 timeslots을 유지하면서 업데이트하는 방식
+  const updateTimeslots = (newSchedules, prevTimeslots) => {
+    let updatedTimeslots = [...prevTimeslots]; // 기존 timeslots 유지
+
+    newSchedules.forEach(({ startSlot, endSlot }) => {
+      for (let slot = startSlot; slot <= endSlot; slot++) {
+        const existingSlot = updatedTimeslots.find((t) => t.slot === slot);
+        if (existingSlot) {
+          // ✅ 중복된 slot이면 members 배열에 새로운 user 추가 (userX)
+          const newUser = `user${existingSlot.members.length + 1}`;
+          if (!existingSlot.members.includes(newUser)) {
+            existingSlot.members.push(newUser);
+          }
+        } else {
+          // ✅ 새로운 slot이면 user1부터 시작
+          updatedTimeslots.push({ slot, members: ["user1"] });
+        }
+      }
+    });
+
+    return updatedTimeslots;
   };
 
-  // 일정 추가 핸들러
+  // ✅ timeslots 업데이트 시 상태도 같이 변경하도록 수정
   const addSchedule = () => {
     if (selectedDays.length > 0 && startTime && endTime) {
       const scheduleData = selectedDays.map((day) => {
-        const dayNumber = days.indexOf(day) + 1; // "월" → 1, "화" → 2 ...
+        const dayNumber = days.indexOf(day) + 1;
         return {
-          days: day, // 기존 요일
+          days: day,
           startTime,
           endTime,
           startSlot: convertToSlot(dayNumber, startTime),
           endSlot: convertToSlot(dayNumber, endTime) - 1,
         };
       });
-      // ✅ 콘솔에서 변환된 슬롯 값 확인하기!
-      console.log("📤 변환된 일정 데이터:", scheduleData, days);
 
-      setSchedules([
-        ...schedules,
-        { days: selectedDays.join(", "), startTime, endTime },
-      ]);
-      setSelectedDays([]);
-      setStartTime("");
-      setEndTime("");
-    } else {
-      console.error("🚨 일정 추가 실패! 요일, 시작시간, 종료시간이 필요함.");
+      // ✅ 기존 schedules에 새로운 일정 추가
+      setSchedules((prevSchedules) => [...prevSchedules, ...scheduleData]);
+
+      // ✅ 기존 timeslots 유지하면서 업데이트
+      setTimeslots((prevTimeslots) => {
+        const newTimeslots = updateTimeslots(scheduleData, prevTimeslots);
+        console.log("📤 업데이트된 timeslots:", newTimeslots); // 콘솔에서 확인
+        return newTimeslots;
+      });
     }
   };
+
   return (
     <div className="form-section">
       <span className="create-container__title">
