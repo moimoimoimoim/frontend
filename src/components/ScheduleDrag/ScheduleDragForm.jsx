@@ -1,177 +1,134 @@
-import React, { useState } from "react";
-import { useDrag, useDrop } from "react-dnd";
+import React, { useState, useRef } from "react";
 import "./ScheduleDragForm.css";
 
 const DragTable = () => {
   // 시간대 하드코딩 (각 30분 간격)
-  const timeBlocks = [
-    Array(7).fill("00:00"),
-    Array(7).fill("00:30"),
-    Array(7).fill("01:00"),
-    Array(7).fill("01:30"),
-    Array(7).fill("02:00"),
-    Array(7).fill("02:30"),
-    Array(7).fill("03:00"),
-    Array(7).fill("03:30"),
-    Array(7).fill("04:00"),
-    Array(7).fill("04:30"),
-    Array(7).fill("05:00"),
-    Array(7).fill("05:30"),
-    Array(7).fill("06:00"),
-    Array(7).fill("06:30"),
-    Array(7).fill("07:00"),
-    Array(7).fill("07:30"),
-    Array(7).fill("08:00"),
-    Array(7).fill("08:30"),
-    Array(7).fill("09:00"),
-    Array(7).fill("09:30"),
-    Array(7).fill("10:00"),
-    Array(7).fill("10:30"),
-    Array(7).fill("11:00"),
-    Array(7).fill("11:30"),
-    Array(7).fill("12:00"),
-    Array(7).fill("12:30"),
-    Array(7).fill("13:00"),
-    Array(7).fill("13:30"),
-    Array(7).fill("14:00"),
-    Array(7).fill("14:30"),
-    Array(7).fill("15:00"),
-    Array(7).fill("15:30"),
-    Array(7).fill("16:00"),
-    Array(7).fill("16:30"),
-    Array(7).fill("17:00"),
-    Array(7).fill("17:30"),
-    Array(7).fill("18:00"),
-    Array(7).fill("18:30"),
-    Array(7).fill("19:00"),
-    Array(7).fill("19:30"),
-    Array(7).fill("20:00"),
-    Array(7).fill("20:30"),
-    Array(7).fill("21:00"),
-    Array(7).fill("21:30"),
-    Array(7).fill("22:00"),
-    Array(7).fill("22:30"),
-    Array(7).fill("23:00"),
-    Array(7).fill("23:30"),
-  ];
+  const timeBlocks = Array.from({ length: 48 }, (_, i) =>
+    Array(7).fill(
+      `${String(Math.floor(i / 2)).padStart(2, "0")}:${
+        i % 2 === 0 ? "00" : "30"
+      }`
+    )
+  );
+
   const [selectedCells, setSelectedCells] = useState(new Set());
+  const isDragging = useRef(false);
+  const [startDrag, setStartDrag] = useState({ row: null, col: null });
+  const toggleMode = useRef(false);
 
-  const moveCell = (fromRowIndex, fromColIndex, toRowIndex, toColIndex) => {
-    const newTimeBlocks = timeBlocks.map((row) => [...row]); // timeBlocks 복사
-    const temp = newTimeBlocks[fromRowIndex][fromColIndex];
-    newTimeBlocks[fromRowIndex][fromColIndex] =
-      newTimeBlocks[toRowIndex][toColIndex];
-    newTimeBlocks[toRowIndex][toColIndex] = temp;
-    console.log("Moved", newTimeBlocks);
-  };
+  // 마우스를 누를 때 드래그 시작 (토글 방식 적용)
+  const handleMouseDown = (rowIndex, colIndex) => {
+    isDragging.current = true;
+    setStartDrag({ row: rowIndex, col: colIndex });
 
-  const handleCellSelect = (rowIndex, colIndex) => {
+    const cellKey = `${rowIndex}-${colIndex}`;
     const newSelectedCells = new Set(selectedCells);
-    const cellId = `${rowIndex}-${colIndex}`;
-    if (newSelectedCells.has(cellId)) {
-      newSelectedCells.delete(cellId);
+
+    if (newSelectedCells.has(cellKey)) {
+      newSelectedCells.delete(cellKey);
+      toggleMode.current = false;
     } else {
-      newSelectedCells.add(cellId);
+      newSelectedCells.add(cellKey);
+      toggleMode.current = true;
     }
+
     setSelectedCells(newSelectedCells);
   };
 
-  const DraggableCell = ({
-    rowIndex,
-    colIndex,
-    moveCell,
-    isSelected,
-    onSelect,
-    timeBlocks,
-  }) => {
-    const [{ isDragging }, drag] = useDrag(() => ({
-      type: "cell",
-      item: { rowIndex, colIndex },
-      collect: (monitor) => ({
-        isDragging: monitor.isDragging(),
-      }),
-    }));
+  // 마우스를 움직일 때 드래그 영역 선택 (토글 방식 적용)
+  const handleMouseMove = (e) => {
+    if (!isDragging.current || startDrag.row === null || startDrag.col === null)
+      return;
 
-    const [, drop] = useDrop(() => ({
-      accept: "cell",
-      hover: (item) => {
-        if (item.rowIndex === rowIndex && item.colIndex === colIndex) return;
-        moveCell(item.rowIndex, item.colIndex, rowIndex, colIndex);
-        item.rowIndex = rowIndex;
-        item.colIndex = colIndex;
-      },
-    }));
+    const targetRow = Number(e.target.getAttribute("data-row"));
+    const targetCol = Number(e.target.getAttribute("data-col"));
 
-    return (
-      <td
-        className="select-td"
-        ref={(node) => drag(drop(node))}
-        style={{
-          opacity: isDragging ? 0.5 : 1,
-          backgroundColor: isSelected ? "#FFA500" : "#FFF",
-          border: "1px solid var(--black10)",
-        }}
-        onClick={() => onSelect(rowIndex, colIndex)}
-      >
-        {timeBlocks[rowIndex][colIndex] || "미입력"}{" "}
-        {/* timeBlocks의 값 표시 */}
-      </td>
-    );
+    if (!isNaN(targetRow) && !isNaN(targetCol) && targetCol >= 0) {
+      const newSelectedCells = new Set(selectedCells);
+
+      for (
+        let r = Math.min(startDrag.row, targetRow);
+        r <= Math.max(startDrag.row, targetRow);
+        r++
+      ) {
+        for (
+          let c = Math.min(startDrag.col, targetCol);
+          c <= Math.max(startDrag.col, targetCol);
+          c++
+        ) {
+          const cellKey = `${r}-${c}`;
+          if (toggleMode.current) {
+            newSelectedCells.add(cellKey);
+          } else {
+            newSelectedCells.delete(cellKey);
+          }
+        }
+      }
+
+      setSelectedCells(newSelectedCells);
+    }
+  };
+
+  // 마우스를 떼면 드래그 종료
+  const handleMouseUp = () => {
+    isDragging.current = false;
+    setStartDrag({ row: null, col: null });
   };
 
   return (
     <div className="table-container center">
-      <div className="center">
-        <table className="fixed-table ">
-          <thead className>
-            <tr>
-              <th>시간</th>
-              <th>월</th>
-              <th>화</th>
-              <th>수</th>
-              <th>목</th>
-              <th>금</th>
-              <th>토</th>
-              <th>일</th>
+      <table className="fixed-table">
+        <thead>
+          <tr>
+            <th>시간</th>
+            <th>월</th>
+            <th>화</th>
+            <th>수</th>
+            <th>목</th>
+            <th>금</th>
+            <th>토</th>
+            <th>일</th>
+          </tr>
+        </thead>
+        <tbody>
+          {timeBlocks.map((row, rowIndex) => (
+            <tr key={rowIndex}>
+              {/* 첫 번째 열(시간) - 클릭 및 드래그 방지 */}
+              <td
+                style={{
+                  fontWeight: "bold",
+                  userSelect: "none",
+                  background: "#f0f0f0",
+                }}
+              >
+                {String(Math.floor(rowIndex / 2)).padStart(2, "0")}:00
+              </td>
+
+              {row.map((_, colIndex) => (
+                <td
+                  key={`${rowIndex}-${colIndex}`}
+                  data-row={rowIndex}
+                  data-col={colIndex}
+                  onMouseDown={() =>
+                    colIndex >= 0 && handleMouseDown(rowIndex, colIndex)
+                  }
+                  onMouseMove={(e) => colIndex >= 0 && handleMouseMove(e)}
+                  onMouseUp={handleMouseUp}
+                  style={{
+                    backgroundColor: selectedCells.has(
+                      `${rowIndex}-${colIndex}`
+                    )
+                      ? "#FFA500"
+                      : "#FFF",
+                    border: "1px solid var(--black10)",
+                    cursor: colIndex >= 0 ? "pointer" : "default", // 시간 칼럼은 클릭 X
+                  }}
+                ></td>
+              ))}
             </tr>
-          </thead>
-          <tbody>
-            {timeBlocks.map((row, rowIndex) => (
-              <tr key={rowIndex}>
-                {/* 첫 번째 칸에 시간을 표시 */}
-                {rowIndex % 2 === 0 ? (
-                  <td className="time-td">
-                    <span className="center">
-                      {`${Math.floor(rowIndex / 2) < 10 ? "0" : ""}${Math.floor(
-                        rowIndex / 2
-                      )}`}
-                    </span>
-                  </td>
-                ) : (
-                  <td></td>
-                )}
-                {row.map((cell, colIndex) => {
-                  const cellId = `${rowIndex}-${colIndex}`;
-                  const isSelected = selectedCells.has(cellId);
-                  return (
-                    <DraggableCell
-                      key={cellId}
-                      rowIndex={rowIndex}
-                      colIndex={colIndex}
-                      moveCell={moveCell}
-                      onSelect={handleCellSelect}
-                      isSelected={isSelected}
-                      timeBlocks={timeBlocks} // timeBlocks 전달
-                    >
-                      {cell}
-                    </DraggableCell>
-                  );
-                })}
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
+          ))}
+        </tbody>
+      </table>
     </div>
   );
 };
