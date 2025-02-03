@@ -36,7 +36,9 @@ const CreatePage = ({ onCreateMoim }) => {
       group,
       joinCode,
       participantCount,
-      schedules,
+      schedule: schedules.map(
+        (sch) => `${sch.days} ${sch.startTime}~${sch.endTime}`
+      ), // ✅ 요일 + 시작~종료 시간 조합
     };
 
     onCreateMoim(newMoim); // ✅ App.jsx에서 받아온 onCreateMoim 실행

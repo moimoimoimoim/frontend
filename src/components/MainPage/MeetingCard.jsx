@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import "./MeetingCard.css";
 import calendarIcon from "../../assets/schedule.png";
 import folder from "../../assets/folder-allblack.png";
@@ -6,13 +6,22 @@ import folder from "../../assets/folder-allblack.png";
 const MeetingCard = ({ meeting }) => {
   const [memo, setMemo] = useState(""); // 📝 메모 상태
   const [isEditing, setIsEditing] = useState(false); // ✏️ 수정 모드 상태
+  const [isExpanded, setIsExpanded] = useState(false);
+  const scheduleRef = useRef(null);
+  const [isOverflowing, setIsOverflowing] = useState(false);
 
-  // ✅ 메모 변경 핸들러 (최대 50자)
-  const handleMemoChange = (e) => {
-    if (e.target.value.length <= 75) {
-      setMemo(e.target.value);
+  useEffect(() => {
+    if (scheduleRef.current) {
+      setIsOverflowing(
+        scheduleRef.current.scrollWidth > scheduleRef.current.clientWidth
+      );
     }
-  };
+  }, [meeting.schedule]);
+
+  const scheduleText =
+    meeting.schedule && meeting.schedule.length > 0
+      ? meeting.schedule.join(" / ")
+      : "투표중";
 
   // ✅ "수정" 버튼 클릭 시
   const handleEditClick = () => {
@@ -21,14 +30,12 @@ const MeetingCard = ({ meeting }) => {
     setIsEditing(!isEditing);
   };
 
-  //텍스트 전체보기
-  const [showFullSchedule, setShowFullSchedule] = useState(false);
-
-  // ✅ 확정된 일정이 없으면 "투표중" 표시
-  const scheduleText =
-    meeting.schedule && meeting.schedule.length > 0
-      ? meeting.schedule.join(", ") // ✅ 여러 일정이 있으면 ", "로 연결
-      : "투표중";
+  // ✅ 메모 변경 핸들러 (최대 75자)
+  const handleMemoChange = (e) => {
+    if (e.target.value.length <= 75) {
+      setMemo(e.target.value);
+    }
+  };
 
   return (
     <div className="meeting-card">
@@ -48,15 +55,11 @@ const MeetingCard = ({ meeting }) => {
         <div className="meeting-info">
           <img src={calendarIcon} alt="일정 아이콘" className="schedule-icon" />
           <span
-            className="meeting-schedule"
-            data-full-text={scheduleText}
-            onClick={() => setShowFullSchedule(!showFullSchedule)}
+            className={`meeting-schedule ${isExpanded ? "show" : ""}`}
+            ref={scheduleRef}
+            onClick={() => setIsExpanded(!isExpanded)}
           >
-            {showFullSchedule
-              ? scheduleText
-              : scheduleText.length > 10
-              ? `${scheduleText.slice(0, 10)}...`
-              : scheduleText}
+            {scheduleText}
           </span>
         </div>
 

@@ -67,43 +67,40 @@
   display: flex;
   align-items: center;
   gap: 9px;
-  max-width: 100%;
+  width: 265px;
+  max-width: 265px;
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
   position: relative; /* 전체 텍스트 표시용 */
+  transition: all 0.3s ease-in-out; /* 부드럽게 애니메이션 */
 }
 
-.schedule-icon {
-  width: 18px;
-}
+/* .schedule-icon {
+  width: 18px; 
+} */
 /* ✅ 일정 표시 스타일 */
 .meeting-schedule {
   font-size: 12px;
+  white-space: nowrap; /* 기본적으로 한 줄 유지 */
   overflow: hidden;
-  white-space: nowrap;
   text-overflow: ellipsis;
-  max-width: 150px;
+  max-width: calc(100% - 30px);
   color: #000;
+  transition: all 0.3s ease-in-out;
+  flex-shrink: 1;
+  cursor: pointer;
 }
 
-/* ✅ Hover 시 툴팁으로 전체 일정 표시 */
-.meeting-schedule:hover::after {
-  content: attr(data-full-text);
-  position: absolute;
-  left: 0;
-  top: 100%;
-  background: rgba(0, 0, 0, 0.8);
-  color: #fff;
-  padding: 6px 10px;
-  font-size: 12px;
-  border-radius: 5px;
-  white-space: nowrap;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-  z-index: 10;
+/* ✅ 클릭 시 일정이 여러 줄로 확장됨 */
+.meeting-schedule.show {
+  white-space: normal;
+  overflow: visible;
+  text-overflow: unset;
+  max-width: 100%;
   display: block;
+  line-height: 1.4;
 }
-
 .meeting-main hr {
   border: none; /* 기본 테두리 제거 */
   height: 0.1px; /* 선 두께 설정 */
@@ -120,9 +117,9 @@
   /* padding-bottom: 5px; */
 }
 
-.folder-icon {
+/* .folder-icon {
   width: 18px;
-}
+} */
 
 .meeting-group {
   font-size: 12px;
