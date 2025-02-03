@@ -1,11 +1,14 @@
 import "./CreateMoimForm.css";
+import { Link } from "react-router-dom";
 
 const SubmitButton = ({ onNextStep }) => {
   return (
     <div className="center">
-      <button className="submit-button" onClick={onNextStep}>
-        <span className="center">다음 단계</span>
-      </button>
+      <Link to="schedule" onClick={onNextStep}>
+        <button className="submit-button">
+          <span className="center">다음 단계</span>
+        </button>
+      </Link>
     </div>
   );
 };
