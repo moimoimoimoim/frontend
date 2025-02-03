@@ -7,20 +7,20 @@
 /* 셀렉트박스 스타일 */
 .day-selector-style {
   all: unset;
-  margin-top: 1rem;
+  margin-top: 1.5rem;
 
-  width: 130px; /* ✅ 글자 크기만큼 너비 조절 */
+  width: 150px; /* ✅ 글자 크기만큼 너비 조절 */
   display: inline-block; /* ✅ span 크기에 맞게 조정 */
 
   font-size: 14px; /* ✅ 글자 크기 설정 */
 
-  padding: 0.8rem 1rem; /* ✅ 안쪽 여백 조정 */
+  padding: 1rem 1.5rem; /* ✅ 안쪽 여백 조정 */
   border: 1px solid var(--black10); /* ✅ 테두리 추가 */
-  border-radius: 15px; /* ✅ 둥근 모서리 */
+  border-radius: 20px; /* ✅ 둥근 모서리 */
 
   background-image: url(/public/셀렉트박스.png);
   background-repeat: no-repeat;
-  background-position: right 10px center;
+  background-position: right 16px center;
 
   background-size: 14px, 14px;
   padding-right: 3rem; /* 오른쪽 아이콘과 텍스트 간격 */
@@ -149,21 +149,20 @@
 
 /* 셀렉트박스 스타일 */
 .time-selector-style {
-  margin: auto;
   all: unset;
-  margin-top: 1rem;
+  margin-top: 1.5rem;
   display: inline-block; /* ✅ span 크기에 맞게 조정 */
   width: 70px;
 
   font-size: 14px; /* ✅ 글자 크기 설정 */
 
-  padding: 0.8rem 1rem; /* ✅ 안쪽 여백 조정 */
+  padding: 1rem 1.2rem;
   border: 1px solid var(--black10); /* ✅ 테두리 추가 */
-  border-radius: 15px; /* ✅ 둥근 모서리 */
+  border-radius: 20px; /* ✅ 둥근 모서리 */
 
   background-image: url(/public/셀렉트박스.png);
   background-repeat: no-repeat;
-  background-position: right 10px center;
+  background-position: right 16px center;
 
   background-size: 14px, 14px;
   padding-right: 3rem; /* 오른쪽 아이콘과 텍스트 간격 */
@@ -218,16 +217,16 @@
 .add-button {
   margin: auto;
   all: unset;
-  margin-top: 1rem;
+  margin-top: 1.5rem;
   display: inline-block; /* ✅ span 크기에 맞게 조정 */
 
   font-size: 14px; /* ✅ 글자 크기 설정 */
-  font-weight: bold;
+  font-weight: 500;
   color: white;
 
-  padding: 0.8rem 1rem; /* ✅ 안쪽 여백 조정 */
+  padding: 0.9rem 1.3rem;
   border: 1px solid var(--black10); /* ✅ 테두리 추가 */
-  border-radius: 15px; /* ✅ 둥근 모서리 */
+  border-radius: 20px; /* ✅ 둥근 모서리 */
 
   background: linear-gradient(#4f4f4f, #3a3a3a);
 

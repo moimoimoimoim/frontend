@@ -9,6 +9,7 @@ import LoginPage from "./pages/LoginPage";
 import SignUpPage from "./pages/SignUpPage";
 import MainPage from "./pages/MainPage";
 import CreatePage from "./pages/CreatePage";
+import SchedulePage from "./pages/SchedulePage";
 import MyPage from "./pages/MyPage";
 import NotFound from "./pages/NotFound";
 
@@ -48,16 +49,20 @@ function App() {
             element={<MainPage meetings={meetings} />}
           ></Route>
           {/* <Route path="/create" element={<CreatePage />} /> */}
+          <Route path="/schedule" element={<SchedulePage />} />
           <Route path="/mypage" element={<MyPage />} />
-          <Route
-            path="/create"
-            element={<CreatePage onCreateMoim={handleCreateMoim} />}
-          />
           {/* 메인페이지에서 사이드바를 통한 라우트 */}
           {/* <Route path="/main/all-meetings" element={<MainPage />} /> */}
           <Route path="/main/ongoing-meetings" element={<OngoingMeetings />} />
           <Route path="/main/closed-meetings" element={<ClosedMeetings />} />
           <Route path="/main/group/:groupId" element={<Group />} />
+
+          <Route
+            path="/create"
+            element={<CreatePage onCreateMoim={handleCreateMoim} />}
+          />
+          {/* 생성 페이지 ➡️ 스케줄 페이지 */}
+          <Route path="/create/schedule" element={<SchedulePage />}></Route>
         </Route>
         {/* 동적 그룹 라우팅 (그룹 추가 시 URL 변경) */}
         <Route path="/group/:groupId" element={<Group />} />
