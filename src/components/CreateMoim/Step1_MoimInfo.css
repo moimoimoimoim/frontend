@@ -1,6 +1,6 @@
 /* 그룹, 모임 이름, 참여 코드 필드 */
 .step1-form-fields {
-  gap: 2rem;
+  gap: 3rem;
   display: flex;
   align-items: center; /* ✅ 모든 요소를 가운데 정렬 */
 }
@@ -9,9 +9,9 @@
 select {
   all: unset;
   width: 180px;
-  margin-top: 0.5rem;
+  margin-top: 1rem;
   padding-bottom: 0.8rem;
-  font-size: 14px;
+  font-size: 1rem;
 }
 
 /* input (모임명, 참여코드) */
@@ -30,7 +30,7 @@ select {
 }
 
 .input-fields span {
-  font-size: 14px;
+  font-size: 1rem;
   margin-right: 1rem;
   font-weight: 600;
 }

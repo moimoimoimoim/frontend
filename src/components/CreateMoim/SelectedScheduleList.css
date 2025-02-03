@@ -31,7 +31,7 @@
   display: flex;
   background: #fafafa;
   border-radius: 15px;
-  padding: 1.2rem 1.5rem;
+  padding: 1.3rem 2rem;
   border: 1px solid var(--black05);
   margin-bottom: 1rem;
 
@@ -43,13 +43,13 @@
 }
 
 .schedule-key {
-  font-size: 14px;
+  font-size: 1rem;
   font-weight: bold;
   margin-right: 1rem;
 }
 
 .schedule-value {
-  font-size: 14px;
+  font-size: 1rem;
 }
 
 .no-schedule {
