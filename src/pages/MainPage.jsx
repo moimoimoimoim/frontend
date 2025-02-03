@@ -10,8 +10,8 @@ const MainPage = ({ meetings }) => {
       <div className="main-content">
         <Title text="모든 모임" />
 
-        {/* ✅ 모임 리스트를 출력 */}
-        <div className="meeting-grid">
+        {/* ✅ 모임 리스트를 출력 (없을 때만 flex 적용) */}
+        <div className={`meeting-grid ${meetings.length === 0 ? "empty" : ""}`}>
           {meetings.length === 0 ? (
             <p className="no-meeting">현재 진행 중인 모임이 없습니다.</p>
           ) : (
