@@ -12,7 +12,7 @@ const Step3_Schedule = ({
   setStartTime,
   endTime,
   setEndTime,
-  setTimeBlocks, // ✅ 부모로 전달할 timeBlocks 상태 추가
+  setTimeBlocks,
 }) => {
   const days = ["월", "화", "수", "목", "금", "토", "일"];
   const [isOpen, setIsOpen] = useState(false);
@@ -20,11 +20,22 @@ const Step3_Schedule = ({
   const [isOpenEnd, setIsOpenEnd] = useState(false);
   const [timeslots, setTimeslots] = useState([]);
 
+  // ✅ 시간 선택 옵션 (00:00 ~ 23:30, 30분 단위)
   const timeOptions = Array.from({ length: 48 }, (_, i) => {
     const hours = Math.floor(i / 2);
     const minutes = i % 2 === 0 ? "00" : "30";
     return `${hours}:${minutes}`;
   }).filter((time) => parseInt(time.split(":")[0]) < 24);
+
+  // ✅ 종료 시간 선택 시, 시작 시간 이후의 시간만 선택 가능하도록 수정
+  const filteredEndTimeOptions = timeOptions.filter((time) => {
+    if (!startTime) return true;
+    const [startHour, startMinute] = startTime.split(":").map(Number);
+    const [endHour, endMinute] = time.split(":").map(Number);
+
+    // 분 단위로 변환하여 비교
+    return endHour * 60 + endMinute > startHour * 60 + startMinute;
+  });
 
   const toggleDay = (day) => {
     setSelectedDays((prevDays) =>
@@ -80,16 +91,16 @@ const Step3_Schedule = ({
         return newTimeslots;
       });
 
-      // ✅ timeBlocks 상태도 같이 업데이트
       setTimeBlocks((prevTimeBlocks) => {
         const newTimeBlocks = updateTimeslots(scheduleData, prevTimeBlocks).map(
-          (slot) => ({ timeBlocks: slot }) // JSON 형식 맞추기
+          (slot) => ({ timeBlocks: slot })
         );
         console.log("📤 업데이트된 timeBlocks:", newTimeBlocks);
         return newTimeBlocks;
       });
     }
   };
+
   return (
     <div className="form-section">
       <span className="create-container__title">
@@ -176,18 +187,19 @@ const Step3_Schedule = ({
           </div>
         </div>
 
-        {/* ✅ 종료 시간 선택 */}
+        {/* ✅ 종료 시간 선택 (startTime 이후의 시간만 표시) */}
         <div className="time-picker">
           <div className="dropdown">
             <button
               className="dropdown-btn time-selector-style"
               onClick={() => setIsOpenEnd(!isOpenEnd)}
+              disabled={!startTime} // 시작 시간을 선택하지 않으면 비활성화
             >
               {endTime || "종료 시간"}
             </button>
             {isOpenEnd && (
               <div className="dropdown-list">
-                {timeOptions.map((time) => (
+                {filteredEndTimeOptions.map((time) => (
                   <div
                     key={time}
                     className="dropdown-item"
