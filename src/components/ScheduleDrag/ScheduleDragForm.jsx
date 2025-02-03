@@ -140,7 +140,10 @@ const DragTable = () => {
       <table className="fixed-table">
         <thead>
           <tr>
-            <th onClick={handleSelectAll} style={{ cursor: "pointer" }}>
+            <th
+              onClick={handleSelectAll}
+              style={{ fontSize: "12px", cursor: "pointer" }}
+            >
               전체 선택
             </th>
             {["월", "화", "수", "목", "금", "토", "일"].map((day, colIndex) => (
@@ -161,13 +164,20 @@ const DragTable = () => {
               <td
                 onClick={() => handleTimeClick(rowIndex)}
                 style={{
-                  fontWeight: "bold",
-                  userSelect: "none",
-                  background: "#f0f0f0",
                   cursor: "pointer",
                 }}
               >
-                {String(Math.floor(rowIndex / 2)).padStart(2, "0")}:00
+                {rowIndex % 2 === 0 ? (
+                  <span className="time-section">
+                    <span className="time-section">
+                      {String(Math.floor(rowIndex / 2)).padStart(2, "0")}
+                    </span>
+                  </span>
+                ) : (
+                  <span className="time-section-30">
+                    {String(Math.floor(rowIndex / 2)).padStart(2, "0")} : 30
+                  </span>
+                )}
               </td>
 
               {row.map((_, colIndex) => (
@@ -190,7 +200,7 @@ const DragTable = () => {
                     )
                       ? "#FFA500"
                       : "#FFF",
-                    border: "1px solid var(--black10)",
+                    border: "1px solid #EEEEEE",
                     cursor:
                       colIndex >= 0 && colIndex <= 6 ? "pointer" : "default",
                   }}
