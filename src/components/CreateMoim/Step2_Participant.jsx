@@ -13,7 +13,7 @@ const Step2_Participant = ({ participantCount, setParticipantCount }) => {
           value={participantCount}
           onChange={(e) => setParticipantCount(e.target.value)}
         >
-          <option value="" disabled selected>
+          <option value="" disabled>
             인원수
           </option>
           <option value="2">2명</option>

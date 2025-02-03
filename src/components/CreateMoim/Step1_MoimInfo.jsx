@@ -76,14 +76,4 @@ const Step1_MoimInfo = ({
   );
 };
 
-// ✅ props 타입 지정
-Step1_MoimInfo.propTypes = {
-  moimName: PropTypes.string.isRequired,
-  setMoimName: PropTypes.func.isRequired,
-  group: PropTypes.string.isRequired,
-  setGroup: PropTypes.func.isRequired,
-  joinCode: PropTypes.string.isRequired,
-  setJoinCode: PropTypes.func.isRequired,
-};
-
 export default Step1_MoimInfo;

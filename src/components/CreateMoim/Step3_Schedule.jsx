@@ -2,15 +2,20 @@ import "./CreateMoimForm.css";
 import "./Step3_Schedule.css";
 import { useState } from "react";
 
-const Step3_Schedule = ({ schedules, setSchedules }) => {
-  const [selectedDays, setSelectedDays] = useState([]); // 선택된 요일
-  const [startTime, setStartTime] = useState(""); // 시작 시간
-  const [endTime, setEndTime] = useState(""); // 종료 시간
-  const [isOpen, setIsOpen] = useState(false); // 요일 선택창 상태
+const Step3_Schedule = ({
+  schedules,
+  setSchedules,
+  selectedDays,
+  setSelectedDays,
+  startTime,
+  setStartTime,
+  endTime,
+  setEndTime,
+}) => {
+  const days = ["월", "화", "수", "목", "금", "토", "일"];
+  const [isOpen, setIsOpen] = useState(false); // ✅ isOpen 추가
   const [isOpenStart, setIsOpenStart] = useState(false);
   const [isOpenEnd, setIsOpenEnd] = useState(false);
-
-  const days = ["월", "화", "수", "목", "금", "토", "일"];
 
   // ✅ 1~12시까지만 선택할 수 있도록 설정
   const timeOptions = Array.from({ length: 24 }, (_, i) => `${i - 1 + 1}:00`);
@@ -34,6 +39,8 @@ const Step3_Schedule = ({ schedules, setSchedules }) => {
       setSelectedDays([]);
       setStartTime("");
       setEndTime("");
+    } else {
+      console.error("🚨 일정 추가 실패! 요일, 시작시간, 종료시간이 필요함.");
     }
   };
 

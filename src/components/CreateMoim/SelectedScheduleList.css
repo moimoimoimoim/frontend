@@ -3,7 +3,7 @@
   height: 100%;
   background-color: rgb(255, 255, 255);
 
-  padding: 1.8rem 2rem;
+  padding: 2.5rem 2.8rem;
   margin: 1rem 1rem 5rem 1rem;
   border-radius: 20px;
 
@@ -13,36 +13,43 @@
 .schedule-container__title {
   display: flex;
   width: 100%;
-  /* color: white; */
-  /* background: linear-gradient(45deg, var(--orange), 40%, var(--yellow)); */
-
-  padding-bottom: 1rem;
+  padding-bottom: 1.5rem;
   border-radius: 20px;
-  /* margin-bottom: 1rem; */
-  font-size: 16px;
+  font-size: 18px;
   font-weight: 600;
 }
 
-.schedule-fields {
-  /* border-top: 1px solid var(--black05); */
+.schedule-grid {
   width: 100%;
-  font-size: 14px;
-  padding: 0.8rem 2rem;
-  background-color: rgba(0, 0, 0, 0.02);
-  border-radius: 10px;
+}
+.schedule-list {
+  width: 100%;
 }
 
-/* .schedule-fields > ul {
-  padding-top: 0.5rem;
-} */
+.schedule-card {
+  width: 100%;
+  display: flex;
+  background: #fafafa;
+  border-radius: 15px;
+  padding: 1.2rem 1.5rem;
+  border: 1px solid var(--black05);
+  margin-bottom: 1rem;
 
-.schedule {
-  margin: 1rem 0;
+  text-align: left;
 }
 
 .schedule-list {
-  font-weight: 600;
-  padding-right: 1rem;
+  display: flex;
+}
+
+.schedule-key {
+  font-size: 14px;
+  font-weight: bold;
+  margin-right: 1rem;
+}
+
+.schedule-value {
+  font-size: 14px;
 }
 
 .no-schedule {
