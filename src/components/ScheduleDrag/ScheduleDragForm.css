@@ -1,0 +1,57 @@
+/* DragTable.css */
+
+.table-container {
+  width: 1000px;
+}
+
+.fixed-table {
+  margin: 4rem 0;
+  border: 1px solid var(--black10);
+  width: 50%;
+  border-radius: 20px;
+  table-layout: fixed;
+}
+
+th {
+  padding: 12px 14px;
+  font-size: 14px;
+}
+
+.time-td > span {
+  display: flex;
+}
+.time-td {
+  font-size: 14px;
+  font-weight: bold;
+  text-align: center;
+  width: 40px;
+
+  border-radius: 10px;
+}
+.select-td {
+  text-align: center;
+  font-size: 0rem;
+  width: 30px;
+  height: 0;
+  padding: 10px;
+}
+
+.fixed-table th,
+.fixed-table td {
+  background-color: white;
+}
+
+.fixed-table th {
+  background-color: #f8f8f8;
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}
+
+.fixed-table td:hover {
+  background-color: #f1f1f1;
+}
+
+.selectNoData {
+  background-color: lightgreen; /* 선택된 셀 */
+}

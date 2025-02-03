@@ -77,8 +77,6 @@ const Step3_Schedule = ({
         };
       });
 
-      console.log("📤 변환된 일정 데이터:", scheduleData);
-
       setSchedules((prevSchedules) => [
         ...prevSchedules,
         { days: selectedDays.join(", "), startTime, endTime },
@@ -87,7 +85,7 @@ const Step3_Schedule = ({
       // 기존 timeslots 업데이트 함수
       setTimeslots((prevTimeslots) => {
         const newTimeslots = updateTimeslots(scheduleData, prevTimeslots);
-        console.log("📤 업데이트된 timeslots:", newTimeslots);
+
         return newTimeslots;
       });
 
