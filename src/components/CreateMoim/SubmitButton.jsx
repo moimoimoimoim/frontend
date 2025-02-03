@@ -28,6 +28,8 @@ const SubmitButton = ({
   selectedDays,
   startTime,
   endTime,
+  timeBlocks,
+  setTimeBlocks, // ✅ 추가
 }) => {
   const navigate = useNavigate(); // 페이지 이동을 위한 것
   const requestData = {
@@ -40,6 +42,7 @@ const SubmitButton = ({
     selectedDays,
     startTime,
     endTime,
+    timeBlocks,
   };
 
   const handleSubmit = (e) => {

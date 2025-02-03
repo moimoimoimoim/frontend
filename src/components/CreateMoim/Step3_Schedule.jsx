@@ -12,26 +12,26 @@ const Step3_Schedule = ({
   setStartTime,
   endTime,
   setEndTime,
+  setTimeBlocks, // ✅ 부모로 전달할 timeBlocks 상태 추가
 }) => {
   const days = ["월", "화", "수", "목", "금", "토", "일"];
-  const [isOpen, setIsOpen] = useState(false); // ✅ isOpen 추가
+  const [isOpen, setIsOpen] = useState(false);
   const [isOpenStart, setIsOpenStart] = useState(false);
   const [isOpenEnd, setIsOpenEnd] = useState(false);
   const [timeslots, setTimeslots] = useState([]);
-  // ✅ 1~12시까지만 선택할 수 있도록 설정
-  const timeOptions = Array.from({ length: 48 }, (_, i) => {
-    const hours = Math.floor(i / 2); // 시간 계산 (0~23)
-    const minutes = i % 2 === 0 ? "00" : "30"; // 30분 단위
-    return `${hours}:${minutes}`;
-  }).filter((time) => parseInt(time.split(":")[0]) < 24); // 24:00 이상 제거
 
-  // 요일 선택 핸들러
+  const timeOptions = Array.from({ length: 48 }, (_, i) => {
+    const hours = Math.floor(i / 2);
+    const minutes = i % 2 === 0 ? "00" : "30";
+    return `${hours}:${minutes}`;
+  }).filter((time) => parseInt(time.split(":")[0]) < 24);
+
   const toggleDay = (day) => {
-    if (selectedDays.includes(day)) {
-      setSelectedDays(selectedDays.filter((d) => d !== day));
-    } else {
-      setSelectedDays([...selectedDays, day]);
-    }
+    setSelectedDays((prevDays) =>
+      prevDays.includes(day)
+        ? prevDays.filter((d) => d !== day)
+        : [...prevDays, day]
+    );
   };
 
   const convertToSlot = (day, time) => {
@@ -40,9 +40,8 @@ const Step3_Schedule = ({
     return (day - 1) * 48 + hours * 2 + minutes / 30;
   };
 
-  // ✅ 기존 timeslots을 유지하면서 새로운 슬롯 추가
   const updateTimeslots = (newSchedules, prevTimeslots) => {
-    let updatedTimeslots = [...prevTimeslots]; // 기존 timeslots 유지
+    let updatedTimeslots = [...prevTimeslots];
 
     newSchedules.forEach(({ startSlot, endSlot }) => {
       for (let slot = startSlot; slot <= endSlot; slot++) {
@@ -54,34 +53,40 @@ const Step3_Schedule = ({
 
     return updatedTimeslots;
   };
-  // 일정 추가 핸들러
+
   const addSchedule = () => {
     if (selectedDays.length > 0 && startTime && endTime) {
       const scheduleData = selectedDays.map((day) => {
-        const dayNumber = days.indexOf(day) + 1; // "월" → 1, "화" → 2 ...
+        const dayNumber = days.indexOf(day) + 1;
         return {
-          days: day, // 기존 요일
+          days: day,
           startTime,
           endTime,
           startSlot: convertToSlot(dayNumber, startTime),
           endSlot: convertToSlot(dayNumber, endTime) - 1,
         };
       });
-      // ✅ 콘솔에서 변환된 슬롯 값 확인하기!
-      console.log("📤 변환된 일정 데이터:", scheduleData, days);
 
-      // ✅ 기존 schedules에 새로운 일정 추가
+      console.log("📤 변환된 일정 데이터:", scheduleData);
+
       setSchedules((prevSchedules) => [
         ...prevSchedules,
-
         { days: selectedDays.join(", "), startTime, endTime },
       ]);
 
-      // ✅ 기존 timeslots 유지하면서 업데이트
       setTimeslots((prevTimeslots) => {
-        const timeBlocks = updateTimeslots(scheduleData, prevTimeslots);
-        console.log("📤 업데이트된 timeBlocks:", timeBlocks);
-        return timeBlocks;
+        const newTimeslots = updateTimeslots(scheduleData, prevTimeslots);
+        console.log("📤 업데이트된 timeslots:", newTimeslots);
+        return newTimeslots;
+      });
+
+      // ✅ timeBlocks 상태도 같이 업데이트
+      setTimeBlocks((prevTimeBlocks) => {
+        const newTimeBlocks = updateTimeslots(scheduleData, prevTimeBlocks).map(
+          (slot) => ({ timeBlocks: slot }) // JSON 형식 맞추기
+        );
+        console.log("📤 업데이트된 timeBlocks:", newTimeBlocks);
+        return newTimeBlocks;
       });
     }
   };

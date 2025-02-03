@@ -19,6 +19,7 @@ const CreatePage = () => {
   const [startTime, setStartTime] = useState(""); // ✅ 시작 시간
   const [endTime, setEndTime] = useState(""); // ✅ 종료 시간
   const [onNextStep, handleNextStep] = useState(""); // ✅ 종료 시간
+  const [timeBlocks, setTimeBlocks] = useState([]); // ✅ timeBlocks 상태 추가
 
   const formData = {
     moimName,
@@ -70,6 +71,7 @@ const CreatePage = () => {
           setStartTime={setStartTime}
           endTime={endTime}
           setEndTime={setEndTime}
+          setTimeBlocks={setTimeBlocks}
         />
         {/* <Step3_Schedule schedules={schedules} setSchedules={setSchedules} /> */}
       </CreateMoimForm>
@@ -90,6 +92,7 @@ const CreatePage = () => {
         startTime={startTime} // ✅ 추가
         endTime={endTime} // ✅ 추가
         schedules={schedules}
+        timeBlocks={timeBlocks}
         onNextStep={handleNextStep}
       />
     </div>
