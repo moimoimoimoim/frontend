@@ -1,7 +1,6 @@
 import { useState } from "react";
 import StepIndicator from "../components/StepIndicator";
 import SelectMoim from "../components/SelectMoim/SelectMoim";
-import SelectButton from "../components/SelectMoim/SelectButton";
 
 const SelectPage = () => {
   const [currentStep] = useState(2);

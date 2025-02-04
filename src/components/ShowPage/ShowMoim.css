@@ -1,0 +1,24 @@
+.selected-moim {
+  background: white;
+  border-radius: 1rem;
+  padding: 1.5rem;
+  box-shadow: 0 3px 10px var(--black05);
+  text-align: center;
+  margin-top: 2rem;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+
+.no-data {
+  font-size: 18px;
+
+  margin-top: 6rem;
+  color: var(--black20);
+}
+
+/* ✅ 선택한 데이터가 있을 때만 애니메이션 적용 */
+/* .show-elements .selected-moim {
+  opacity: 1;
+  transform: translateY(0);
+} */

@@ -5,6 +5,7 @@ import SelectButton from "./SelectButton";
 const SelectMoim = () => {
   const [selectedIndex, setSelectedIndex] = useState(null);
   const [moimData, setMoimData] = useState([]); // 백엔드에서 가져온 데이터 저장
+  const [isFirstLoad, setIsFirstLoad] = useState(true); // ✅ 처음 한 번만 애니메이션 실행
 
   // ✅ 백엔드에서 모임 데이터 가져오기
   useEffect(() => {
@@ -30,6 +31,10 @@ const SelectMoim = () => {
           { id: null, title: "모임 없음", date: "" },
         ]); // 오류 발생 시 기본 박스 표시
       });
+    // ✅ 애니메이션 한 번 실행 후 비활성화
+    setTimeout(() => {
+      setIsFirstLoad(false);
+    }, 2000);
   }, []);
 
   const handleSelect = (index) => {
@@ -42,7 +47,9 @@ const SelectMoim = () => {
       alert("모임을 선택해주세요!");
       return;
     }
-
+    console.log("✅ 확정된 일정:", selectedMoim);
+    setConfirmedMoim(selectedMoim);
+    localStorage.setItem("confirmedMoim", JSON.stringify(selectedMoim)); // ✅ localStorage 저장
     const selectedMoim = moimData[selectedIndex];
 
     console.log("백엔드로 보낼 데이터:", selectedMoim);
@@ -75,7 +82,7 @@ const SelectMoim = () => {
           return (
             <div
               key={index}
-              className={`moim-list ${
+              className={`moim-list ${isFirstLoad ? "animated" : ""} ${
                 selectedIndex === index ? "selected" : ""
               }`}
               onClick={() => handleSelect(index)}
@@ -86,18 +93,21 @@ const SelectMoim = () => {
           );
         })}
       </div>
-
-      {/* ✅ 선택된 박스가 있을 때만 `show-elements` 클래스 추가 */}
-      <div className={selectedIndex !== null ? "show-elements" : ""}>
-        <span className="question center">해당 일정으로 확정하시겠습니까?</span>
-        <div className="select-btn">
-          <SelectButton
-            selectedMoim={
-              selectedIndex !== null ? moimData[selectedIndex] : null
-            }
-          />
+      {/* ✅ 선택된 일정 확인 UI */}
+      {selectedIndex !== null && (
+        <div className="show-elements">
+          <span className="question center">
+            해당 일정으로 확정하시겠습니까?
+          </span>
+          <div className="select-btn">
+            <SelectButton
+              selectedMoim={
+                selectedIndex !== null ? moimData[selectedIndex] : null
+              }
+            />
+          </div>
         </div>
-      </div>
+      )}
     </section>
   );
 };

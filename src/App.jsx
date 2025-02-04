@@ -12,6 +12,7 @@ import CreatePage from "./pages/CreatePage";
 import SchedulePage from "./pages/SchedulePage";
 import SelectPage from "./pages/SelectPage";
 import NotFound from "./pages/NotFound";
+import ShowPage from "./pages/ShowPage";
 
 //메인페이지 Sidebar route
 // import Sidebar from "./components/MainPage/Sidebar";
@@ -30,7 +31,8 @@ function App() {
         <Link to="/main">메인</Link>
         <Link to="/create">생성</Link>
         <Link to="/schedule">스케줄</Link>
-        <Link to="/selelct">선택</Link>
+        <Link to="/select">선택</Link>
+        <Link to="/show">보여주기</Link>
       </nav>
 
       <Routes>
@@ -40,7 +42,8 @@ function App() {
           <Route path="/main" element={<MainPage />} />
           <Route path="/create" element={<CreatePage />} />
           <Route path="/schedule" element={<SchedulePage />} />
-          <Route path="/selelct" element={<SelectPage />} />
+          <Route path="/select" element={<SelectPage />} />
+          <Route path="/show" element={<ShowPage />} />
           {/* 얘도 지울 것 */}
           {/* <Route path="/join/:moimId" element={<JoinPage />} /> */}
 
@@ -52,6 +55,7 @@ function App() {
           <Route path="/main/group/:groupId" element={<Group />} />
           {/* 생성 페이지 ➡️ 스케줄 페이지 */}
           <Route path="/create/schedule" element={<SchedulePage />}></Route>
+          {/* <Route path="/create/show" element={<ShowPage />}></Route> */}
         </Route>
         {/* 동적 그룹 라우팅 (그룹 추가 시 URL 변경) */}
         <Route path="/group/:groupId" element={<Group />} />

@@ -8,40 +8,19 @@
   align-items: center;
   gap: 2.5rem;
 }
-
-.moim-section {
-  display: flex;
-  width: 100%;
-  height: 220px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 2rem;
+/* ✅ 처음 등장할 때 아래에서 위로 올라오는 효과 (한 번만 실행) */
+@keyframes fadeUp {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
-.moim-list {
-  flex: 1;
-  height: 85%;
-  background-color: white; /* 내부 배경 */
-  border-radius: 1rem;
-  cursor: pointer;
-  position: relative;
-  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  /* 기본 테두리 (그라데이션) */
-  background: linear-gradient(white, white) padding-box,
-    linear-gradient(var(--black05), var(--black05)) border-box;
-  border: 1px solid transparent;
-  box-shadow: 0 3px 10px var(--black05);
-
-  /* ✅ 크기가 커져도 위치 유지 */
-  transform-origin: center;
-}
-
-/* 🎨 그라데이션 애니메이션 */
+/* ✅ 선택한 박스 스타일 */
 @keyframes gradientShift {
   0% {
     background: linear-gradient(white, white) padding-box,
@@ -57,35 +36,65 @@
   }
 }
 
-/* ✅ 선택된 경우: 박스 크기가 커져도 위치 유지 */
+/* ✅ 기본 박스 스타일 */
+.moim-list {
+  flex: 1;
+  height: 85%;
+  background-color: white;
+  border-radius: 1rem;
+  cursor: pointer;
+  position: relative;
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 1;
+  transform: translateY(0);
+
+  /* ✅ 기본 테두리 */
+  background: linear-gradient(white, white) padding-box,
+    linear-gradient(var(--black05), var(--black05)) border-box;
+  border: 1px solid transparent;
+  box-shadow: 0 3px 10px var(--black05);
+  transform-origin: center;
+}
+
+/* ✅ 페이지 처음 로드 시 `fadeUp` 실행 */
+.moim-list.animated {
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeUp 0.7s ease-out forwards;
+  animation-fill-mode: forwards;
+}
+
+/* ✅ 첫 번째 박스 즉시 등장 */
+.moim-list.animated:nth-child(1) {
+  animation-delay: 0s;
+}
+
+/* ✅ 두 번째 박스는 0.4초 뒤 등장 */
+.moim-list.animated:nth-child(2) {
+  animation-delay: 0.4s;
+}
+
+/* ✅ 세 번째 박스는 0.8초 뒤 등장 */
+.moim-list.animated:nth-child(3) {
+  animation-delay: 0.8s;
+}
+
+/* ✅ 박스를 선택했을 때: fadeUp이 실행되지 않고, 테두리와 크기만 변화 */
 .moim-list.selected {
   border: 2px solid transparent;
-  transform: scale(1.02); /* 크기 조정 */
-  animation: gradientShift 3s infinite ease-in-out;
-
-  /* ✅ 크기가 커져도 위치 유지 */
-  margin: 0 auto;
-  transition: transform 0.3s ease-in-out;
+  transform: scale(1.02);
+  animation: gradientShift 0.01s infinite;
+  transition: transform 0s, border 0s;
 }
 
 .question {
-  margin-top: 3rem;
-  margin-bottom: 2.5rem;
-  font-size: 22px;
+  font-size: 20px;
   font-weight: 600;
-}
-
-.select-btn {
-}
-@keyframes fadeUp {
-  0% {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  100% {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  margin-top: 3rem;
+  margin-bottom: 2rem;
 }
 /* ✅ 기본적으로 숨김 */
 .question,
@@ -95,14 +104,24 @@
   transition: opacity 0.8s ease-out, transform 0.8s ease-out;
 }
 
-/* ✅ `show-elements`가 추가되었을 때 나타남 */
-.show-elements .question {
-  opacity: 1;
-  transform: translateY(0);
-}
-
+/* ✅ 박스를 선택한 경우만 표시 */
+.show-elements .question,
 .show-elements .select-btn {
   opacity: 1;
   transform: translateY(0);
-  transition-delay: 0.3s; /* ✅ 질문이 먼저 뜨고 버튼이 0.3초 뒤에 뜨도록 설정 */
+}
+@keyframes fadeUpQuestion {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.show-elements .question,
+.show-elements .select-btn {
+  animation: fadeUpQuestion 0.8s ease-out forwards;
 }

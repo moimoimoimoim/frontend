@@ -48,7 +48,7 @@ const CreatePage = () => {
         이전 단계
       </button>
       <button onClick={() => setCurrentStep((prev) => Math.min(prev + 1, 2))}>
-        다음 단계
+        다음 단계x
       </button> */}
 
       <CreateMoimForm>

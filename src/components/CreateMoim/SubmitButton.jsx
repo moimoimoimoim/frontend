@@ -56,6 +56,7 @@ const SubmitButton = ({
           console.log("✅ navigate 실행됨!");
 
           onNextStep?.();
+          // 이거 나중에 빼야됨
           navigate(nextPage);
         } else {
           console.error("❌ 데이터 전송 실패");

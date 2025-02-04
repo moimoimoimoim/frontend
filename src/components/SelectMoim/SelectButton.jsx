@@ -35,7 +35,7 @@ const SelectButton = ({ selectedMoim }) => {
   return (
     <div className="center">
       <button className="submit-button" onClick={handleSubmit}>
-        <span className="center">확정하기</span>
+        <span className="center">확인</span>
       </button>
     </div>
   );
