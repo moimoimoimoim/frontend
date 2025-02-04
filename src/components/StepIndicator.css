@@ -1,6 +1,6 @@
 .step-container {
   display: flex;
-  width: 70%;
+  width: 1000px;
   flex-direction: column;
   padding-left: 1rem;
   /* text-align: center; */
