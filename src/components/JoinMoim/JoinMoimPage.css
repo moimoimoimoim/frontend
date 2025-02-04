@@ -1,0 +1,25 @@
+html,
+body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+.join-moim-container {
+  display: flex;
+  flex-direction: column;
+
+  height: calc(100vh - 76px);
+  gap: 32px;
+}
+.title {
+  font-size: 28px;
+  font-weight: 600;
+  text-align: center;
+}
+
+.highlight {
+  background: linear-gradient(73deg, #ff6a20, #ffaa17);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}

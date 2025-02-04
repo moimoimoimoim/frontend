@@ -12,6 +12,7 @@ import CreatePage from "./pages/CreatePage";
 import SchedulePage from "./pages/SchedulePage";
 import MyPage from "./pages/MyPage";
 import NotFound from "./pages/NotFound";
+import JoinMoimPage from "./pages/JoinMoimPage";
 
 //메인페이지 Sidebar route
 // import Sidebar from "./components/MainPage/Sidebar";
@@ -36,6 +37,8 @@ function App() {
         <Link to="/signup">회원가입</Link>
         <Link to="/main">메인</Link>
         <Link to="/create">생성</Link>
+        <Link to="/schedule">스케줄</Link>
+        <Link to="/join-moim">모임들어가기창</Link>
         <Link to="/mypage">마이페이지</Link>
       </nav>
 
@@ -56,7 +59,7 @@ function App() {
           <Route path="/main/ongoing-meetings" element={<OngoingMeetings />} />
           <Route path="/main/closed-meetings" element={<ClosedMeetings />} />
           <Route path="/main/group/:groupId" element={<Group />} />
-
+          <Route path="/join-moim" element={<JoinMoimPage />} />
           <Route
             path="/create"
             element={<CreatePage onCreateMoim={handleCreateMoim} />}

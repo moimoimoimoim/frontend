@@ -1,5 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import GoogleLoginButton from "../components/Login/GoogleLoginButton";
+import "../components/Login/LoginPage.css";
+import Logo from "../components/JoinMoim/Logo.jsx";
 
 const LoginPage = () => {
   const navigate = useNavigate();
@@ -9,7 +11,8 @@ const LoginPage = () => {
   };
 
   return (
-    <div className="center">
+    <div className="center login-container">
+      <Logo />
       {/* 아이디 */}
       {/* 비번 */}
       {/* 로그인 버튼 */}
