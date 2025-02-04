@@ -13,7 +13,6 @@ const SelectPage = () => {
         currentStep={currentStep}
       />
       <SelectMoim />
-      <SelectButton />
     </div>
   );
 };
