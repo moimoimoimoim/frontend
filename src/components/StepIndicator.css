@@ -25,6 +25,7 @@
 
 /* 과정 설명/ */
 .step-title {
+  width: 100%;
   font-size: 24px;
   font-weight: bold;
   margin: 1rem 0;

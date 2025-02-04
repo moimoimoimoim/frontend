@@ -1,29 +1,39 @@
 import "../CreateMoim/CreateMoimForm.css";
 import { useNavigate } from "react-router-dom";
 
+const API_URL = import.meta.env.VITE_API_URL || "http://localhost:5000"; // ✅ API 주소 설정
+
 const ScheduleButton = ({ data }) => {
   const navigate = useNavigate();
 
-  // ✅ `data`가 올바르게 들어왔는지 확인
-  console.log("🔍 ScheduleButton에서 받은 데이터:", data);
-
-  // ✅ `data`가 없으면 경고
   if (!data) {
-    console.error("⚠️ ScheduleButton: data가 없음! 데이터가 전달되지 않음.");
+    console.error("❌ ScheduleButton에서 받은 데이터가 없습니다! (undefined)");
+    return null; // 데이터 없으면 버튼 안 보이게 처리
   }
+
+  console.log(
+    "🔍 ScheduleButton에서 받은 데이터:",
+    JSON.stringify(data, null, 2)
+  );
 
   const handleSubmit = async () => {
     console.log("📤 서버로 보낼 데이터:", JSON.stringify(data, null, 2));
 
-    fetch("/result", {
+    fetch(`${API_URL}/new-calendars`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(data),
     })
-      .then((response) => response.json()) // 응답을 JSON으로 변환
-      .then((data) => {
-        console.log("✅ 서버 응답 데이터:", JSON.stringify(data, null, 2));
-        navigate("/next-step"); // ✅ 데이터 전송 후 페이지 이동
+      .then(async (response) => {
+        if (!response.ok) {
+          throw new Error(`HTTP 오류! 상태 코드: ${response.status}`);
+        }
+        const serverData = await response.json();
+        console.log(
+          "✅ 서버 응답 데이터:",
+          JSON.stringify(serverData, null, 2)
+        );
+        navigate("/select"); // ✅ 데이터 전송 후 페이지 이동
       })
       .catch((error) => console.error("🚨 서버 연결 실패:", error));
   };

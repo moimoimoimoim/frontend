@@ -1,0 +1,904 @@
+{
+  "confirm-schedule": [
+    {
+      "id": "0733",
+      "moimName": "창의학기제",
+      "group": "기본 그룹",
+      "joinCode": "123",
+      "participantCount": "3",
+      "schedules": [
+        {
+          "days": "수",
+          "startTime": "0:30",
+          "endTime": "3:00"
+        }
+      ],
+      "selectedDays": [
+        "수"
+      ],
+      "startTime": "0:30",
+      "endTime": "3:00",
+      "timeBlocks": [
+        97,
+        98,
+        99,
+        100,
+        101
+      ]
+    }
+  ],
+  "join/:inviteToken": [],
+  "select": [
+    {
+      "id": "6725",
+      "timeslots": [
+        {
+          "slot": 51,
+          "members": [
+            "user1"
+          ]
+        },
+        {
+          "slot": 53,
+          "members": [
+            "user1"
+          ]
+        },
+        {
+          "slot": 56,
+          "members": [
+            "user1"
+          ]
+        },
+        {
+          "slot": 58,
+          "members": [
+            "user1"
+          ]
+        },
+        {
+          "slot": 103,
+          "members": [
+            "user1"
+          ]
+        },
+        {
+          "slot": 106,
+          "members": [
+            "user1"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "5e41",
+      "timeslots": [
+        {
+          "slot": 101,
+          "members": [
+            "user1"
+          ]
+        },
+        {
+          "slot": 103,
+          "members": [
+            "user1"
+          ]
+        },
+        {
+          "slot": 105,
+          "members": [
+            "user1"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "881a",
+      "timeslots": [
+        {
+          "slot": 100,
+          "members": [
+            "user1"
+          ]
+        },
+        {
+          "slot": 101,
+          "members": [
+            "user1"
+          ]
+        },
+        {
+          "slot": 102,
+          "members": [
+            "user1"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "8289",
+      "timeslots": [
+        {
+          "slot": 108,
+          "members": [
+            "user1"
+          ]
+        },
+        {
+          "slot": 109,
+          "members": [
+            "user1"
+          ]
+        },
+        {
+          "slot": 110,
+          "members": [
+            "user1"
+          ]
+        },
+        {
+          "slot": 111,
+          "members": [
+            "user1"
+          ]
+        },
+        {
+          "slot": 112,
+          "members": [
+            "user1"
+          ]
+        },
+        {
+          "slot": 113,
+          "members": [
+            "user1"
+          ]
+        },
+        {
+          "slot": 114,
+          "members": [
+            "user1"
+          ]
+        },
+        {
+          "slot": 115,
+          "members": [
+            "user1"
+          ]
+        },
+        {
+          "slot": 116,
+          "members": [
+            "user1"
+          ]
+        },
+        {
+          "slot": 117,
+          "members": [
+            "user1"
+          ]
+        },
+        {
+          "slot": 118,
+          "members": [
+            "user1"
+          ]
+        },
+        {
+          "slot": 119,
+          "members": [
+            "user1"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "69ee",
+      "timeslots": [
+        {
+          "slot": 55,
+          "members": [
+            "user1"
+          ]
+        },
+        {
+          "slot": 56,
+          "members": [
+            "user1"
+          ]
+        },
+        {
+          "slot": 57,
+          "members": [
+            "user1"
+          ]
+        },
+        {
+          "slot": 58,
+          "members": [
+            "user1"
+          ]
+        },
+        {
+          "slot": 59,
+          "members": [
+            "user1"
+          ]
+        },
+        {
+          "slot": 60,
+          "members": [
+            "user1"
+          ]
+        },
+        {
+          "slot": 61,
+          "members": [
+            "user1"
+          ]
+        },
+        {
+          "slot": 62,
+          "members": [
+            "user1"
+          ]
+        },
+        {
+          "slot": 63,
+          "members": [
+            "user1"
+          ]
+        },
+        {
+          "slot": 64,
+          "members": [
+            "user1"
+          ]
+        },
+        {
+          "slot": 65,
+          "members": [
+            "user1"
+          ]
+        },
+        {
+          "slot": 66,
+          "members": [
+            "user1"
+          ]
+        }
+      ]
+    }
+  ],
+  "new-calendars": [
+    {
+      "id": "01e6",
+      "moimName": "창의학기제",
+      "group": "운동",
+      "joinCode": "123",
+      "participantCount": "3",
+      "schedules": [
+        {
+          "days": "화",
+          "startTime": "0:30",
+          "endTime": "3:00"
+        }
+      ],
+      "timeBlocks": [
+        49,
+        50,
+        51,
+        52,
+        53
+      ]
+    },
+    {
+      "id": "ff78",
+      "moimName": "창의학기제",
+      "group": "기본 그룹",
+      "joinCode": "123",
+      "participantCount": "2",
+      "schedules": [
+        {
+          "days": "수",
+          "startTime": "1:00",
+          "endTime": "3:30"
+        }
+      ],
+      "timeBlocks": [
+        98,
+        99,
+        100,
+        101,
+        102
+      ]
+    },
+    {
+      "id": "1f3c",
+      "moimName": "창의학기제",
+      "group": "기본 그룹",
+      "joinCode": "1234",
+      "participantCount": "2",
+      "schedules": [
+        {
+          "days": "수, 목",
+          "startTime": "0:30",
+          "endTime": "6:30"
+        }
+      ],
+      "timeBlocks": [
+        97,
+        98,
+        99,
+        100,
+        101,
+        102,
+        103,
+        104,
+        105,
+        106,
+        107,
+        108,
+        145,
+        146,
+        147,
+        148,
+        149,
+        150,
+        151,
+        152,
+        153,
+        154,
+        155,
+        156
+      ]
+    },
+    {
+      "id": "dd88",
+      "moimName": "창의학기제",
+      "group": "기본 그룹",
+      "joinCode": "123",
+      "participantCount": "2",
+      "schedules": [
+        {
+          "days": "수",
+          "startTime": "0:30",
+          "endTime": "3:00"
+        }
+      ],
+      "selectedDays": [
+        "수"
+      ],
+      "startTime": "0:30",
+      "endTime": "3:00",
+      "timeBlocks": [
+        97,
+        98,
+        99,
+        100,
+        101
+      ]
+    },
+    {
+      "id": "9e01",
+      "moimName": "창의학기제",
+      "group": "기본 그룹",
+      "joinCode": "123",
+      "participantCount": "2",
+      "schedules": [
+        {
+          "days": "수",
+          "startTime": "0:30",
+          "endTime": "3:00"
+        }
+      ],
+      "selectedDays": [
+        "수"
+      ],
+      "startTime": "0:30",
+      "endTime": "3:00",
+      "timeBlocks": [
+        97,
+        98,
+        99,
+        100,
+        101
+      ]
+    },
+    {
+      "id": "2f3f",
+      "moimName": "",
+      "group": "",
+      "joinCode": "",
+      "participantCount": "",
+      "schedules": [],
+      "selectedDays": [],
+      "startTime": "",
+      "endTime": "",
+      "timeBlocks": []
+    },
+    {
+      "id": "03b6",
+      "moimName": "창의학기제",
+      "group": "기본 그룹",
+      "joinCode": "123",
+      "participantCount": "2",
+      "schedules": [
+        {
+          "days": "목",
+          "startTime": "0:30",
+          "endTime": "2:30"
+        }
+      ],
+      "selectedDays": [
+        "목"
+      ],
+      "startTime": "0:30",
+      "endTime": "2:30",
+      "timeBlocks": [
+        145,
+        146,
+        147,
+        148
+      ]
+    },
+    {
+      "id": "1fb0",
+      "moimName": "창의학기제",
+      "group": "기본 그룹",
+      "joinCode": "123",
+      "participantCount": "2",
+      "schedules": [
+        {
+          "days": "수",
+          "startTime": "0:30",
+          "endTime": "3:00"
+        }
+      ],
+      "selectedDays": [
+        "수"
+      ],
+      "startTime": "0:30",
+      "endTime": "3:00",
+      "timeBlocks": [
+        97,
+        98,
+        99,
+        100,
+        101
+      ]
+    },
+    {
+      "id": "0733",
+      "moimName": "창의학기제",
+      "group": "기본 그룹",
+      "joinCode": "123",
+      "participantCount": "3",
+      "schedules": [
+        {
+          "days": "수",
+          "startTime": "0:30",
+          "endTime": "3:00"
+        }
+      ],
+      "selectedDays": [
+        "수"
+      ],
+      "startTime": "0:30",
+      "endTime": "3:00",
+      "timeBlocks": [
+        97,
+        98,
+        99,
+        100,
+        101
+      ]
+    },
+    {
+      "id": "ceb5",
+      "moimName": "창의학기제",
+      "group": "기본 그룹",
+      "joinCode": "123",
+      "participantCount": "2",
+      "schedules": [
+        {
+          "days": "수",
+          "startTime": "0:30",
+          "endTime": "2:30"
+        }
+      ],
+      "selectedDays": [
+        "수"
+      ],
+      "startTime": "0:30",
+      "endTime": "2:30",
+      "timeBlocks": [
+        97,
+        98,
+        99,
+        100
+      ]
+    },
+    {
+      "id": "24c5",
+      "moimName": "창의학기제",
+      "group": "스터디",
+      "joinCode": "123",
+      "participantCount": "2",
+      "schedules": [
+        {
+          "days": "목",
+          "startTime": "0:00",
+          "endTime": "2:00"
+        }
+      ],
+      "selectedDays": [
+        "목"
+      ],
+      "startTime": "0:00",
+      "endTime": "2:00",
+      "timeBlocks": [
+        144,
+        145,
+        146,
+        147
+      ]
+    },
+    {
+      "id": "e145",
+      "timeslots": [
+        {
+          "slot": 100,
+          "members": [
+            "user1"
+          ]
+        },
+        {
+          "slot": 101,
+          "members": [
+            "user1"
+          ]
+        },
+        {
+          "slot": 102,
+          "members": [
+            "user1"
+          ]
+        },
+        {
+          "slot": 103,
+          "members": [
+            "user1"
+          ]
+        },
+        {
+          "slot": 104,
+          "members": [
+            "user1"
+          ]
+        },
+        {
+          "slot": 105,
+          "members": [
+            "user1"
+          ]
+        },
+        {
+          "slot": 106,
+          "members": [
+            "user1"
+          ]
+        },
+        {
+          "slot": 107,
+          "members": [
+            "user1"
+          ]
+        },
+        {
+          "slot": 108,
+          "members": [
+            "user1"
+          ]
+        },
+        {
+          "slot": 109,
+          "members": [
+            "user1"
+          ]
+        },
+        {
+          "slot": 110,
+          "members": [
+            "user1"
+          ]
+        },
+        {
+          "slot": 111,
+          "members": [
+            "user1"
+          ]
+        },
+        {
+          "slot": 112,
+          "members": [
+            "user1"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "0bb4",
+      "moimName": "창의학기제",
+      "group": "기본 그룹",
+      "joinCode": "123",
+      "participantCount": "4",
+      "schedules": [
+        {
+          "days": "수",
+          "startTime": "1:00",
+          "endTime": "4:00"
+        }
+      ],
+      "selectedDays": [
+        "수"
+      ],
+      "startTime": "1:00",
+      "endTime": "4:00",
+      "timeBlocks": [
+        98,
+        99,
+        100,
+        101,
+        102,
+        103
+      ]
+    },
+    {
+      "id": "8ee3",
+      "timeslots": [
+        {
+          "slot": 56,
+          "members": [
+            "user1"
+          ]
+        },
+        {
+          "slot": 62,
+          "members": [
+            "user1"
+          ]
+        },
+        {
+          "slot": 123,
+          "members": [
+            "user1"
+          ]
+        },
+        {
+          "slot": 161,
+          "members": [
+            "user1"
+          ]
+        },
+        {
+          "slot": 199,
+          "members": [
+            "user1"
+          ]
+        },
+        {
+          "slot": 206,
+          "members": [
+            "user1"
+          ]
+        }
+      ]
+    }
+  ],
+  "users": [],
+  "meetings": [
+    {
+      "id": "1738688997800",
+      "title": "창의학기제",
+      "group": "기본 그룹",
+      "joinCode": "1234",
+      "participantCount": "2",
+      "schedule": [
+        "월, 화, 수, 목, 금, 토, 일 0:00~5:30"
+      ]
+    },
+    {
+      "id": "1738689075091",
+      "title": "gfgfg",
+      "group": "운동",
+      "joinCode": "1",
+      "participantCount": "2",
+      "schedule": [
+        "화 0:30~3:30"
+      ]
+    },
+    {
+      "id": "1738689285775",
+      "title": "창의학기제",
+      "group": "기본 그룹",
+      "joinCode": "123",
+      "participantCount": "2",
+      "schedule": [
+        "월 0:00~2:30"
+      ]
+    },
+    {
+      "id": "1738689571639",
+      "title": "창의학기제",
+      "group": "기본 그룹",
+      "joinCode": "1234",
+      "participantCount": "2",
+      "schedule": [
+        "월 0:00~1:30"
+      ]
+    },
+    {
+      "id": "1738689785088",
+      "title": "창의학기제",
+      "group": "기본 그룹",
+      "joinCode": "123",
+      "participantCount": "2",
+      "schedule": [
+        "월 0:00~2:30"
+      ]
+    },
+    {
+      "id": "1738689835384",
+      "title": "창의학기제",
+      "group": "스터디",
+      "joinCode": "123",
+      "participantCount": "2",
+      "schedule": [
+        "월 0:00~2:00"
+      ]
+    },
+    {
+      "id": "1738690084776",
+      "title": "창의학기제",
+      "group": "기본 그룹",
+      "joinCode": "123",
+      "participantCount": "2",
+      "schedule": [
+        "월 0:00~2:00"
+      ]
+    },
+    {
+      "id": "1738690268261",
+      "title": "mk",
+      "group": "스터디",
+      "joinCode": "123",
+      "participantCount": "3",
+      "schedule": [
+        "월 0:30~2:30"
+      ]
+    },
+    {
+      "id": "1738690373356",
+      "title": "창의학기제",
+      "group": "운동",
+      "joinCode": "123",
+      "participantCount": "3",
+      "schedule": [
+        "화 0:30~3:00"
+      ]
+    },
+    {
+      "id": "1738690373394",
+      "title": "창의학기제",
+      "group": "운동",
+      "joinCode": "123",
+      "participantCount": "3",
+      "schedule": [
+        "화 0:30~3:00"
+      ]
+    },
+    {
+      "id": "1738690656129",
+      "title": "창의학기제",
+      "group": "기본 그룹",
+      "joinCode": "123",
+      "participantCount": "2",
+      "schedule": [
+        "수 1:00~3:30"
+      ]
+    },
+    {
+      "id": "1738690656147",
+      "title": "창의학기제",
+      "group": "기본 그룹",
+      "joinCode": "123",
+      "participantCount": "2",
+      "schedule": [
+        "수 1:00~3:30"
+      ]
+    },
+    {
+      "id": "1738691710721",
+      "title": "창의학기제",
+      "group": "기본 그룹",
+      "joinCode": "1234",
+      "participantCount": "2",
+      "schedule": [
+        "수, 목 0:30~6:30"
+      ]
+    },
+    {
+      "id": "1738691710757",
+      "title": "창의학기제",
+      "group": "기본 그룹",
+      "joinCode": "1234",
+      "participantCount": "2",
+      "schedule": [
+        "수, 목 0:30~6:30"
+      ]
+    },
+    {
+      "id": "1738700119519",
+      "title": "창의학기제",
+      "group": "기본 그룹",
+      "joinCode": "123",
+      "participantCount": "2",
+      "schedule": [
+        "수 0:30~3:00"
+      ]
+    },
+    {
+      "id": "1738700119555",
+      "title": "창의학기제",
+      "group": "기본 그룹",
+      "joinCode": "123",
+      "participantCount": "2",
+      "schedule": [
+        "수 0:30~3:00"
+      ]
+    },
+    {
+      "id": "1738700416537",
+      "title": "창의학기제",
+      "group": "기본 그룹",
+      "joinCode": "123",
+      "participantCount": "2",
+      "schedule": [
+        "수 0:30~3:00"
+      ]
+    },
+    {
+      "id": "1738700416579",
+      "title": "창의학기제",
+      "group": "기본 그룹",
+      "joinCode": "123",
+      "participantCount": "2",
+      "schedule": [
+        "수 0:30~3:00"
+      ]
+    },
+    {
+      "id": "1738701875177",
+      "title": "창의학기제",
+      "group": "기본 그룹",
+      "joinCode": "123",
+      "participantCount": "2",
+      "schedule": [
+        "목 0:30~2:30"
+      ]
+    },
+    {
+      "id": "1738701875188",
+      "title": "창의학기제",
+      "group": "기본 그룹",
+      "joinCode": "123",
+      "participantCount": "2",
+      "schedule": [
+        "목 0:30~2:30"
+      ]
+    }
+  ],
+  "schedules": []
+}
