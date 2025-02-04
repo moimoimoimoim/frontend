@@ -1,8 +1,13 @@
+import Title from "./MainPageTitle";
+import AddMoim from "./AddMoim";
+
 const ClosedMeetings = () => {
   return (
-    <div>
-      <h1>ClosedMeetings</h1>
-      <button>로그인</button>
+    <div className="main-page">
+      <div className="main-content">
+        <Title text="마감된 모임" />
+      </div>
+      <AddMoim />
     </div>
   );
 };

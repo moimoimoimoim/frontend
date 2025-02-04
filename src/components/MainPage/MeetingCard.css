@@ -1,0 +1,164 @@
+.meeting-card {
+  background: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+  padding: 1rem 0;
+  display: flex;
+  flex-direction: column;
+  width: 320px;
+  height: 217px;
+}
+
+/* 카드헤더 */
+.meeting-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 0.5px solid #e6e6e6;
+  padding-bottom: 12px;
+  padding-left: 16px;
+  padding-right: 14px;
+}
+/* 버튼 */
+.btn-container {
+  display: flex;
+  text-align: center;
+  justify-content: center;
+  gap: 6px;
+}
+.main-header-btn {
+  border: 0.5px solid #e5e5e5;
+  border-radius: 10px;
+  background-color: #fff;
+  color: #7f7f7f;
+  transition: all 0.1s ease;
+  font-size: 8px;
+  padding: 4px 10px;
+
+  cursor: pointer;
+  transition: background 0.3s ease-in-out, color 0.3s ease-in-out,
+    border 0.3s ease-in-out, box-shadow 0.3s ease-in-out,
+    transform 0.3s ease-in-out;
+}
+.main-header-btn:hover {
+  background: linear-gradient(to right, #ff6a20, #ffaa17);
+  color: #ffffff;
+  border: 0.5px solid rgba(0, 0, 0, 0.02);
+  box-shadow: inset 1px 2px 2px rgba(255, 255, 255, 0.25);
+  font-weight: bold;
+}
+
+.meeting-title {
+  font-weight: bold;
+  font-size: 16px;
+  letter-spacing: 0.2px;
+}
+
+/* 제목아래메인 */
+.meeting-main {
+  display: flex;
+  flex-direction: column;
+  padding: 12px 16px 16px 16px;
+  /* border: 1px solid red; */
+  gap: 13px;
+}
+
+.meeting-info {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  width: 265px;
+  max-width: 265px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  position: relative; /* 전체 텍스트 표시용 */
+  transition: all 0.3s ease-in-out; /* 부드럽게 애니메이션 */
+}
+
+/* .schedule-icon {
+  width: 18px; 
+} */
+/* ✅ 일정 표시 스타일 */
+.meeting-schedule {
+  font-size: 12px;
+  white-space: nowrap; /* 기본적으로 한 줄 유지 */
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: calc(100% - 30px);
+  color: #000;
+  transition: all 0.3s ease-in-out;
+  flex-shrink: 1;
+  cursor: pointer;
+}
+
+/* ✅ 클릭 시 일정이 여러 줄로 확장됨 */
+.meeting-schedule.show {
+  white-space: normal;
+  overflow: visible;
+  text-overflow: unset;
+  max-width: 100%;
+  display: block;
+  line-height: 1.4;
+}
+.meeting-main hr {
+  border: none; /* 기본 테두리 제거 */
+  height: 0.1px; /* 선 두께 설정 */
+  background-color: #f3f2f2;
+}
+
+/* 그룹부분 */
+.meeting-group-info {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  font-size: 12px;
+  color: #000000;
+  /* padding-bottom: 5px; */
+}
+
+/* .folder-icon {
+  width: 18px;
+} */
+
+.meeting-group {
+  font-size: 12px;
+  color: #000;
+}
+
+/* 메모부분 */
+
+.memo-container {
+  display: flex;
+  flex-direction: column;
+  border-radius: 10px;
+  padding: 12px;
+  font-size: 12px;
+  border: 1px solid #ebebeb;
+  width: 100%;
+  height: 70px;
+  box-sizing: border-box;
+  line-height: 1.3;
+}
+
+.memo-input {
+  font-size: 12px;
+  font-family: inherit;
+  border: none;
+  width: 100%;
+  height: 100%;
+  resize: none;
+  box-sizing: border-box; /* 크기 유지 */
+  outline: none;
+  background: transparent; /* 배경 투명하게 유지 */
+  line-height: 1.3;
+  align-items: center;
+}
+.memo-text {
+  font-size: 12px;
+  color: #b3b3b3;
+}
+/* 메모가 입력된 경우 색상을 검정색으로 변경 */
+.memo-text.filled {
+  color: #777777;
+}
