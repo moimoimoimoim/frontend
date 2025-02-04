@@ -35,11 +35,8 @@ const SubmitButton = ({
     timeBlocks,
   };
 
-  // console.log("📤 최종 requestData:", JSON.stringify(requestData, null, 2)); // 🔥 여기서 최종 데이터 확인
+  console.log("📤 최종 requestData:", JSON.stringify(requestData, null, 2)); // 🔥 여기서 최종 데이터 확인
   console.log("🚀 handleSubmit 실행됨!"); // ✅ 버튼이 눌렸는지 확인
-
-  const targetUrl = data ? "/result" : "/new-calendars";
-  const nextPage = data ? "/next-step" : "/schedule";
 
   const handleSubmit = (e) => {
     e.preventDefault(); // 기본 동작(페이지 새로고침) 방지

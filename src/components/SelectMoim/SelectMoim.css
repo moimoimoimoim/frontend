@@ -1,11 +1,22 @@
 /* SelectMoim.css */
 .moim-section {
+  display: flex;
   width: 100%;
   height: 220px;
   display: flex;
   justify-content: center;
   align-items: center;
   gap: 2.5rem;
+}
+
+.moim-section {
+  display: flex;
+  width: 100%;
+  height: 220px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
 }
 
 .moim-list {
@@ -15,7 +26,7 @@
   border-radius: 1rem;
   cursor: pointer;
   position: relative;
-  transition: transform 0.5s ease-in-out;
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -25,6 +36,9 @@
     linear-gradient(var(--black05), var(--black05)) border-box;
   border: 1px solid transparent;
   box-shadow: 0 3px 10px var(--black05);
+
+  /* ✅ 크기가 커져도 위치 유지 */
+  transform-origin: center;
 }
 
 /* 🎨 그라데이션 애니메이션 */
@@ -43,9 +57,13 @@
   }
 }
 
-/* 선택된 경우 테두리 강조 + 애니메이션 추가 */
+/* ✅ 선택된 경우: 박스 크기가 커져도 위치 유지 */
 .moim-list.selected {
   border: 2px solid transparent;
-  transform: scale(1.02);
+  transform: scale(1.02); /* 크기 조정 */
   animation: gradientShift 3s infinite ease-in-out;
+
+  /* ✅ 크기가 커져도 위치 유지 */
+  margin: 0 auto;
+  transition: transform 0.3s ease-in-out;
 }

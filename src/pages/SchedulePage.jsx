@@ -4,8 +4,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import StepIndicator from "../components/StepIndicator";
 import ScheduleDragForm from "../components/ScheduleDrag/ScheduleDragForm";
-// import ScheduleButton from "../components/ScheduleDrag/ScheduleButton";
-import SubmitButton from "../components/CreateMoim/SubmitButton";
+import ScheduleButton from "../components/ScheduleDrag/ScheduleButton";
 
 const SchedulePage = () => {
   const [currentStep] = useState(1);
@@ -26,7 +25,7 @@ const SchedulePage = () => {
         <ScheduleDragForm onSubmit={handleScheduleSubmit} />
       </DndProvider>
 
-      <SubmitButton data={selectedSlots} navigate={navigate} />
+      <ScheduleButton data={selectedSlots} navigate={navigate} />
     </div>
   );
 };

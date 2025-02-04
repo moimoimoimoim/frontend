@@ -1,32 +1,25 @@
 import "../CreateMoim/CreateMoimForm.css";
 import { useNavigate } from "react-router-dom";
 
-const ScheduleButton = ({ data }) => {
+const SelectButton = ({ selectedMoim }) => {
   const navigate = useNavigate();
-
-  // ✅ `data`가 undefined인지 확인
-  if (!data) {
-    console.error("❌ ScheduleButton에서 받은 데이터가 없습니다! (undefined)");
-  } else {
-    console.log(
-      "🔍 ScheduleButton에서 받은 데이터:",
-      JSON.stringify(data, null, 2)
-    );
-  }
+  console.log("🔍 SelectButton에서 받은 selectedMoim:", selectedMoim); // ✅ 데이터 확인용 로그 추가
 
   const handleSubmit = async () => {
-    if (!data) {
-      console.error("🚨 서버로 보낼 데이터가 없습니다! (data가 undefined)");
-      alert("데이터가 없습니다. 다시 시도해주세요.");
+    if (!selectedMoim) {
+      alert("모임을 선택해주세요!");
       return;
     }
 
-    console.log("📤 서버로 보낼 데이터:", JSON.stringify(data, null, 2));
+    console.log(
+      "📤 서버로 보낼 데이터:",
+      JSON.stringify(selectedMoim, null, 2)
+    );
 
     fetch("/result", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(data),
+      body: JSON.stringify(selectedMoim),
     })
       .then((response) => response.json())
       .then((serverData) => {
@@ -34,7 +27,7 @@ const ScheduleButton = ({ data }) => {
           "✅ 서버 응답 데이터:",
           JSON.stringify(serverData, null, 2)
         );
-        navigate("/next-step"); // ✅ 데이터 전송 후 페이지 이동
+        navigate("/next-step"); // ✅ 성공하면 다음 페이지로 이동
       })
       .catch((error) => console.error("🚨 서버 연결 실패:", error));
   };
@@ -48,4 +41,4 @@ const ScheduleButton = ({ data }) => {
   );
 };
 
-export default ScheduleButton;
+export default SelectButton;
