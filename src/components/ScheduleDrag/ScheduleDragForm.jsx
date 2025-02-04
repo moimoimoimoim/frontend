@@ -108,7 +108,6 @@ const DragTable = ({ onSubmit }) => {
       console.error("⚠️ DragTable: onSubmit이 정의되지 않음!");
     }
   };
-
   // 요일 클릭 시 해당 열 전체 선택/해제
   const handleHeaderClick = (colIndex) => {
     if (colIndex < 0 || colIndex > 6) return;
@@ -194,9 +193,9 @@ const DragTable = ({ onSubmit }) => {
           <tr>
             <th
               onClick={handleSelectAll}
-              style={{ fontSize: "12px", cursor: "pointer" }}
+              style={{ fontSize: "13px", cursor: "pointer" }}
             >
-              전체 선택
+              전체선택
             </th>
             {["월", "화", "수", "목", "금", "토", "일"].map((day, colIndex) => (
               <th
@@ -222,9 +221,7 @@ const DragTable = ({ onSubmit }) => {
               >
                 {rowIndex % 2 === 0 ? (
                   <span className="time-section">
-                    <span className="time-section">
-                      {String(Math.floor(rowIndex / 2)).padStart(2, "0")}시
-                    </span>
+                    {String(Math.floor(rowIndex / 2)).padStart(2, "0")}시
                   </span>
                 ) : (
                   <span className="time-section-30">

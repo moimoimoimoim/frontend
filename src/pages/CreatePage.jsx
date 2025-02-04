@@ -6,6 +6,7 @@ import SelectedScheduleList from "../components/CreateMoim/SelectedScheduleList"
 import SubmitButton from "../components/CreateMoim/SubmitButton";
 import StepIndicator from "../components/StepIndicator";
 import CreateMoimForm from "../components/CreateMoim/CreateMoimForm";
+import LinkModal from "../components/ShareLink/LinkModal";
 
 const CreatePage = () => {
   // const [currentStep, setCurrentStep] = useState(0);
@@ -14,12 +15,13 @@ const CreatePage = () => {
   const [group, setGroup] = useState(""); // 모임이 속한 그룹
   const [joinCode, setJoinCode] = useState(""); // 참여 코드
   const [participantCount, setParticipantCount] = useState(""); // 인원수
-  const [schedules, setSchedules] = useState([]); // ✅ 일정 리스트 추가
-  const [selectedDays, setSelectedDays] = useState([]); // ✅ 선택된 요일
-  const [startTime, setStartTime] = useState(""); // ✅ 시작 시간
-  const [endTime, setEndTime] = useState(""); // ✅ 종료 시간
-  const [onNextStep, handleNextStep] = useState(""); // ✅ 종료 시간
-  const [timeBlocks, setTimeBlocks] = useState([]); // ✅ timeBlocks 상태 추가
+  const [schedules, setSchedules] = useState([]); // 일정 리스트 추가
+  const [selectedDays, setSelectedDays] = useState([]); // 선택된 요일
+  const [startTime, setStartTime] = useState(""); // 시작 시간
+  const [endTime, setEndTime] = useState(""); // 종료 시간
+  const [onNextStep, handleNextStep] = useState(""); // 종료 시간
+  const [timeBlocks, setTimeBlocks] = useState([]); // timeBlocks 상태 추가
+  const [isModalOpen, setModalOpen] = useState(false);
 
   const formData = {
     moimName,
@@ -94,7 +96,12 @@ const CreatePage = () => {
         schedules={schedules}
         timeBlocks={timeBlocks}
         onNextStep={handleNextStep}
+        onClick={() => setModalOpen(true)}
       />
+      <LinkModal
+        isOpen={isModalOpen}
+        onClose={() => setModalOpen(false)}
+      ></LinkModal>
     </div>
   );
 };

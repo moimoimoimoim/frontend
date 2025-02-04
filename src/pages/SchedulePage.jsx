@@ -4,7 +4,8 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import StepIndicator from "../components/StepIndicator";
 import ScheduleDragForm from "../components/ScheduleDrag/ScheduleDragForm";
-import ScheduleButton from "../components/ScheduleDrag/ScheduleButton";
+// import ScheduleButton from "../components/ScheduleDrag/ScheduleButton";
+import SubmitButton from "../components/CreateMoim/SubmitButton";
 
 const SchedulePage = () => {
   const [currentStep] = useState(1);
@@ -22,16 +23,15 @@ const SchedulePage = () => {
         currentStep={currentStep}
       />
       <DndProvider backend={HTML5Backend}>
-        <ScheduleDragForm />
+        <ScheduleDragForm onSubmit={handleScheduleSubmit} />
       </DndProvider>
 
-      <ScheduleButton data={selectedSlots} navigate={navigate} />
+      <SubmitButton data={selectedSlots} navigate={navigate} />
     </div>
   );
 };
 
 export default SchedulePage;
-
 // import { DndProvider } from "react-dnd"; // <-- 이 줄을 추가해주세요.
 // import { HTML5Backend } from "react-dnd-html5-backend";
 // import { useNavigate } from "react-router-dom";

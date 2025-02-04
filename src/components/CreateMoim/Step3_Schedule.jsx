@@ -1,6 +1,6 @@
 import "./CreateMoimForm.css";
 import "./Step3_Schedule.css";
-import { convertToSlot } from "../../utils/convertTimeslot.jsx";
+
 import { useState } from "react";
 
 const Step3_Schedule = ({
