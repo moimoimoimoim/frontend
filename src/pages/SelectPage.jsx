@@ -7,7 +7,7 @@ const SelectPage = () => {
   return (
     <div>
       <StepIndicator
-        title="해당 일정을 친구들에게 공유해 보세요!"
+        title="이런 일정은 어떠세요?"
         steps={[1, 2, 3]}
         currentStep={currentStep}
       />
