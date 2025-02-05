@@ -19,7 +19,7 @@ const ScheduleButton = ({ data }) => {
   const handleSubmit = async () => {
     console.log("📤 서버로 보낼 데이터:", JSON.stringify(data, null, 2));
 
-    fetch(`${API_URL}/new-calendars`, {
+    fetch(`${API_URL}/create`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(data),

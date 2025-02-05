@@ -1,7 +1,7 @@
 import "./CreateMoimForm.css";
 import "./Step2_Participant.css";
 
-const Step2_Participant = ({ participantCount, setParticipantCount }) => {
+const Step2_Participant = ({ participant_count, setparticipant_count }) => {
   return (
     <div className="form-section">
       <span className="create-container__title">
@@ -10,8 +10,8 @@ const Step2_Participant = ({ participantCount, setParticipantCount }) => {
       <div className="step2-form-fields">
         <select
           className="step2-people"
-          value={participantCount}
-          onChange={(e) => setParticipantCount(e.target.value)}
+          value={participant_count}
+          onChange={(e) => setparticipant_count(e.target.value)}
         >
           <option value="" disabled>
             인원수

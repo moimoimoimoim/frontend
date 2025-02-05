@@ -11,7 +11,7 @@ import LinkModal from "../components/ShareLink/LinkModal";
 const CreatePage = () => {
   // const [currentStep, setCurrentStep] = useState(0);
   const [currentStep] = useState(0); //현재 단계 -> 사용을 하나?
-  const [moimName, setMoimName] = useState(""); // 모임명
+  const [meeting_name, setmeeting_name] = useState(""); // 모임명
   const [group, setGroup] = useState(""); // 모임이 속한 그룹
   const [joinCode, setJoinCode] = useState(""); // 참여 코드
   const [participantCount, setParticipantCount] = useState(""); // 인원수
@@ -24,7 +24,7 @@ const CreatePage = () => {
   const [isModalOpen, setModalOpen] = useState(false);
 
   const formData = {
-    moimName,
+    meeting_name,
     group,
     joinCode,
     participantCount,
@@ -42,19 +42,10 @@ const CreatePage = () => {
         currentStep={currentStep}
       />
 
-      {/* ✅ Step1_MoimInfo에 props로 상태 전달 */}
-      {/* 단계 변경 버튼 예시 추후에 바꿀 것*/}
-      {/* <button onClick={() => setCurrentStep((prev) => Math.max(prev - 1, 0))}>
-        이전 단계
-      </button>
-      <button onClick={() => setCurrentStep((prev) => Math.min(prev + 1, 2))}>
-        다음 단계
-      </button> */}
-
       <CreateMoimForm>
         <Step1_MoimInfo
-          moimName={moimName}
-          setMoimName={setMoimName}
+          meeting_name={meeting_name}
+          setmeeting_name={setmeeting_name}
           group={group}
           setGroup={setGroup}
           joinCode={joinCode}
@@ -81,12 +72,12 @@ const CreatePage = () => {
       {/* ✅ 입력된 값이 반영되는지 확인 */}
       <SelectedScheduleList schedules={schedules} setSchedules={setSchedules}>
         {/* <p>선택한 그룹: {group}</p>
-        <p>입력된 모임 이름: {moimName}</p>
+        <p>입력된 모임 이름: {meeting_name}</p>
         <p>입력한 참여 코드: {joinCode}</p> */}
         {/* <p>인원수: {participantCount}명</p> */}
       </SelectedScheduleList>
       <SubmitButton
-        moimName={moimName}
+        meeting_name={meeting_name}
         group={group}
         joinCode={joinCode}
         participantCount={participantCount}
