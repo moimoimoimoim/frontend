@@ -25,6 +25,27 @@
         100,
         101
       ]
+    },
+    {
+      "id": "ff78",
+      "moimName": "창의학기제",
+      "group": "기본 그룹",
+      "joinCode": "123",
+      "participantCount": "2",
+      "schedules": [
+        {
+          "days": "수",
+          "startTime": "1:00",
+          "endTime": "3:30"
+        }
+      ],
+      "timeBlocks": [
+        98,
+        99,
+        100,
+        101,
+        102
+      ]
     }
   ],
   "join/:inviteToken": [],
