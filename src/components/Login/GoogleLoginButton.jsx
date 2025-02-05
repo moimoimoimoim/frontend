@@ -1,25 +1,20 @@
 import "./GoogleLoginButton.css";
 import google from "../../assets/구글.png";
-import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
 
-const GOOGLE_AUTH_URL = "http://localhost:8080/login/oauth2/google";
+const GOOGLE_AUTH_URL =
+  "https://accounts.google.com/o/oauth2/v2/auth" +
+  `?client_id=${import.meta.env.VITE_GOOGLE_CLIENT_ID}` +
+  "&response_type=code" +
+  `&redirect_uri=${import.meta.env.VITE_GOOGLE_REDIRECT_URI}` +
+  "&scope=email profile";
 
 const GoogleLoginButton = () => {
-  const navigate = useNavigate();
-
-  const handleLogin = () => {
-    window.location.href = GOOGLE_AUTH_URL; // 구글 로그인 페이지로 이동
-  };
-
   return (
-    <button
-      type="button"
-      className="google-login-btn center"
-      onClick={handleLogin}
-    >
+    <button type="button" className="google-login-btn center">
       <img src={google} className="google-icon" alt="google이미지" />
-      <span className="google-login-span center">Google 계정으로 로그인</span>
+      <a href={GOOGLE_AUTH_URL} className="google-login-button center">
+        Google 계정으로 로그인
+      </a>
     </button>
   );
 };

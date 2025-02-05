@@ -13,7 +13,7 @@ const CreatePage = () => {
   const [currentStep] = useState(0); //현재 단계 -> 사용을 하나?
   const [meeting_name, setmeeting_name] = useState(""); // 모임명
   const [group, setGroup] = useState(""); // 모임이 속한 그룹
-  const [joinCode, setJoinCode] = useState(""); // 참여 코드
+  const [meetingCode, setmeetingCode] = useState(""); // 참여 코드
   const [participantCount, setParticipantCount] = useState(""); // 인원수
   const [schedules, setSchedules] = useState([]); // 일정 리스트 추가
   const [selectedDays, setSelectedDays] = useState([]); // 선택된 요일
@@ -26,7 +26,7 @@ const CreatePage = () => {
   const formData = {
     meeting_name,
     group,
-    joinCode,
+    meetingCode,
     participantCount,
     schedules,
     selectedDays,
@@ -44,12 +44,12 @@ const CreatePage = () => {
 
       <CreateMoimForm>
         <Step1_MoimInfo
-          meeting_name={meeting_name}
-          setmeeting_name={setmeeting_name}
+          meetingName={meeting_name}
+          setmeetingName={setmeeting_name}
           group={group}
           setGroup={setGroup}
-          joinCode={joinCode}
-          setJoinCode={setJoinCode}
+          meetingCode={meetingCode}
+          setmeetingCode={setmeetingCode}
         />
         <Step2_Participant
           participantCount={participantCount}
@@ -73,13 +73,13 @@ const CreatePage = () => {
       <SelectedScheduleList schedules={schedules} setSchedules={setSchedules}>
         {/* <p>선택한 그룹: {group}</p>
         <p>입력된 모임 이름: {meeting_name}</p>
-        <p>입력한 참여 코드: {joinCode}</p> */}
+        <p>입력한 참여 코드: {meetingCode}</p> */}
         {/* <p>인원수: {participantCount}명</p> */}
       </SelectedScheduleList>
       <SubmitButton
         meeting_name={meeting_name}
         group={group}
-        joinCode={joinCode}
+        meetingCode={meetingCode}
         participantCount={participantCount}
         selectedDays={selectedDays} // ✅ 추가
         startTime={startTime} // ✅ 추가

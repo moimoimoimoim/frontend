@@ -23,7 +23,9 @@
   width: 18px;
   height: 18px;
 }
-.google-login-span {
+.google-login-button {
   display: flex;
   font-size: 16px;
+  color: black;
+  text-decoration: none;
 }

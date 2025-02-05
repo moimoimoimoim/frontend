@@ -16,7 +16,7 @@ const Step2_Participant = ({ participant_count, setparticipant_count }) => {
           <option value="" disabled>
             인원수
           </option>
-          <option value="2">미정</option>
+          <option value="1">미정</option>
           <option value="2">2명</option>
           <option value="3">3명</option>
           <option value="4">4명</option>

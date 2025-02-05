@@ -1,5 +1,5 @@
 import "./Header.css";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom"; // ✅ useNavigate 추가
 import Sidebar from "./MainPage/Sidebar";
 
@@ -7,7 +7,7 @@ import menu from "../assets/menu.png";
 import logoSimple from "../assets/logo-simple.png";
 import logout from "../assets/logout.png";
 
-const Header = ({ userName, showMenu }) => {
+const Header = ({ userName, showMenu, logout }) => {
   const navigate = useNavigate(); // ✅ 네비게이션 훅 추가
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const toggleSidebar = () => {
@@ -22,7 +22,7 @@ const Header = ({ userName, showMenu }) => {
   ].some((path) => location.pathname.startsWith(path));
 
   const user = {
-    isLogin: true,
+    isLogin: !!userName,
   };
 
   return (
@@ -41,14 +41,23 @@ const Header = ({ userName, showMenu }) => {
         </div>
         <div className="header-component__right">
           <div className="user">
-            <div className="user-name logout">{userName}</div>
             {user.isLogin ? (
-              <button className="logout">
-                로그아웃
-                <img src={logout} className="logout-icon" alt="로그아웃" />
-              </button>
+              <>
+                <div className="user-name logout">{userName}</div>
+                <button
+                  className="logout"
+                  onClick={() => {
+                    logout();
+                  }}
+                >
+                  로그아웃
+                  <img src={logout} className="logout-icon" alt="로그아웃" />
+                </button>
+              </>
             ) : (
-              <button className="logout">로그인</button>
+              <button className="logout" onClick={() => navigate("/")}>
+                로그인
+              </button>
             )}
           </div>
         </div>

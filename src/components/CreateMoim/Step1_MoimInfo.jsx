@@ -8,8 +8,8 @@ const Step1_MoimInfo = ({
   setmeeting_name,
   group,
   setGroup,
-  meeting_code,
-  setmeeting_code,
+  meetingCode,
+  setmeetingCode,
 }) => {
   const [selectColor, setSelectColor] = useState("var(--black30)"); // 기본 색상 설정
   return (
@@ -61,12 +61,12 @@ const Step1_MoimInfo = ({
             name="name"
             placeholder="숫자 4자리"
             required
-            value={meeting_code}
+            value={meetingCode}
             onChange={(e) => {
               const numericValue = e.target.value.replace(/[^0-9]/g, ""); // 숫자만 입력
               if (numericValue.length <= 4) {
                 // 4글자까지만 입력 가능
-                setmeeting_code(numericValue);
+                setmeetingCode(numericValue);
               }
             }}
           />

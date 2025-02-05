@@ -21,6 +21,8 @@ import ShowPage from "./pages/ShowPage";
 import OngoingMeetings from "./components/MainPage/OngoingMeetings";
 import ClosedMeetings from "./components/MainPage/ClosedMeetings";
 import Group from "./components/MainPage/Group"; // 동적 그룹 페이지
+import GoogleCallback from "./pages/GoogleCallback";
+import { CookiesProvider } from "react-cookie";
 
 const API_URL = import.meta.env.VITE_API_URL || "http://localhost:8080";
 console.log("API_URL:", API_URL); // 디버깅용 콘솔 출력
@@ -55,7 +57,7 @@ function App() {
   };
 
   return (
-    <>
+    <CookiesProvider defaultSetOptions={{ path: "/" }}>
       {/* 네비게이션 추가 */}
       <nav>
         <Link to="/">로그인</Link>
@@ -71,6 +73,7 @@ function App() {
       <Routes>
         <Route element={<Layout />}>
           <Route path="/" element={<LoginPage />} />
+          <Route path="/login/google/callback" element={<GoogleCallback />} />
           <Route path="/signup" element={<SignUpPage />} />
           {/* <Route path="/main" element={<MainPage />} /> */}
           <Route
@@ -100,7 +103,7 @@ function App() {
 
         <Route path="*" element={<NotFound />} />
       </Routes>
-    </>
+    </CookiesProvider>
   );
 }
 
