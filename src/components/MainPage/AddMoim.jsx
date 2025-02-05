@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import "./AddMoim.css";
-import calendarAdd from "../../assets/Calendar-add.png";
+import calendarAdd from "../../assets/calendar-add.png";
 
 const AddMoim = () => {
   const navigate = useNavigate(); // 페이지 이동을 위한 Hook
