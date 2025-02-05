@@ -9,10 +9,10 @@ import "./CreateMoimForm.css";
 // import SubmitButton from "./SubmitButton";
 
 const CreateMoimForm = ({ children }) => {
-  // const [moimName, setMoimName] = useState("");
+  // const [meeting_name, setmeeting_name] = useState("");
   // const [group, setGroup] = useState("");
-  // const [joinCode, setJoinCode] = useState("");
-  // const [participantCount, setParticipantCount] = useState("");
+  // const [meeting_code, setmeeting_code] = useState("");
+  // const [participant_count, setparticipant_count] = useState("");
   // const [schedules, setSchedules] = useState([]); // 일정 리스트
 
   return (

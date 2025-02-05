@@ -9,7 +9,7 @@ const SelectMoim = () => {
 
   // ✅ 백엔드에서 모임 데이터 가져오기
   useEffect(() => {
-    fetch(`${API_URL}/new-calendars`) // 실제 백엔드 API URL로 변경하세요.
+    fetch(`${API_URL}/create`) // 실제 백엔드 API URL로 변경하세요.
       .then((response) => response.json())
       .then((data) => {
         if (Array.isArray(data) && data.length > 0) {

@@ -4,12 +4,12 @@ import "./CreateMoimForm.css";
 import "./Step1_MoimInfo.css";
 
 const Step1_MoimInfo = ({
-  moimName,
-  setMoimName,
+  meeting_name,
+  setmeeting_name,
   group,
   setGroup,
-  joinCode,
-  setJoinCode,
+  meeting_code,
+  setmeeting_code,
 }) => {
   const [selectColor, setSelectColor] = useState("var(--black30)"); // 기본 색상 설정
   return (
@@ -48,8 +48,8 @@ const Step1_MoimInfo = ({
             name="name"
             placeholder="모임 이름을 작성해주세요."
             required
-            value={moimName}
-            onChange={(e) => setMoimName(e.target.value)}
+            value={meeting_name}
+            onChange={(e) => setmeeting_name(e.target.value)}
           />
         </div>
         {/* 참여 코드/ */}
@@ -61,12 +61,12 @@ const Step1_MoimInfo = ({
             name="name"
             placeholder="숫자 4자리"
             required
-            value={joinCode}
+            value={meeting_code}
             onChange={(e) => {
               const numericValue = e.target.value.replace(/[^0-9]/g, ""); // 숫자만 입력
               if (numericValue.length <= 4) {
                 // 4글자까지만 입력 가능
-                setJoinCode(numericValue);
+                setmeeting_code(numericValue);
               }
             }}
           />

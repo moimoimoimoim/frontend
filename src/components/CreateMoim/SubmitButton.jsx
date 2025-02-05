@@ -2,34 +2,37 @@ import "./CreateMoimForm.css";
 import { useNavigate } from "react-router-dom";
 
 // ✅ 환경 변수에서 API_URL 가져오기
-const API_URL = import.meta.env.VITE_API_URL || "http://localhost:5000"; // 기본값 설정
-const targetUrl = `${API_URL}/new-calendars`; // ✅ 백엔드(JSON Server)로 요청 보내기
+const API_URL = import.meta.env.VITE_API_URL || "http://localhost:8080"; // 기본값 설정
+
+const targetUrl = `${API_URL}/create`; // ✅ 백엔드(JSON Server)로 요청 보내기
 const SubmitButton = ({
   onNextStep,
-  moimName,
-  group,
-  joinCode,
-  participantCount,
+  meeting_name,
+  group, // 백엔드에서 group으로 바꿈
+  meeting_code,
+  participant_count,
   schedules,
   selectedDays,
   startTime,
   endTime,
   timeBlocks,
+  creator, //생성자 정보 추가
   onClick,
 }) => {
   const navigate = useNavigate();
 
   // 전송할 데이터 결정
   const requestData = {
-    moimName,
+    meeting_name,
     group,
-    joinCode,
-    participantCount,
+    meeting_code,
+    participant_count,
     schedules,
     selectedDays,
     startTime,
     endTime,
     timeBlocks,
+    creator,
   };
 
   console.log("🚀 handleSubmit 실행됨!"); // ✅ 버튼이 눌렸는지 확인

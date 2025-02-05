@@ -21,8 +21,10 @@ import ShowPage from "./pages/ShowPage";
 import OngoingMeetings from "./components/MainPage/OngoingMeetings";
 import ClosedMeetings from "./components/MainPage/ClosedMeetings";
 import Group from "./components/MainPage/Group"; // 동적 그룹 페이지
-const API_URL = import.meta.env.VITE_API_URL || "http://localhost:5000";
+
+const API_URL = import.meta.env.VITE_API_URL || "http://localhost:8080";
 console.log("API_URL:", API_URL); // 디버깅용 콘솔 출력
+
 function App() {
   // ✅ meetings 상태 추가
   const [meetings, setMeetings] = useState([]);
@@ -33,7 +35,9 @@ function App() {
       .then((res) => res.json())
       .then((data) => {
         console.log("모임 목록:", data);
-        setMeetings(data); // 가져온 데이터로 상태 업데이트
+        setMeetings(data.meetings || []);
+        // 주석
+        // setMeetings(data); // 가져온 데이터로 상태 업데이트
       })
       .catch((error) => console.error("데이터 불러오기 오류:", error));
   }, []);
