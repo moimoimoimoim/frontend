@@ -1,0 +1,24 @@
+.meeting-grid {
+  width: 100%;
+  min-width: 1024px;
+  min-height: 400px; /* 최소 높이 설정 */
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* 3개씩 배치 */
+  gap: 24px; /* 카드 사이 간격 */
+  justify-content: start; /* 왼쪽부터 채우기 */
+  align-items: start; /* 상단부터 채우기 */
+  margin-bottom: 10rem;
+}
+
+/* ✅ 모임이 없을 때만 중앙 정렬 */
+.meeting-grid.empty {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.no-meeting {
+  text-align: center;
+  font-size: 18px;
+  color: var(--black30);
+}

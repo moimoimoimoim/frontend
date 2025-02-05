@@ -1,0 +1,32 @@
+.divider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+.divider-text {
+  position: relative;
+  font-size: 14px;
+  font-weight: 300;
+  color: rgba(0, 0, 0, 0.5);
+  text-align: center;
+}
+
+.divider-text::before,
+.divider-text::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  width: 62px; /* 선의 길이 */
+  height: 1px;
+  background: var(--black20); /* 선 색상 */
+}
+
+.divider-text::before {
+  left: -73px; /* 왼쪽 선 위치 조정 */
+}
+
+.divider-text::after {
+  right: -73px; /* 오른쪽 선 위치 조정 */
+}

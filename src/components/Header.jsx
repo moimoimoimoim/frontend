@@ -1,15 +1,14 @@
 import "./Header.css";
 import { useState } from "react";
+import { useNavigate, useLocation } from "react-router-dom"; // ✅ useNavigate 추가
 import Sidebar from "./MainPage/Sidebar";
-import { useLocation } from "react-router-dom";
 
 import menu from "../assets/menu.png";
 import logoSimple from "../assets/logo-simple.png";
-import logo from "../assets/logo.png";
 import logout from "../assets/logout.png";
-import calendarAdd from "../assets/Calendar-add.png";
 
 const Header = ({ userName, showMenu }) => {
+  const navigate = useNavigate(); // ✅ 네비게이션 훅 추가
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const toggleSidebar = () => {
     setIsSidebarOpen(!isSidebarOpen);
@@ -35,14 +34,9 @@ const Header = ({ userName, showMenu }) => {
               <img src={menu} className="menu-icon" alt="메뉴 아이콘" />
             </div>
           )}
-          <div>
-            {
-              <img
-                src={logoSimple}
-                className="logoSimple-icon"
-                alt="로고"
-              ></img>
-            }
+          {/* ✅ 로고 클릭 시 /main으로 이동 */}
+          <div onClick={() => navigate("/main")} style={{ cursor: "pointer" }}>
+            <img src={logoSimple} className="logoSimple-icon" alt="로고" />
           </div>
         </div>
         <div className="header-component__right">
@@ -51,13 +45,7 @@ const Header = ({ userName, showMenu }) => {
             {user.isLogin ? (
               <button className="logout">
                 로그아웃
-                {
-                  <img
-                    src={logout}
-                    className="logout-icon"
-                    alt="로그아웃"
-                  ></img>
-                }
+                <img src={logout} className="logout-icon" alt="로그아웃" />
               </button>
             ) : (
               <button className="logout">로그인</button>

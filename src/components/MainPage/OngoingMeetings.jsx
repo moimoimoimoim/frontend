@@ -1,8 +1,13 @@
+import Title from "./MainPageTitle";
+import AddMoim from "./AddMoim";
+
 const OngoingMeetings = () => {
   return (
-    <div>
-      <h1>OngoingMeetings</h1>
-      <button>로그인</button>
+    <div className="main-page">
+      <div className="main-content">
+        <Title text="진행 중인 모임" />
+      </div>
+      <AddMoim />
     </div>
   );
 };

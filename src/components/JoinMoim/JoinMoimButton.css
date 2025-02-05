@@ -1,0 +1,19 @@
+/* 다음 단계로 넘어가는 버튼 */
+
+.join-button {
+  width: 280px;
+  margin-top: -20px;
+  padding: 0.9rem 1rem;
+  background: linear-gradient(90deg, var(--orange), var(--yellow));
+  color: white;
+  border: none;
+  border-radius: 10px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.join-button:hover {
+  /* color: black; */
+  background: linear-gradient(45deg, #ff7d3b, 40%, #ffbe4d);
+}

@@ -1,6 +1,6 @@
 import "./StepIndicator.css"; // CSS 파일에서 스타일 지정
 
-const StepIndicator = ({ steps, currentStep }) => {
+const StepIndicator = ({ steps, currentStep, title }) => {
   return (
     <section className="step-container">
       <div className="step-indicator">
@@ -11,7 +11,7 @@ const StepIndicator = ({ steps, currentStep }) => {
           />
         ))}
       </div>
-      <span className="step-title">모임 생성하기</span>
+      <span className="step-title">{title}</span>
     </section>
   );
 };

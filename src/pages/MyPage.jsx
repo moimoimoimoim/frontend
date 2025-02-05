@@ -1,8 +1,7 @@
 const MyPage = () => {
   return (
     <div>
-      <h1>메인 페이지</h1>
-      <button>로그인</button>
+      <h1>모든 모임</h1>
     </div>
   );
 };

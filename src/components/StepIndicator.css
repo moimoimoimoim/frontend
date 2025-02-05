@@ -1,10 +1,11 @@
 .step-container {
   display: flex;
+  width: 1000px;
   flex-direction: column;
   padding-left: 1rem;
+  /* text-align: center; */
 }
 /* 점 3개 들어가는 칸 */
-
 .step-indicator {
   margin-top: 4rem;
   display: flex;
@@ -24,6 +25,7 @@
 
 /* 과정 설명/ */
 .step-title {
+  width: 100%;
   font-size: 24px;
   font-weight: bold;
   margin: 1rem 0;

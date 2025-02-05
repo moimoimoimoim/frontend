@@ -6,20 +6,41 @@ import SelectedScheduleList from "../components/CreateMoim/SelectedScheduleList"
 import SubmitButton from "../components/CreateMoim/SubmitButton";
 import StepIndicator from "../components/StepIndicator";
 import CreateMoimForm from "../components/CreateMoim/CreateMoimForm";
+import LinkModal from "../components/ShareLink/LinkModal";
 
 const CreatePage = () => {
   // const [currentStep, setCurrentStep] = useState(0);
-  const [currentStep] = useState(0);
-  // ✅ 상태 변수 설정
-  const [moimName, setMoimName] = useState("");
-  const [group, setGroup] = useState("");
-  const [joinCode, setJoinCode] = useState("");
-  const [participantCount, setParticipantCount] = useState("");
-  const [schedules, setSchedules] = useState([]); // ✅ 일정 리스트 추가
+  const [currentStep] = useState(0); //현재 단계 -> 사용을 하나?
+  const [moimName, setMoimName] = useState(""); // 모임명
+  const [group, setGroup] = useState(""); // 모임이 속한 그룹
+  const [joinCode, setJoinCode] = useState(""); // 참여 코드
+  const [participantCount, setParticipantCount] = useState(""); // 인원수
+  const [schedules, setSchedules] = useState([]); // 일정 리스트 추가
+  const [selectedDays, setSelectedDays] = useState([]); // 선택된 요일
+  const [startTime, setStartTime] = useState(""); // 시작 시간
+  const [endTime, setEndTime] = useState(""); // 종료 시간
+  const [onNextStep, handleNextStep] = useState(""); // 종료 시간
+  const [timeBlocks, setTimeBlocks] = useState([]); // timeBlocks 상태 추가
+  const [isModalOpen, setModalOpen] = useState(false);
+
+  const formData = {
+    moimName,
+    group,
+    joinCode,
+    participantCount,
+    schedules,
+    selectedDays,
+    startTime,
+    endTime,
+  };
 
   return (
     <div>
-      <StepIndicator steps={[1, 2, 3]} currentStep={currentStep} />
+      <StepIndicator
+        title="모임 생성하기"
+        steps={[1, 2, 3]}
+        currentStep={currentStep}
+      />
 
       {/* ✅ Step1_MoimInfo에 props로 상태 전달 */}
       {/* 단계 변경 버튼 예시 추후에 바꿀 것*/}
@@ -43,7 +64,17 @@ const CreatePage = () => {
           participantCount={participantCount}
           setParticipantCount={setParticipantCount}
         />
-        <Step3_Schedule schedules={schedules} setSchedules={setSchedules} />
+        <Step3_Schedule
+          schedules={schedules}
+          setSchedules={setSchedules}
+          selectedDays={selectedDays}
+          setSelectedDays={setSelectedDays}
+          startTime={startTime}
+          setStartTime={setStartTime}
+          endTime={endTime}
+          setEndTime={setEndTime}
+          setTimeBlocks={setTimeBlocks}
+        />
         {/* <Step3_Schedule schedules={schedules} setSchedules={setSchedules} /> */}
       </CreateMoimForm>
 
@@ -54,7 +85,23 @@ const CreatePage = () => {
         <p>입력한 참여 코드: {joinCode}</p> */}
         {/* <p>인원수: {participantCount}명</p> */}
       </SelectedScheduleList>
-      <SubmitButton></SubmitButton>
+      <SubmitButton
+        moimName={moimName}
+        group={group}
+        joinCode={joinCode}
+        participantCount={participantCount}
+        selectedDays={selectedDays} // ✅ 추가
+        startTime={startTime} // ✅ 추가
+        endTime={endTime} // ✅ 추가
+        schedules={schedules}
+        timeBlocks={timeBlocks}
+        onNextStep={handleNextStep}
+        onClick={() => setModalOpen(true)}
+      />
+      <LinkModal
+        isOpen={isModalOpen}
+        onClose={() => setModalOpen(false)}
+      ></LinkModal>
     </div>
   );
 };
