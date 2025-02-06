@@ -14,7 +14,7 @@ const SchedulePage = () => {
   const [currentStep] = useState(1);
   const [meetingTimezone, setMeetingTimezone] = useState([]);
   const [initialTimeslots, setInitialTimeslots] = useState([]);
-  const [selectedSlots, setSelectedSlots] = useState(null); // ✅ 선택한 데이터를 저장
+  const [selectedSlots, setSelectedSlots] = useState([]); // ✅ 선택한 데이터를 저장
 
   useEffect(() => {
     (async () => {
@@ -22,8 +22,8 @@ const SchedulePage = () => {
         credentials: "include",
       });
       const data = await response.json();
-      setMeetingTimezone(data.schedule.meeting.meetingTimezone);
-      setInitialTimeslots(data.schedule.timeslots);
+      setMeetingTimezone(data?.schedule?.meeting?.meetingTimezone);
+      setInitialTimeslots(data?.schedule?.timeslots);
     })();
   }, [scheduleId]);
 

@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 
 const API_URL = import.meta.env.VITE_API_URL || "http://localhost:5000"; // 기본 API URL
 
-const JoinMoimButton = ({ nickname, code }) => {
+const JoinMoimButton = ({ nickname, code, inviteToken }) => {
   const navigate = useNavigate();
 
   const handleSubmit = async () => {
@@ -12,28 +12,23 @@ const JoinMoimButton = ({ nickname, code }) => {
       return;
     }
 
-    console.log("📤 서버로 보낼 데이터:", { nickname, inviteToken: code });
-
+    let data;
     try {
       // ✅ 참가자 정보 저장 API 호출
-      const response = await fetch(`${API_URL}/participant`, {
+      const response = await fetch(`${API_URL}/join/${inviteToken}`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ nickname, inviteToken: code }),
+        body: JSON.stringify({ nickname, participantCode: code }),
+        credentials: "include",
       });
 
-      if (!response.ok) {
-        throw new Error(`서버 응답 오류: ${response.status}`);
-      }
-
-      const serverData = await response.json();
-      console.log("✅ 서버 응답 데이터:", serverData);
+      data = await response.json();
 
       // ✅ 성공하면 /schedule 페이지로 이동
-      navigate("/schedule");
+      navigate("/schedule/" + data.schedule._id);
     } catch (error) {
       console.error("🚨 서버 연결 실패:", error);
-      alert("서버와 연결에 실패했습니다. 다시 시도해주세요.");
+      alert(data?.message);
     }
   };
 

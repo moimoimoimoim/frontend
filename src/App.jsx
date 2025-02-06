@@ -87,7 +87,7 @@ function App() {
           <Route path="/main/ongoing-meetings" element={<OngoingMeetings />} />
           <Route path="/main/closed-meetings" element={<ClosedMeetings />} />
           <Route path="/main/group/:groupId" element={<Group />} />
-          <Route path="/join-moim" element={<JoinMoimPage />} />
+          <Route path="/join/:inviteToken" element={<JoinMoimPage />} />
           <Route
             path="/create"
             element={<CreatePage onCreateMoim={handleCreateMoim} />}

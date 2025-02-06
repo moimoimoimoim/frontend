@@ -21,6 +21,7 @@ const ScheduleDragForm = ({ onSubmit, initialTimeslots, meetingTimezone }) => {
   const toggleMode = useRef(false);
 
   useEffect(() => {
+    if (initialTimeslots === undefined) return;
     const newSelectedCells = new Set(selectedCells);
     initialTimeslots.forEach(({ slot }) => {
       const [colIndex, rowIndex] = convertToIndex(slot);
@@ -30,6 +31,7 @@ const ScheduleDragForm = ({ onSubmit, initialTimeslots, meetingTimezone }) => {
   }, [initialTimeslots]);
 
   useEffect(() => {
+    if (meetingTimezone === undefined) return;
     const newFixedCells = new Set(fixedCells);
     meetingTimezone.forEach(({ slot }) => {
       const [colIndex, rowIndex] = convertToIndex(slot);
