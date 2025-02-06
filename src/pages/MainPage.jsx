@@ -1,11 +1,8 @@
-import { useState, useEffect } from "react";
 import { Outlet } from "react-router-dom";
 import Title from "../components/MainPage/MainPageTitle";
 import AddMoim from "../components/MainPage/AddMoim";
 import MeetingCard from "../components/MainPage/MeetingCard";
 import "../components/MainPage/MainPage.css";
-
-const API_URL = import.meta.env.VITE_API_URL; // ✅ JSON Server 사용 중, 백엔드 연결 시 변경
 
 const MainPage = ({ meetings }) => {
   return (
@@ -15,7 +12,7 @@ const MainPage = ({ meetings }) => {
 
         {/* ✅ 모임 리스트를 출력 */}
         <div className={`meeting-grid ${meetings.length === 0 ? "empty" : ""}`}>
-          {meetings.length === 0 ? (
+          {!meetings || meetings.length === 0 ? (
             <p className="no-meeting">현재 진행 중인 모임이 없습니다.</p>
           ) : (
             meetings.map((meeting) => (

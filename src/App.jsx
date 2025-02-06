@@ -22,27 +22,29 @@ import OngoingMeetings from "./components/MainPage/OngoingMeetings";
 import ClosedMeetings from "./components/MainPage/ClosedMeetings";
 import Group from "./components/MainPage/Group"; // 동적 그룹 페이지
 import GoogleCallback from "./pages/GoogleCallback";
-import { CookiesProvider } from "react-cookie";
+import { useCookies } from "react-cookie";
 
 const API_URL = import.meta.env.VITE_API_URL || "http://localhost:8080";
 
 function App() {
   // ✅ meetings 상태 추가
   const [meetings, setMeetings] = useState([]);
+  const [cookies] = useCookies(["token"]);
 
   // ✅ JSON Server에서 모임 목록 가져오기
   useEffect(() => {
-    fetch(`${API_URL}/`, {
-      credentials: "include",
-    }) // JSON Server에서 데이터 가져오기
-      .then((res) => res.json())
-      .then((data) => {
-        setMeetings(data || []);
-      });
-  }, []);
+    if (cookies.token)
+      fetch(`${API_URL}/`, {
+        credentials: "include",
+      }) // JSON Server에서 데이터 가져오기
+        .then((res) => res.json())
+        .then((data) => {
+          setMeetings(data || []);
+        });
+  }, [cookies]);
 
   return (
-    <CookiesProvider defaultSetOptions={{ path: "/" }}>
+    <>
       {/* 네비게이션 추가 */}
       <nav>
         <Link to="/">로그인</Link>
@@ -88,7 +90,7 @@ function App() {
 
         <Route path="*" element={<NotFound />} />
       </Routes>
-    </CookiesProvider>
+    </>
   );
 }
 
