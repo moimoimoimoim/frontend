@@ -93,7 +93,10 @@ function App() {
             element={<CreatePage onCreateMoim={handleCreateMoim} />}
           />
           {/* 생성 페이지 ➡️ 스케줄 페이지 */}
-          <Route path="/schedule" element={<SchedulePage />}></Route>
+          <Route
+            path="/schedule/:scheduleId"
+            element={<SchedulePage />}
+          ></Route>
           <Route path="/link-modal" element={<SchedulePage />}></Route>
           <Route path="/select" element={<SelectPage />} />
           <Route path="/show" element={<ShowPage />} />

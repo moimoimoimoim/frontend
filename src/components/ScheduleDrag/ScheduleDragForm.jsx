@@ -1,7 +1,7 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import "./ScheduleDragForm.css";
 
-const ScheduleDragForm = ({ onSubmit }) => {
+const ScheduleDragForm = ({ onSubmit, initialTimeslots, meetingTimezone }) => {
   // ✅ props로 onSubmit 받기
   const exBlocks = Array.from({ length: 48 }, (_, i) =>
     Array(7).fill(
@@ -13,10 +13,30 @@ const ScheduleDragForm = ({ onSubmit }) => {
 
   // rowIndex와 colIndex를 기반으로 slot을 계산하는 함수
   const convertToSlot = (colIndex, rowIndex) => colIndex * 48 + rowIndex;
+  const convertToIndex = (slot) => [Math.floor(slot / 48), slot % 48];
   const [selectedCells, setSelectedCells] = useState(new Set());
+  const [fixedCells, setFixedCells] = useState(new Set());
   const isDragging = useRef(false);
   const [startDrag, setStartDrag] = useState({ row: null, col: null });
   const toggleMode = useRef(false);
+
+  useEffect(() => {
+    const newSelectedCells = new Set(selectedCells);
+    initialTimeslots.forEach(({ slot }) => {
+      const [colIndex, rowIndex] = convertToIndex(slot);
+      newSelectedCells.add(`${rowIndex}-${colIndex}`);
+    });
+    setSelectedCells(newSelectedCells);
+  }, [initialTimeslots]);
+
+  useEffect(() => {
+    const newFixedCells = new Set(fixedCells);
+    meetingTimezone.forEach(({ slot }) => {
+      const [colIndex, rowIndex] = convertToIndex(slot);
+      newFixedCells.add(`${rowIndex}-${colIndex}-fix`);
+    });
+    setFixedCells(newFixedCells);
+  }, [meetingTimezone]);
 
   // 마우스를 누를 때 드래그 시작 (토글 방식 적용)
   const handleMouseDown = (rowIndex, colIndex) => {
@@ -90,9 +110,8 @@ const ScheduleDragForm = ({ onSubmit }) => {
     });
 
     const formattedData = {
-      timeslots: Object.entries(selectedSlots).map(([slot, members]) => ({
+      timeslots: Object.entries(selectedSlots).map(([slot]) => ({
         slot: Number(slot),
-        members: Array.from(members),
       })),
     };
 
@@ -249,6 +268,8 @@ const ScheduleDragForm = ({ onSubmit }) => {
                       `${rowIndex}-${colIndex}`
                     )
                       ? "#FFA500"
+                      : fixedCells.has(`${rowIndex}-${colIndex}-fix`)
+                      ? "#fff4d9"
                       : "#FFF",
                     border: "1px solid #EEEEEE",
                     cursor:

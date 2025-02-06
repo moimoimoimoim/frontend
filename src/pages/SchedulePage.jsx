@@ -1,17 +1,31 @@
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 import StepIndicator from "../components/StepIndicator";
 import ScheduleDragForm from "../components/ScheduleDrag/ScheduleDragForm";
 import ScheduleButton from "../components/ScheduleDrag/ScheduleButton";
 
+const API_URL = import.meta.env.VITE_API_URL;
+
 const SchedulePage = () => {
   const navigate = useNavigate();
+  const { scheduleId } = useParams();
   const [currentStep] = useState(1);
+  const [meetingTimezone, setMeetingTimezone] = useState([]);
+  const [initialTimeslots, setInitialTimeslots] = useState([]);
   const [selectedSlots, setSelectedSlots] = useState(null); // ✅ 선택한 데이터를 저장
 
-  console.log("📥 SchedulePage에서 받은 데이터:", selectedSlots);
+  useEffect(() => {
+    (async () => {
+      const response = await fetch(API_URL + "/schedules/" + scheduleId, {
+        credentials: "include",
+      });
+      const data = await response.json();
+      setMeetingTimezone(data.schedule.meeting.meetingTimezone);
+      setInitialTimeslots(data.schedule.timeslots);
+    })();
+  }, [scheduleId]);
 
   // ✅ 부모에서 `selectedSlots` 상태를 업데이트하는 함수
   const handleScheduleSubmit = (scheduleData) => {
@@ -28,11 +42,19 @@ const SchedulePage = () => {
       />
       <DndProvider backend={HTML5Backend}>
         {/* ✅ ScheduleDragForm에 onSubmit 전달 */}
-        <ScheduleDragForm onSubmit={handleScheduleSubmit} />
+        <ScheduleDragForm
+          meetingTimezone={meetingTimezone}
+          initialTimeslots={initialTimeslots}
+          onSubmit={handleScheduleSubmit}
+        />
       </DndProvider>
 
       {/* ✅ ScheduleButton에 selectedSlots 데이터 전달 */}
-      <ScheduleButton data={selectedSlots} navigate={navigate} />
+      <ScheduleButton
+        scheduleId={scheduleId}
+        data={selectedSlots}
+        navigate={navigate}
+      />
     </div>
   );
 };
