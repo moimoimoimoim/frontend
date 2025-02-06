@@ -10,11 +10,13 @@ const GOOGLE_AUTH_URL =
 
 const GoogleLoginButton = () => {
   return (
-    <button type="button" className="google-login-btn center">
+    <button
+      type="button"
+      onClick={() => (window.location.href = GOOGLE_AUTH_URL)}
+      className="google-login-btn center"
+    >
       <img src={google} className="google-icon" alt="google이미지" />
-      <a href={GOOGLE_AUTH_URL} className="google-login-button center">
-        Google 계정으로 로그인
-      </a>
+      <a className="google-login-button center">Google 계정으로 로그인</a>
     </button>
   );
 };

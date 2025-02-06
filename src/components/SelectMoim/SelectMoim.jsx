@@ -9,12 +9,16 @@ const SelectMoim = ({ meetingId }) => {
   const [selectedIndex, setSelectedIndex] = useState(null);
   const [moimData, setMoimData] = useState([]); // 백엔드에서 가져온 데이터 저장
   const [isFirstLoad, setIsFirstLoad] = useState(true); // ✅ 처음 한 번만 애니메이션 실행
+  const [filterOptions, setFilterOptions] = useState({
+    minDuration: 0,
+    minMembers: 1,
+  });
 
   // ✅ 백엔드에서 모임 데이터 가져오기
-  useEffect(() => {
+  const updateMoimData = () => {
     fetch(`${API_URL}/filter-timeslots/${meetingId}`, {
       method: "POST",
-      body: JSON.stringify({ minDuration: 0, minMembers: 1 }),
+      body: JSON.stringify(filterOptions),
       credentials: "include",
       headers: {
         "Content-Type": "application/json",
@@ -27,23 +31,58 @@ const SelectMoim = ({ meetingId }) => {
         } else {
           setMoimData([]);
         }
+        setTimeout(() => {
+          setIsFirstLoad(false);
+        }, 2000);
       })
       .catch((error) => {
         console.error("데이터 가져오기 실패:", error);
         setMoimData([]);
       });
+  };
 
-    setTimeout(() => {
-      setIsFirstLoad(false);
-    }, 2000);
+  useEffect(() => {
+    updateMoimData();
   }, []);
 
   const handleSelect = (index) => {
     setSelectedIndex(index);
   };
 
+  const handleFilterOptionChange = (e) => {
+    setFilterOptions({
+      ...filterOptions,
+      [e.target.name]: parseInt(e.target.value),
+    });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setIsFirstLoad(true);
+    updateMoimData();
+  };
+
   return (
     <section>
+      <form onSubmit={handleSubmit}>
+        <label htmlFor="minDuration">최소 시간</label>
+        <input
+          type="number"
+          name="minDuration"
+          id="minDuration"
+          value={filterOptions.minDuration}
+          onChange={handleFilterOptionChange}
+        />
+        <label htmlFor="minMembers">최소 인원</label>
+        <input
+          type="number"
+          name="minMembers"
+          id="minMembers"
+          value={filterOptions.minMembers}
+          onChange={handleFilterOptionChange}
+        />
+        <button>재추천</button>
+      </form>
       <div className="moim-section">
         {moimData && moimData.length > 0 ? (
           moimData.map((moim, index) => {

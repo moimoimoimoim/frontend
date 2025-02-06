@@ -5,7 +5,9 @@ import calendarIcon from "../../assets/schedule.png";
 import folder from "../../assets/folder-allblack.png";
 import { convertToTime } from "../../utils/convertTimeslot";
 
-const MeetingCard = ({ meeting, isOwner }) => {
+const API_URL = import.meta.env.VITE_API_URL || "http://localhost:8080";
+
+const MeetingCard = ({ meeting, user, isOwner }) => {
   const navigate = useNavigate(); // ✅ 네비게이션 훅 추가
   const [isExpanded, setIsExpanded] = useState(false);
   const scheduleRef = useRef(null);
@@ -31,6 +33,13 @@ const MeetingCard = ({ meeting, isOwner }) => {
     scheduleText = `${startDay} ${startHour}:${startMinute} ~ ${endDay} ${endHour}:${endMinute}`;
   } else scheduleText = "투표중";
 
+  let schedule = null;
+  if (meeting.meetingSchedules && user) {
+    schedule = meeting.meetingSchedules.find(
+      (scheduleItem) => scheduleItem.user === user._id
+    );
+  }
+
   // ✅ 카드 클릭 시 경로 변경하는 함수
   const handleCardClick = () => {
     if (scheduleText === "투표중" && isOwner) {
@@ -38,6 +47,16 @@ const MeetingCard = ({ meeting, isOwner }) => {
     } else {
       navigate("/show/" + meeting._id); // ✅ 일정이 확정되었으면 /show로 이동
     }
+  };
+
+  const toggleExpiration = () => {
+    fetch(
+      `${API_URL}/${meeting.isExpired ? "activate" : "expire"}/${meeting._id}`,
+      {
+        method: "PUT",
+        credentials: "include",
+      }
+    ).then((res) => res.json());
   };
 
   return (
@@ -49,20 +68,25 @@ const MeetingCard = ({ meeting, isOwner }) => {
       <div className="meeting-header">
         <h3 className="meeting-title">{meeting.meetingName}</h3>
         <div className="btn-container">
-          {/* <button
-            className="button-re main-header-btn"
-            onClick={(e) => {
-              e.stopPropagation();
-              handleEditClick();
-            }}
-          >
-            {isEditing ? "완료" : "수정"}
-          </button> */}
+          {schedule && scheduleText === "투표중" && (
+            <button
+              className="button-end main-header-btn"
+              onClick={(e) => {
+                e.stopPropagation();
+                navigate("/schedule/" + schedule._id);
+              }}
+            >
+              일정 수정
+            </button>
+          )}
           <button
             className="button-end main-header-btn"
-            onClick={(e) => e.stopPropagation()}
+            onClick={(e) => {
+              e.stopPropagation();
+              toggleExpiration();
+            }}
           >
-            마감
+            {meeting.isExpired ? "활성화" : "마감"}
           </button>
         </div>
       </div>

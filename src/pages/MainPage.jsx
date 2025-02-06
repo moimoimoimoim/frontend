@@ -30,6 +30,7 @@ const MainPage = ({ meetings, user }) => {
               <MeetingCard
                 key={meeting._id}
                 meeting={meeting}
+                user={user}
                 isOwner={user && user._id === meeting.owner}
               />
             ))
