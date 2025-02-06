@@ -15,11 +15,16 @@ const Step3_Schedule = ({
   setTimeBlocks = () => {},
 }) => {
   const days = ["월", "화", "수", "목", "금", "토", "일"];
+  const [activeDropdown, setActiveDropdown] = useState(null); // 현재 열려있는 드롭다운 상태
   const [isOpen, setIsOpen] = useState(false);
   const [isOpenStart, setIsOpenStart] = useState(false);
   const [isOpenEnd, setIsOpenEnd] = useState(false);
   const [timeslots, setTimeslots] = useState([]);
 
+  // ✅ 요일 정렬 함수 (월~일 순서 유지)
+  const sortDays = (daysToSort) => {
+    return days.filter((day) => daysToSort.includes(day));
+  };
   // ✅ 시간 선택 옵션 (00:00 ~ 23:30, 30분 단위)
   const timeOptions = Array.from({ length: 48 }, (_, i) => {
     const hours = Math.floor(i / 2);
@@ -38,11 +43,12 @@ const Step3_Schedule = ({
   });
 
   const toggleDay = (day) => {
-    setSelectedDays((prevDays) =>
-      prevDays.includes(day)
-        ? prevDays.filter((d) => d !== day)
-        : [...prevDays, day]
-    );
+    setSelectedDays((prevDays) => {
+      const newDays = prevDays.includes(day)
+        ? prevDays.filter((d) => d !== day) // 선택 해제
+        : [...prevDays, day]; // 선택 추가
+      return sortDays(newDays); // ✅ 즉시 정렬하여 저장
+    });
   };
 
   const updateTimeslots = (newSchedules, prevTimeslots) => {
@@ -107,14 +113,16 @@ const Step3_Schedule = ({
         <div className="day-selector">
           <button
             className="day-selector-style"
-            onClick={() => setIsOpen(!isOpen)}
+            onClick={() =>
+              setActiveDropdown(activeDropdown === "day" ? null : "day")
+            }
           >
             {selectedDays?.length > 0
               ? selectedDays.join(", ")
               : "요일을 선택해주세요."}
           </button>
 
-          {isOpen && (
+          {activeDropdown === "day" && (
             <div className="day-dropdown">
               <div className="day-header">
                 <label className="all-select">
@@ -130,7 +138,10 @@ const Step3_Schedule = ({
                   />
                   <span>전체 선택</span>
                 </label>
-                <button className="done-btn" onClick={() => setIsOpen(false)}>
+                <button
+                  className="done-btn"
+                  onClick={() => setActiveDropdown(null)}
+                >
                   완료
                 </button>
               </div>
@@ -159,19 +170,23 @@ const Step3_Schedule = ({
           <div className="dropdown">
             <button
               className="dropdown-btn time-selector-style"
-              onClick={() => setIsOpenStart(!isOpenStart)}
+              onClick={() =>
+                setActiveDropdown(activeDropdown === "start" ? null : "start")
+              }
+              // disabled={!selectedDays}
             >
               {startTime || "시작 시간"}
             </button>
-            {isOpenStart && (
+            {activeDropdown === "start" && (
               <div className="dropdown-list">
                 {timeOptions.map((time) => (
                   <div
                     key={time}
                     className="dropdown-item"
                     onClick={() => {
-                      setStartTime(time);
-                      setIsOpenStart(false);
+                      setStartTime(time); // ✅ 새로운 시작 시간 설정
+                      setEndTime(""); // ✅ 종료 시간 초기화
+                      setActiveDropdown(null); // ✅ 드롭다운 닫기
                     }}
                   >
                     {time}
@@ -187,12 +202,14 @@ const Step3_Schedule = ({
           <div className="dropdown">
             <button
               className="dropdown-btn time-selector-style"
-              onClick={() => setIsOpenEnd(!isOpenEnd)}
-              disabled={!startTime} // 시작 시간을 선택하지 않으면 비활성화
+              onClick={() =>
+                setActiveDropdown(activeDropdown === "end" ? null : "end")
+              }
+              // disabled={!startTime} // 시작 시간을 선택하지 않으면 비활성화
             >
               {endTime || "종료 시간"}
             </button>
-            {isOpenEnd && (
+            {activeDropdown === "end" && (
               <div className="dropdown-list">
                 {filteredEndTimeOptions.map((time) => (
                   <div
@@ -200,7 +217,7 @@ const Step3_Schedule = ({
                     className="dropdown-item"
                     onClick={() => {
                       setEndTime(time);
-                      setIsOpenEnd(false);
+                      setActiveDropdown(null); // 선택 후 닫기
                     }}
                   >
                     {time}
@@ -212,7 +229,16 @@ const Step3_Schedule = ({
         </div>
 
         {/* ✅ 추가하기 버튼 */}
-        <button className="add-button" onClick={addSchedule}>
+        <button
+          className="add-button"
+          onClick={() => {
+            addSchedule(); // ✅ 선택한 데이터 저장
+            setSelectedDays([]); // ✅ 선택된 요일 초기화
+            setStartTime(""); // ✅ 시작 시간 초기화
+            setEndTime(""); // ✅ 종료 시간 초기화
+            setActiveDropdown(null); // ✅ 드롭다운 닫기
+          }}
+        >
           + 추가하기
         </button>
       </div>

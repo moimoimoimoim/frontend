@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
+import "../components/Login/LoadingScreen.css";
 
 function GoogleCallback() {
   const navigate = useNavigate();
@@ -8,6 +9,8 @@ function GoogleCallback() {
   useEffect(() => {
     (async () => {
       try {
+        await new Promise((resolve) => setTimeout(resolve, 1000)); // ⏳ 3초 대기
+
         const response = await fetch(
           import.meta.env.VITE_API_URL +
             "/login/oauth2/google/callback?code=" +
@@ -27,7 +30,10 @@ function GoogleCallback() {
 
   return (
     <>
-      <span>로그인 중...</span>
+      <div className="loading-container">
+        <div className="spinner"></div>
+        <p className="loading-text">로그인 중...</p>
+      </div>
     </>
   );
 }

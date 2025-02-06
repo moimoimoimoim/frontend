@@ -1,0 +1,43 @@
+/* 전체 화면 중앙 정렬 */
+.loading-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(255, 255, 255, 0.9);
+  z-index: 9999;
+  opacity: 1;
+  transition: opacity 1s ease-in-out; /* 3초 후 점점 사라짐 */
+}
+/* 로딩 스피너 */
+.spinner {
+  width: 60px;
+  height: 60px;
+
+  border: 6px solid #ffffff;
+  border-top: 6px solid var(--orange);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin-bottom: 2rem;
+}
+
+/* 로딩 텍스트 */
+.loading-text {
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+/* 스피너 애니메이션 */
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}

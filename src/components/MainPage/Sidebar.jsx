@@ -88,17 +88,6 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
         <hr /> {/* 구분선 */}
         <h3 className="category-title">그룹 관리</h3>
         <ul className="group-list">
-          {groups.length > 0 ? (
-            groups.map((group) => (
-              <li key={group.id}>
-                <Link to={`/main/group/${group.id}`} onClick={toggleSidebar}>
-                  {group.name}
-                </Link>
-              </li>
-            ))
-          ) : (
-            <li>생성된 그룹이 없습니다.</li>
-          )}
           {/* 사용자 입력 필드 추가 */}
           <li className="addGroup-container">
             <form
@@ -125,6 +114,17 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
               </div>
             </form>
           </li>
+          {groups.length > 0 ? (
+            groups.map((group) => (
+              <li key={group.id}>
+                <Link to={`/main/group/${group.id}`} onClick={toggleSidebar}>
+                  {group.name}
+                </Link>
+              </li>
+            ))
+          ) : (
+            <li>생성된 그룹이 없습니다.</li>
+          )}
         </ul>
       </div>
     </aside>

@@ -102,14 +102,15 @@
 /* ✅ 복사 완료 메시지를 input 위에 표시 */
 .link-container.copied::after {
   width: 280px;
-  content: "✅ 링크가 복사되었습니다!";
+  content: "☑️ 링크가 복사되었습니다!";
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   font-size: 14px;
+  font-weight: 700;
   font-weight: 400;
-  color: rgba(0, 0, 0, 0.8);
+  color: rgba(0, 0, 0, 1);
   background-color: white;
   padding: 5px 10px;
   border-radius: 5px;
