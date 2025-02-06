@@ -2,13 +2,18 @@ import { useNavigate } from "react-router-dom";
 import GoogleLoginButton from "../components/Login/GoogleLoginButton";
 import "../components/Login/LoginPage.css";
 import Logo from "../components/JoinMoim/Logo.jsx";
+import { useCookies } from "react-cookie";
+import { useEffect } from "react";
 
 const LoginPage = () => {
   const navigate = useNavigate();
+  const [cookies] = useCookies(["token"]);
 
-  const handleGoToMyPage = () => {
-    navigate("/mainPage"); // 마이페이지로 이동
-  };
+  useEffect(() => {
+    if (cookies.token) {
+      navigate("/main");
+    }
+  }, [cookies]);
 
   return (
     <div className="center login-container">

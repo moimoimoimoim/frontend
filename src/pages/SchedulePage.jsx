@@ -1,7 +1,7 @@
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
 import { useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import StepIndicator from "../components/StepIndicator";
 import ScheduleDragForm from "../components/ScheduleDrag/ScheduleDragForm";
 import ScheduleButton from "../components/ScheduleDrag/ScheduleButton";
@@ -9,12 +9,12 @@ import ScheduleButton from "../components/ScheduleDrag/ScheduleButton";
 const API_URL = import.meta.env.VITE_API_URL;
 
 const SchedulePage = () => {
-  const navigate = useNavigate();
   const { scheduleId } = useParams();
   const [currentStep] = useState(1);
   const [meetingTimezone, setMeetingTimezone] = useState([]);
   const [initialTimeslots, setInitialTimeslots] = useState([]);
   const [selectedSlots, setSelectedSlots] = useState([]); // ✅ 선택한 데이터를 저장
+  const [isOwner, setIsOwner] = useState(false);
 
   useEffect(() => {
     (async () => {
@@ -24,12 +24,12 @@ const SchedulePage = () => {
       const data = await response.json();
       setMeetingTimezone(data?.schedule?.meeting?.meetingTimezone);
       setInitialTimeslots(data?.schedule?.timeslots);
+      setIsOwner(data.schedule?.user === data.schedule?.meeting?.owner);
     })();
   }, [scheduleId]);
 
   // ✅ 부모에서 `selectedSlots` 상태를 업데이트하는 함수
   const handleScheduleSubmit = (scheduleData) => {
-    console.log("📥 handleScheduleSubmit에서 받은 데이터:", scheduleData);
     setSelectedSlots(scheduleData); // ✅ 데이터 업데이트
   };
 
@@ -53,7 +53,7 @@ const SchedulePage = () => {
       <ScheduleButton
         scheduleId={scheduleId}
         data={selectedSlots}
-        navigate={navigate}
+        isOwner={isOwner}
       />
     </div>
   );

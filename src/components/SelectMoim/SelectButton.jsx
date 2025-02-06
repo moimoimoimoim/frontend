@@ -1,10 +1,10 @@
 import "../CreateMoim/CreateMoimForm.css";
 import { useNavigate } from "react-router-dom";
-const API_URL = import.meta.env.VITE_API_URL || "http://localhost:5000"; // 기본값 설정
 
-const SelectButton = ({ selectedMoim }) => {
+const API_URL = import.meta.env.VITE_API_URL; // 기본값 설정
+
+const SelectButton = ({ selectedMoim, meetingId }) => {
   const navigate = useNavigate();
-  console.log("🔍 SelectButton에서 받은 selectedMoim:", selectedMoim); // ✅ 데이터 확인용 로그 추가
 
   const handleSubmit = async () => {
     if (!selectedMoim) {
@@ -12,23 +12,15 @@ const SelectButton = ({ selectedMoim }) => {
       return;
     }
 
-    console.log(
-      "📤 서버로 보낼 데이터:",
-      JSON.stringify(selectedMoim, null, 2)
-    );
-
-    fetch(`${API_URL}/confirm-schedule`, {
+    fetch(`${API_URL}/confirm-schedule/${meetingId}`, {
       method: "POST",
+      credentials: "include",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(selectedMoim),
     })
       .then((response) => response.json())
       .then((serverData) => {
-        console.log(
-          "✅ 서버 응답 데이터:",
-          JSON.stringify(serverData, null, 2)
-        );
-        navigate("/main"); // ✅ 성공하면 다음 페이지로 이동
+        navigate("/show/" + meetingId); // ✅ 성공하면 다음 페이지로 이동
       })
       .catch((error) => console.error("🚨 서버 연결 실패:", error));
   };

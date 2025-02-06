@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 
 const API_URL = import.meta.env.VITE_API_URL; // ✅ API 주소 설정
 
-const ScheduleButton = ({ data, scheduleId }) => {
+const ScheduleButton = ({ data, scheduleId, isOwner }) => {
   const navigate = useNavigate();
 
   if (!data) {
@@ -21,7 +21,9 @@ const ScheduleButton = ({ data, scheduleId }) => {
     const result = await response.json();
     if (result.success) {
       alert("일정 선택이 완료되었습니다.");
-      navigate("/select");
+      isOwner
+        ? navigate("/select/" + result.schedule.meeting)
+        : navigate("/show/" + result.schedule.meeting);
     } else alert("일정 선택에 실패하였습니다. 다시 시도해 주세요.");
   };
 

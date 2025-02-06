@@ -3,11 +3,10 @@ import { useNavigate } from "react-router-dom"; // ✅ 페이지 이동을 위�
 import "./MeetingCard.css";
 import calendarIcon from "../../assets/schedule.png";
 import folder from "../../assets/folder-allblack.png";
+import { convertToTime } from "../../utils/convertTimeslot";
 
-const MeetingCard = ({ meeting }) => {
+const MeetingCard = ({ meeting, isOwner }) => {
   const navigate = useNavigate(); // ✅ 네비게이션 훅 추가
-  const [memo, setMemo] = useState(""); // 📝 메모 상태
-  const [isEditing, setIsEditing] = useState(false); // ✏️ 수정 모드 상태
   const [isExpanded, setIsExpanded] = useState(false);
   const scheduleRef = useRef(null);
   const [isOverflowing, setIsOverflowing] = useState(false);
@@ -21,13 +20,20 @@ const MeetingCard = ({ meeting }) => {
   }, [meeting.schedule]);
 
   // ✅ 확정된 모임이 있으면 해당 일정 표시, 없으면 "투표중"
-  const scheduleText = meeting?.confirmedSchedule?.type
-    ? `${meeting?.confirmedSchedule?.type} (${meeting.meetingName})`
-    : "투표중";
+  let scheduleText = "";
+  if (meeting?.confirmedSchedule?.start && meeting?.confirmedSchedule?.end) {
+    const [startDay, startHour, startMinute] = convertToTime(
+      meeting.confirmedSchedule.start
+    );
+    const [endDay, endHour, endMinute] = convertToTime(
+      meeting.confirmedSchedule.end
+    );
+    scheduleText = `${startDay} ${startHour}:${startMinute} ~ ${endDay} ${endHour}:${endMinute}`;
+  } else scheduleText = "투표중";
 
   // ✅ 카드 클릭 시 경로 변경하는 함수
   const handleCardClick = () => {
-    if (scheduleText === "투표중") {
+    if (scheduleText === "투표중" && isOwner) {
       navigate("/select/" + meeting._id); // ✅ 일정이 확정되지 않았으면 /select로 이동
     } else {
       navigate("/show/" + meeting._id); // ✅ 일정이 확정되었으면 /show로 이동
@@ -75,7 +81,9 @@ const MeetingCard = ({ meeting }) => {
 
         <div className="meeting-group-info">
           <img src={folder} alt="폴더 아이콘" className="folder-icon" />
-          <span className="meeting-group">{meeting.meetingGroup.name}</span>
+          <span className="meeting-group">
+            {meeting.meetingGroup ? meeting.meetingGroup.name : "그룹 없음"}
+          </span>
         </div>
 
         {/* <div className="memo-container">

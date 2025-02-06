@@ -1,26 +1,44 @@
 import { useState, useEffect } from "react";
 import "./ShowMoim.css";
 import "../SelectMoim/SelectMoim.css";
+import { convertToTime } from "../../utils/convertTimeslot";
 
-const ShowMoim = () => {
-  const [confirmedMoim, setConfirmedMoim] = useState(null);
+const API_URL = import.meta.env.VITE_API_URL;
 
-  // ✅ localStorage에서 확정된 일정 불러오기
+const ShowMoim = ({ meetingId }) => {
+  const [confirmedMoimText, setConfirmedMoimText] = useState(null);
+
   useEffect(() => {
-    const storedMoim = localStorage.getItem("confirmedMoim");
-    if (storedMoim) {
-      setConfirmedMoim(JSON.parse(storedMoim));
-    }
+    fetch(`${API_URL}/confirm-schedule/${meetingId}`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.confirmedSchedule?.start && data.confirmedSchedule?.end) {
+          const [startDay, startHour, startMinute] = convertToTime(
+            data.confirmedSchedule.start
+          );
+          const [endDay, endHour, endMinute] = convertToTime(
+            data.confirmedSchedule.end
+          );
+          setConfirmedMoimText(
+            `${startDay} ${startHour}:${startMinute} ~ ${endDay} ${endHour}:${endMinute}`
+          );
+        }
+      })
+      .catch((error) => {
+        console.error("데이터 가져오기 실패:", error);
+      });
   }, []);
 
   return (
     <section className="showmoim-section">
-      {confirmedMoim ? (
+      {confirmedMoimText ? (
         <div className="show-elements">
-          <div className="selected-moim">
-            <h3>{confirmedMoim.title}</h3>
-            <p>{confirmedMoim.date}</p>
-          </div>
+          <div className="selected-moim">{confirmedMoimText}</div>
           <span className="question center">해당 일정으로 확정되었습니다.</span>
         </div>
       ) : (

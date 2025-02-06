@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
+import "../components/Login/LoadingScreen.css";
 
 function GoogleCallback() {
   const navigate = useNavigate();
@@ -18,6 +19,7 @@ function GoogleCallback() {
           }
         );
         await response.json();
+        await new Promise((resolve) => setTimeout(resolve, 3000));
         navigate("/main");
       } catch {
         alert("로그인 오류 발생");
@@ -27,7 +29,10 @@ function GoogleCallback() {
 
   return (
     <>
-      <span>로그인 중...</span>
+      <div className="loading-container">
+        <div className="spinner"></div>
+        <p className="loading-text">로그인 중...</p>
+      </div>
     </>
   );
 }

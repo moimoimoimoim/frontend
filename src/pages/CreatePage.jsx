@@ -89,6 +89,12 @@ const CreatePage = () => {
         timeBlocks={timeBlocks}
         setOwnerScheduleId={setOwnerScheduleId}
         onClick={(url) => {
+          if (!url) {
+            alert(
+              "모임이 정상적으로 생성되지 않았습니다. 누락된 부분이 없는지 확인해 주세요."
+            );
+            return;
+          }
           setModalOpen(true);
           setMeetingLink("http://" + window.location.host + url);
         }}
