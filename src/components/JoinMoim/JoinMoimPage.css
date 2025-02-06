@@ -13,7 +13,7 @@ body {
   gap: 32px;
 }
 .title {
-  font-size: 28px;
+  font-size: 24px;
   font-weight: 600;
   text-align: center;
 }
@@ -22,4 +22,5 @@ body {
   background: linear-gradient(73deg, #ff6a20, #ffaa17);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+  margin-right: 0.3rem;
 }

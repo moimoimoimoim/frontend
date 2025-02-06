@@ -4,6 +4,7 @@ import "../components/Login/LoginPage.css";
 import Logo from "../components/JoinMoim/Logo.jsx";
 import { useCookies } from "react-cookie";
 import { useEffect } from "react";
+import LoginTitle from "../components/Login/LoginTitle.jsx";
 
 const LoginPage = () => {
   const navigate = useNavigate();
@@ -17,7 +18,8 @@ const LoginPage = () => {
 
   return (
     <div className="center login-container">
-      <Logo />
+      {/* <Logo /> */}
+      <LoginTitle />
       {/* 아이디 */}
       {/* 비번 */}
       {/* 로그인 버튼 */}

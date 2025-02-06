@@ -39,18 +39,19 @@ const Header = ({ userName, showMenu, logout }) => {
             <img src={logoSimple} className="logoSimple-icon" alt="로고" />
           </div>
         </div>
-        <div className="header-component__right">
+        <div className="header-component__right center">
           <div className="user">
             {user.isLogin ? (
               <>
                 <div className="user-name logout">{userName}</div>
+                <span className="user-name__hello center">님 환영합니다!</span>
                 <button
                   className="logout"
                   onClick={() => {
                     logout();
                   }}
                 >
-                  로그아웃
+                  <span className="logout-span"> 로그아웃</span>
                   <img
                     src={logoutIcon}
                     className="logout-icon"
@@ -59,9 +60,14 @@ const Header = ({ userName, showMenu, logout }) => {
                 </button>
               </>
             ) : (
-              <button className="logout" onClick={() => navigate("/")}>
-                로그인
-              </button>
+              <>
+                <span className="user-name__hello center">
+                  로그인 후 일정을 관리해보세요!
+                </span>
+                <button className="logout" onClick={() => navigate("/")}>
+                  로그인
+                </button>
+              </>
             )}
           </div>
         </div>

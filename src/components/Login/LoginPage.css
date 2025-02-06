@@ -1,7 +1,13 @@
 .login-container {
   display: flex;
   flex-direction: column;
-  height: calc(100vh - 76px);
-  gap: 20px;
+  margin-top: 2rem;
+  gap: 2rem;
+  text-align: center;
+
   /* 위치를 좀 위로옮기면 좋을듯 */
+}
+
+.login-container > img {
+  width: 80px;
 }
