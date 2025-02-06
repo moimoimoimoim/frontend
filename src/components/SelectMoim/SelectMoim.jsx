@@ -1,15 +1,24 @@
 import { useState, useEffect } from "react";
 import "./SelectMoim.css";
 import SelectButton from "./SelectButton";
-const API_URL = import.meta.env.VITE_API_URL || "http://localhost:5000"; // 기본값 설정
-const SelectMoim = () => {
+
+const API_URL = import.meta.env.VITE_API_URL; // 기본값 설정
+
+const SelectMoim = ({ meetingId }) => {
   const [selectedIndex, setSelectedIndex] = useState(null);
   const [moimData, setMoimData] = useState([]); // 백엔드에서 가져온 데이터 저장
   const [isFirstLoad, setIsFirstLoad] = useState(true); // ✅ 처음 한 번만 애니메이션 실행
 
   // ✅ 백엔드에서 모임 데이터 가져오기
   useEffect(() => {
-    fetch(`${API_URL}/create`) // 실제 백엔드 API URL로 변경하세요.
+    fetch(`${API_URL}/filter-timeslots/${meetingId}`, {
+      method: "POST",
+      body: JSON.stringify({ minDuration: 0, minMembers: 1 }),
+      credentials: "include",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    }) // 실제 백엔드 API URL로 변경하세요.
       .then((response) => response.json())
       .then((data) => {
         if (Array.isArray(data) && data.length > 0) {
@@ -73,11 +82,7 @@ const SelectMoim = () => {
       <div className="moim-section">
         {/* ✅ 최소 3개의 빈 박스를 유지하면서 기존 데이터를 유지 */}
         {Array.from({ length: Math.max(3, moimData.length) }, (_, index) => {
-          const moim = moimData[index] || {
-            id: null,
-            title: "모임 없음",
-            date: "",
-          };
+          const moim = moimData[index];
 
           return (
             <div
@@ -87,8 +92,7 @@ const SelectMoim = () => {
               }`}
               onClick={() => handleSelect(index)}
             >
-              <h3>{moim.title}</h3>
-              <p>{moim.date}</p>
+              <h3>{moim && `${moim.start} ~ ${moim.end}`}</h3>
             </div>
           );
         })}

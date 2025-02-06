@@ -1,8 +1,10 @@
 import { useState } from "react";
 import StepIndicator from "../components/StepIndicator";
 import SelectMoim from "../components/SelectMoim/SelectMoim";
+import { useParams } from "react-router-dom";
 
 const SelectPage = () => {
+  const { meetingId } = useParams();
   const [currentStep] = useState(2);
   return (
     <div>
@@ -11,7 +13,7 @@ const SelectPage = () => {
         steps={[1, 2, 3]}
         currentStep={currentStep}
       />
-      <SelectMoim />
+      <SelectMoim meetingId={meetingId} />
     </div>
   );
 };

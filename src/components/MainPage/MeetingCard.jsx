@@ -4,7 +4,7 @@ import "./MeetingCard.css";
 import calendarIcon from "../../assets/schedule.png";
 import folder from "../../assets/folder-allblack.png";
 
-const MeetingCard = ({ meeting, confirmedMoim }) => {
+const MeetingCard = ({ meeting }) => {
   const navigate = useNavigate(); // ✅ 네비게이션 훅 추가
   const [memo, setMemo] = useState(""); // 📝 메모 상태
   const [isEditing, setIsEditing] = useState(false); // ✏️ 수정 모드 상태
@@ -21,17 +21,16 @@ const MeetingCard = ({ meeting, confirmedMoim }) => {
   }, [meeting.schedule]);
 
   // ✅ 확정된 모임이 있으면 해당 일정 표시, 없으면 "투표중"
-  const scheduleText =
-    confirmedMoim && confirmedMoim.date
-      ? `${confirmedMoim.date} (${confirmedMoim.title})`
-      : "투표중";
+  const scheduleText = meeting?.confirmedSchedule?.type
+    ? `${meeting?.confirmedSchedule?.type} (${meeting.meetingName})`
+    : "투표중";
 
   // ✅ 카드 클릭 시 경로 변경하는 함수
   const handleCardClick = () => {
     if (scheduleText === "투표중") {
-      navigate("/select"); // ✅ 일정이 확정되지 않았으면 /select로 이동
+      navigate("/select/" + meeting._id); // ✅ 일정이 확정되지 않았으면 /select로 이동
     } else {
-      navigate("/show"); // ✅ 일정이 확정되었으면 /show로 이동
+      navigate("/show/" + meeting._id); // ✅ 일정이 확정되었으면 /show로 이동
     }
   };
 
@@ -42,9 +41,9 @@ const MeetingCard = ({ meeting, confirmedMoim }) => {
       style={{ cursor: "pointer" }}
     >
       <div className="meeting-header">
-        <h3 className="meeting-title">{meeting.title}</h3>
+        <h3 className="meeting-title">{meeting.meetingName}</h3>
         <div className="btn-container">
-          <button
+          {/* <button
             className="button-re main-header-btn"
             onClick={(e) => {
               e.stopPropagation();
@@ -52,7 +51,7 @@ const MeetingCard = ({ meeting, confirmedMoim }) => {
             }}
           >
             {isEditing ? "완료" : "수정"}
-          </button>
+          </button> */}
           <button
             className="button-end main-header-btn"
             onClick={(e) => e.stopPropagation()}
@@ -76,10 +75,10 @@ const MeetingCard = ({ meeting, confirmedMoim }) => {
 
         <div className="meeting-group-info">
           <img src={folder} alt="폴더 아이콘" className="folder-icon" />
-          <span className="meeting-group">{meeting.group}</span>
+          <span className="meeting-group">{meeting.meetingGroup.name}</span>
         </div>
 
-        <div className="memo-container">
+        {/* <div className="memo-container">
           {isEditing ? (
             <textarea
               className="memo-input"
@@ -91,7 +90,7 @@ const MeetingCard = ({ meeting, confirmedMoim }) => {
               {memo || "메모를 입력해주세요. (최대 75자)"}
             </span>
           )}
-        </div>
+        </div> */}
       </div>
     </div>
   );

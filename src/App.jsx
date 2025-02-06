@@ -25,7 +25,6 @@ import GoogleCallback from "./pages/GoogleCallback";
 import { CookiesProvider } from "react-cookie";
 
 const API_URL = import.meta.env.VITE_API_URL || "http://localhost:8080";
-console.log("API_URL:", API_URL); // 디버깅용 콘솔 출력
 
 function App() {
   // ✅ meetings 상태 추가
@@ -33,28 +32,14 @@ function App() {
 
   // ✅ JSON Server에서 모임 목록 가져오기
   useEffect(() => {
-    fetch(`${API_URL}/meetings`) // JSON Server에서 데이터 가져오기
+    fetch(`${API_URL}/`, {
+      credentials: "include",
+    }) // JSON Server에서 데이터 가져오기
       .then((res) => res.json())
       .then((data) => {
-        console.log("모임 목록:", data);
-        setMeetings(data.meetings || []);
-        // 주석
-        // setMeetings(data); // 가져온 데이터로 상태 업데이트
-      })
-      .catch((error) => console.error("데이터 불러오기 오류:", error));
+        setMeetings(data || []);
+      });
   }, []);
-
-  // ✅ 새 모임 추가 함수 (CreatePage에서 모임 추가할 때 사용)
-  const handleCreateMoim = (newMoim) => {
-    fetch(`${API_URL}/meetings`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(newMoim),
-    })
-      .then((res) => res.json())
-      .then((data) => setMeetings([...meetings, data])) // 새로운 모임 추가
-      .catch((error) => console.error("모임 생성 오류:", error));
-  };
 
   return (
     <CookiesProvider defaultSetOptions={{ path: "/" }}>
@@ -88,18 +73,15 @@ function App() {
           <Route path="/main/closed-meetings" element={<ClosedMeetings />} />
           <Route path="/main/group/:groupId" element={<Group />} />
           <Route path="/join/:inviteToken" element={<JoinMoimPage />} />
-          <Route
-            path="/create"
-            element={<CreatePage onCreateMoim={handleCreateMoim} />}
-          />
+          <Route path="/create" element={<CreatePage />} />
           {/* 생성 페이지 ➡️ 스케줄 페이지 */}
           <Route
             path="/schedule/:scheduleId"
             element={<SchedulePage />}
           ></Route>
           <Route path="/link-modal" element={<SchedulePage />}></Route>
-          <Route path="/select" element={<SelectPage />} />
-          <Route path="/show" element={<ShowPage />} />
+          <Route path="/select/:meetingId" element={<SelectPage />} />
+          <Route path="/show/:meetingId" element={<ShowPage />} />
         </Route>
         {/* 동적 그룹 라우팅 (그룹 추가 시 URL 변경) */}
         <Route path="/group/:groupId" element={<Group />} />
