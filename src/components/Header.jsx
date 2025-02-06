@@ -5,7 +5,7 @@ import Sidebar from "./MainPage/Sidebar";
 
 import menu from "../assets/menu.png";
 import logoSimple from "../assets/logo-simple.png";
-import logout from "../assets/logout.png";
+import logoutIcon from "../assets/logout.png";
 
 const Header = ({ userName, showMenu, logout }) => {
   const navigate = useNavigate(); // ✅ 네비게이션 훅 추가
@@ -51,7 +51,11 @@ const Header = ({ userName, showMenu, logout }) => {
                   }}
                 >
                   로그아웃
-                  <img src={logout} className="logout-icon" alt="로그아웃" />
+                  <img
+                    src={logoutIcon}
+                    className="logout-icon"
+                    alt="로그아웃"
+                  />
                 </button>
               </>
             ) : (

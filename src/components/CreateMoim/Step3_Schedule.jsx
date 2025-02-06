@@ -1,7 +1,7 @@
 import "./CreateMoimForm.css";
 import "./Step3_Schedule.css";
 import { convertToSlot } from "../../utils/convertTimeslot.jsx";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 const Step3_Schedule = ({
   schedules = [], // 기본값 설정

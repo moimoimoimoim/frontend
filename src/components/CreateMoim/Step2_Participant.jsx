@@ -1,7 +1,7 @@
 import "./CreateMoimForm.css";
 import "./Step2_Participant.css";
 
-const Step2_Participant = ({ participant_count, setparticipant_count }) => {
+const Step2_Participant = ({ memberTotal, setMemberTotal }) => {
   return (
     <div className="form-section">
       <span className="create-container__title">
@@ -10,8 +10,8 @@ const Step2_Participant = ({ participant_count, setparticipant_count }) => {
       <div className="step2-form-fields">
         <select
           className="step2-people"
-          value={participant_count}
-          onChange={(e) => setparticipant_count(e.target.value)}
+          value={memberTotal}
+          onChange={(e) => setMemberTotal(e.target.value)}
         >
           <option value="" disabled>
             인원수
@@ -20,7 +20,7 @@ const Step2_Participant = ({ participant_count, setparticipant_count }) => {
           <option value="2">2명</option>
           <option value="3">3명</option>
           <option value="4">4명</option>
-          <option value="5">5명 이상</option>
+          <option value="5">5명</option>
         </select>
       </div>
     </div>

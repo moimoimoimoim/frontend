@@ -4,14 +4,16 @@ import "./CreateMoimForm.css";
 import "./Step1_MoimInfo.css";
 
 const Step1_MoimInfo = ({
-  meeting_name,
-  setmeeting_name,
+  meetingName,
+  setmeetingName,
+  groups,
   group,
   setGroup,
   meetingCode,
   setmeetingCode,
 }) => {
   const [selectColor, setSelectColor] = useState("var(--black30)"); // 기본 색상 설정
+
   return (
     <div className="form-section">
       <div className="create-container__title">
@@ -35,9 +37,12 @@ const Step1_MoimInfo = ({
           >
             그룹을 선택해주세요.
           </option>
-          <option value="기본 그룹">기본 그룹</option>
-          <option value="스터디">스터디</option>
-          <option value="운동">운동</option>
+          {groups.length > 0 &&
+            groups.map(({ id, name }) => (
+              <option value={id} key={id}>
+                {name}
+              </option>
+            ))}
         </select>
         {/* 모임 이름 작성/ */}
         <div className="input-fields">
@@ -48,8 +53,8 @@ const Step1_MoimInfo = ({
             name="name"
             placeholder="모임 이름을 작성해주세요."
             required
-            value={meeting_name}
-            onChange={(e) => setmeeting_name(e.target.value)}
+            value={meetingName}
+            onChange={(e) => setmeetingName(e.target.value)}
           />
         </div>
         {/* 참여 코드/ */}

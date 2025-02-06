@@ -3,20 +3,42 @@ import addGroup from "../../assets/group-add.png";
 import { Link } from "react-router-dom";
 import { useRef, useEffect, useState } from "react";
 
+const API_URL = import.meta.env.VITE_API_URL;
+
 const Sidebar = ({ isOpen, toggleSidebar }) => {
   const outside = useRef(null); //사이드바 요소 참조
 
-  const [groups, setGroups] = useState([{ id: 1, name: "기본 그룹" }]); // 기본 그룹 리스트
+  const [groups, setGroups] = useState([]); // 기본 그룹 리스트
   const [groupName, setGroupName] = useState(""); // 사용자 입력을 저장할 state
 
   // 새 그룹 추가 함수
   const addNewGroup = () => {
     if (!groupName.trim()) return; // 빈 입력 방지
-    const newGroupId = groups.length + 1;
-    const newGroup = { id: newGroupId, name: groupName };
-    setGroups([...groups, newGroup]); // 그룹 리스트에 추가
-    setGroupName(""); // 입력창 초기화
+    (async () => {
+      const response = await fetch(API_URL + "/groups", {
+        body: JSON.stringify({ name: groupName }),
+        credentials: "include",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        method: "POST",
+      });
+      const data = await response.json();
+      const newGroup = { id: data.group._id, name: groupName };
+      setGroups([...groups, newGroup]); // 그룹 리스트에 추가
+      setGroupName(""); // 입력창 초기화
+    })();
   };
+
+  useEffect(() => {
+    (async () => {
+      const response = await fetch(API_URL + "/groups", {
+        credentials: "include",
+      });
+      const data = await response.json();
+      setGroups(data.groups.map(({ _id, name }) => ({ id: _id, name })));
+    })();
+  }, []);
 
   //사이드바 외부 클릭 시 닫힘
   useEffect(() => {
@@ -66,13 +88,17 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
         <hr /> {/* 구분선 */}
         <h3 className="category-title">그룹 관리</h3>
         <ul className="group-list">
-          {groups.map((group) => (
-            <li key={group.id}>
-              <Link to={`/main/group/${group.id}`} onClick={toggleSidebar}>
-                {group.name}
-              </Link>
-            </li>
-          ))}
+          {groups.length > 0 ? (
+            groups.map((group) => (
+              <li key={group.id}>
+                <Link to={`/main/group/${group.id}`} onClick={toggleSidebar}>
+                  {group.name}
+                </Link>
+              </li>
+            ))
+          ) : (
+            <li>생성된 그룹이 없습니다.</li>
+          )}
           {/* 사용자 입력 필드 추가 */}
           <li className="addGroup-container">
             <form
@@ -89,12 +115,13 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
                   value={groupName}
                   onChange={(e) => setGroupName(e.target.value)}
                 />
-                <img
-                  src={addGroup}
-                  className="addGroup-icon"
-                  alt="그룹 추가"
-                  onClick={addNewGroup}
-                />
+                <button className="addGroup-button">
+                  <img
+                    src={addGroup}
+                    className="addGroup-icon"
+                    alt="그룹 추가"
+                  />
+                </button>
               </div>
             </form>
           </li>

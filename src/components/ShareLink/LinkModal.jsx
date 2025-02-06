@@ -3,7 +3,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom"; // ✅ useNavigate 추가
 import copy from "../../assets/copy.png";
 
-const LinkModal = ({ isOpen, onClose, meetingLink }) => {
+const LinkModal = ({ isOpen, onClose, meetingLink, ownerScheduleId }) => {
   const [copied, setCopied] = useState(false);
   const navigate = useNavigate(); // ✅ 네비게이션 훅 추가
 
@@ -18,7 +18,7 @@ const LinkModal = ({ isOpen, onClose, meetingLink }) => {
 
   // ✅ 버튼 클릭 시 /schedule로 이동하는 함수 추가
   const goToSchedule = () => {
-    navigate("/schedule");
+    navigate("/schedule/" + ownerScheduleId);
   };
 
   return (
@@ -45,7 +45,7 @@ const LinkModal = ({ isOpen, onClose, meetingLink }) => {
 
           {/* ✅ 공유하기 버튼 -> 클릭 시 /schedule로 이동 */}
           <button className="share-button" onClick={goToSchedule}>
-            공유하기
+            다음
           </button>
         </div>
       </div>

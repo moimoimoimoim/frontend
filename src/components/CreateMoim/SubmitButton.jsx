@@ -6,64 +6,40 @@ const API_URL = import.meta.env.VITE_API_URL || "http://localhost:8080"; // 기�
 
 const targetUrl = `${API_URL}/create`; // ✅ 백엔드(JSON Server)로 요청 보내기
 const SubmitButton = ({
-  onNextStep,
-  meeting_name,
-  group, // 백엔드에서 group으로 바꿈
-  meeting_code,
-  participant_count,
-  schedules,
-  selectedDays,
-  startTime,
-  endTime,
+  meetingName,
+  meetingCode,
+  memberTotal,
+  meetingGroup,
+  setOwnerScheduleId,
   timeBlocks,
-  creator, //생성자 정보 추가
   onClick,
 }) => {
   const navigate = useNavigate();
 
   // 전송할 데이터 결정
   const requestData = {
-    meeting_name,
-    group,
-    meeting_code,
-    participant_count,
-    schedules,
-    selectedDays,
-    startTime,
-    endTime,
-    timeBlocks,
-    creator,
+    meetingName,
+    meetingCode,
+    meetingGroup,
+    memberTotal,
+    meetingTimezone: timeBlocks.map((slot) => ({ slot })),
   };
 
-  console.log("🚀 handleSubmit 실행됨!"); // ✅ 버튼이 눌렸는지 확인
-  console.log("📤 백엔드로 보낼 데이터:", JSON.stringify(requestData, null, 2));
-  console.log("🚀 API 요청 URL:", targetUrl); // ✅ 올바른 URL인지 확인
-
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
-    fetch(targetUrl, {
+    const response = await fetch(targetUrl, {
       method: "POST",
+      credentials: "include",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(requestData),
-    })
-      .then((response) => {
-        if (response.ok) {
-          console.log("✅ 데이터 전송 성공");
-          console.log("✅ navigate 실행됨!");
-
-          onNextStep?.();
-        } else {
-          console.error("❌ 데이터 전송 실패");
-        }
-      })
-      .catch((error) => {
-        console.error("🚨 네트워크 오류:", error);
-      });
+    });
+    const data = await response.json();
+    console.log(data);
 
     // onClick 함수 실행 (모달 열기 등)
-    onClick?.();
-    onNextStep?.();
+    onClick?.(data.inviteLink);
+    setOwnerScheduleId?.(data.ownerSchedule._id);
   };
 
   return (

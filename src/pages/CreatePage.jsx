@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Step1_MoimInfo from "../components/CreateMoim/Step1_MoimInfo";
 import Step2_Participant from "../components/CreateMoim/Step2_Participant";
 import Step3_Schedule from "../components/CreateMoim/Step3_Schedule";
@@ -8,31 +8,35 @@ import StepIndicator from "../components/StepIndicator";
 import CreateMoimForm from "../components/CreateMoim/CreateMoimForm";
 import LinkModal from "../components/ShareLink/LinkModal";
 
+const API_URL = import.meta.env.VITE_API_URL;
+
 const CreatePage = () => {
   // const [currentStep, setCurrentStep] = useState(0);
   const [currentStep] = useState(0); //현재 단계 -> 사용을 하나?
   const [meeting_name, setmeeting_name] = useState(""); // 모임명
   const [group, setGroup] = useState(""); // 모임이 속한 그룹
+  const [groups, setGroups] = useState([]);
   const [meetingCode, setmeetingCode] = useState(""); // 참여 코드
-  const [participantCount, setParticipantCount] = useState(""); // 인원수
+  const [memberTotal, setMemberTotal] = useState(""); // 인원수
   const [schedules, setSchedules] = useState([]); // 일정 리스트 추가
   const [selectedDays, setSelectedDays] = useState([]); // 선택된 요일
   const [startTime, setStartTime] = useState(""); // 시작 시간
   const [endTime, setEndTime] = useState(""); // 종료 시간
-  const [onNextStep, handleNextStep] = useState(""); // 종료 시간
   const [timeBlocks, setTimeBlocks] = useState([]); // timeBlocks 상태 추가
   const [isModalOpen, setModalOpen] = useState(false);
+  const [meetingLink, setMeetingLink] = useState("");
+  const [ownerScheduleId, setOwnerScheduleId] = useState(null);
 
-  const formData = {
-    meeting_name,
-    group,
-    meetingCode,
-    participantCount,
-    schedules,
-    selectedDays,
-    startTime,
-    endTime,
-  };
+  useEffect(() => {
+    (async () => {
+      const response = await fetch(API_URL + "/groups", {
+        credentials: "include",
+      });
+      const data = await response.json();
+      if (data.groups.length > 0)
+        setGroups(data.groups.map(({ _id, name }) => ({ id: _id, name })));
+    })();
+  }, []);
 
   return (
     <div>
@@ -46,14 +50,15 @@ const CreatePage = () => {
         <Step1_MoimInfo
           meetingName={meeting_name}
           setmeetingName={setmeeting_name}
+          groups={groups}
           group={group}
           setGroup={setGroup}
           meetingCode={meetingCode}
           setmeetingCode={setmeetingCode}
         />
         <Step2_Participant
-          participantCount={participantCount}
-          setParticipantCount={setParticipantCount}
+          memberTotal={memberTotal}
+          setMemberTotal={setMemberTotal}
         />
         <Step3_Schedule
           schedules={schedules}
@@ -77,21 +82,22 @@ const CreatePage = () => {
         {/* <p>인원수: {participantCount}명</p> */}
       </SelectedScheduleList>
       <SubmitButton
-        meeting_name={meeting_name}
-        group={group}
+        meetingName={meeting_name}
         meetingCode={meetingCode}
-        participantCount={participantCount}
-        selectedDays={selectedDays} // ✅ 추가
-        startTime={startTime} // ✅ 추가
-        endTime={endTime} // ✅ 추가
-        schedules={schedules}
+        memberTotal={memberTotal}
+        meetingGroup={group}
         timeBlocks={timeBlocks}
-        onNextStep={handleNextStep}
-        onClick={() => setModalOpen(true)}
+        setOwnerScheduleId={setOwnerScheduleId}
+        onClick={(url) => {
+          setModalOpen(true);
+          setMeetingLink("http://" + window.location.host + url);
+        }}
       />
       <LinkModal
         isOpen={isModalOpen}
+        meetingLink={meetingLink}
         onClose={() => setModalOpen(false)}
+        ownerScheduleId={ownerScheduleId}
       ></LinkModal>
     </div>
   );
